@@ -1,0 +1,34 @@
+{
+    "name": "VRPlayerInput",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "3ccf20ff-6f71-4033-a0f2-0d4d086cdc5a",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "693a1e9f-cc59-4129-9be3-0f326bc9d7ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "87d53c16-8f8e-4181-b751-621a6fe8220d",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
