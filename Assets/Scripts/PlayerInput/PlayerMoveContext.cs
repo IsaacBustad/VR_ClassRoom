@@ -92,5 +92,8 @@ public class PlayerMoveContext : MonoBehaviour
     public virtual InputBridgeLocal IB { get { return ib; } }
     #endregion
 
+    #region Access to Move State Params
+
+    #endregion
 
 }

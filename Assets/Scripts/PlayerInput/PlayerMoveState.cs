@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BugFreeProductions.Extentions;
 
 public class PlayerMoveState 
 {
@@ -26,6 +27,12 @@ public class PlayerMoveState
 
     #region Fixed Update Actions
     public virtual void FUActions(PlayerMoveContext aPMC)
+    {
+        Move(aPMC.RB,aPMC.IB,aPMC.);
+        BugFreeTool.LimitToWorldVelocity(aPMC.RB.velocity);
+    }
+
+    public virtual void UActions(PlayerMoveContext aPMC)
     {
         //Move(aPMC.RB,aPMC.IB,aPMC.);
     }
