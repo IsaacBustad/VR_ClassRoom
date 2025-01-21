@@ -28,7 +28,7 @@ public class PlayerMoveState
     #region Fixed Update Actions
     public virtual void FUActions(PlayerMoveContext aPMC)
     {
-        Move(aPMC.RB,aPMC.IB,aPMC.);
+        Move(aPMC.RB,aPMC.IB.MoveDir,aPMC.FreeWalkMSP);
         BugFreeTool.LimitToWorldVelocity(aPMC.RB.velocity);
     }
 

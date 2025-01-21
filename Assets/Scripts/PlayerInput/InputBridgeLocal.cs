@@ -51,7 +51,7 @@ public class InputBridgeLocal : MonoBehaviour
 
 
     // Accessors
-
+    public Vector3 MoveDir { get { return moveDir; }  }
 
 
 }

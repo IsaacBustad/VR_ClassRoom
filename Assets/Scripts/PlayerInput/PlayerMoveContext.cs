@@ -93,7 +93,7 @@ public class PlayerMoveContext : MonoBehaviour
     #endregion
 
     #region Access to Move State Params
-
+    public MoveStateParam_SCO FreeWalkMSP { get { return freeWalkMSP; } }
     #endregion
 
 }
