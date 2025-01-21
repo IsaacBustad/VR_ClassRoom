@@ -11,7 +11,7 @@ public class InputBridgeLocal : MonoBehaviour
 {
     // Vars
     #region Movement Vars
-    [SerializeField] protected PlayerMoveContextLocal vrpmcl = null;
+    [SerializeField] protected PlayerMoveContext vrpmcl = null;
 
     // Vector to Move
     protected Vector3 moveDir = Vector3.zero;

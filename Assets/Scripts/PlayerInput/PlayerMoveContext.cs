@@ -7,15 +7,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveContextLocal : MonoBehaviour
+public class PlayerMoveContext : MonoBehaviour
 {
     // Var 
     // curent player move state for use in local version
+    #region State Vars
     protected PlayerMoveState curPMS = null;
     protected PlayerMoveState lastPMS = null;
 
     protected PlayerMoveState freeWalkPMS = new PMS_FreeWalk();
     protected PlayerMoveState lockToPointPMS = new PMS_LockToPoint();
+    #endregion
+
+    #region Movement Variables
+    protected Rigidbody rb = null;
+    protected InputBridgeLocal ib = null;
+
+    #endregion
+
+    #region Move Settings SCO's
+    [SerializeField] protected MoveStateParam_SCO freeWalkMSP = null;
+    #endregion
     //protected PlayerMoveState pms_
 
 
@@ -31,6 +43,13 @@ public class PlayerMoveContextLocal : MonoBehaviour
     }
 
     protected virtual void CollectVars()
+    {
+        // collect Component refferences on this body
+        rb = GetComponent<Rigidbody>();
+        ib = GetComponent<InputBridgeLocal>();
+    }
+
+    protected virtual void FixedUpdate()
     {
 
     }
@@ -68,6 +87,10 @@ public class PlayerMoveContextLocal : MonoBehaviour
     public PlayerMoveState LockToPointPMS { get { return freeWalkPMS; } }
     #endregion
 
+    #region Access to move Vars
+    public virtual Rigidbody RB { get { return rb; } }
+    public virtual InputBridgeLocal IB { get { return ib; } }
+    #endregion
 
 
 }

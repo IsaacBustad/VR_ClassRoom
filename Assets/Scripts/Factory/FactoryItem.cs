@@ -52,13 +52,17 @@ namespace BugFreeProductions.Tools
 
             nObjPlace.id = id;
 
-            nObjPlace.tpX = transform.position.x;
-            nObjPlace.tpY = transform.position.y;
-            nObjPlace.tpZ = transform.position.z;
+            Vector3 nObjPos = transform.position; 
 
-            nObjPlace.trX = transform.eulerAngles.x;
-            nObjPlace.trY = transform.eulerAngles.y;
-            nObjPlace.tpZ = transform.eulerAngles.z;
+            nObjPlace.tpX = nObjPos.x;
+            nObjPlace.tpY = nObjPos.y;
+            nObjPlace.tpZ = nObjPos.z;
+
+            Vector3 nObjRot = transform.eulerAngles;
+
+            nObjPlace.trX = nObjRot.x;
+            nObjPlace.trY = nObjRot.y;
+            nObjPlace.trZ = nObjRot.z;
             
             return nObjPlace;
         }
