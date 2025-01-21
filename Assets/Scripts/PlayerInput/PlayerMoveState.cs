@@ -12,10 +12,19 @@ public class PlayerMoveState
 
 
     // Methods
-    public virtual PlayerMoveState PMS_LockToPoint ()
+    public virtual PlayerMoveState LockToPoint(PlayerMoveContextLocal aPMCL)
+    {
+        return aPMCL.LockToPointPMS;
+    }
 
+    public virtual PlayerMoveState FreeWalk(PlayerMoveContextLocal aPMCL)
+    {
+        return aPMCL.FreeWalkPMS;
+    }
+    
     // Accessors
-
+    public virtual bool IsLockToPoint { get { return false; } }
+    public virtual bool IsFreeWalk { get { return false; } }
 
 
 

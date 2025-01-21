@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PMS_FreeWalk : MonoBehaviour
+public class PMS_FreeWalk : PlayerMoveState
 {
     // Vars
 
