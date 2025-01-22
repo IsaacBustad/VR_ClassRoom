@@ -1,5 +1,5 @@
 // Isaac Bustad
-// 1/17/2025
+// 1/22/2025
 
 
 
@@ -7,19 +7,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PMS_FreeWalk : PlayerMoveState
+public class PCS_ThreeD : PlayerCamState
 {
     // Vars
 
 
 
     // Methods
-
+    
 
 
 
     // Accessors
-    public override bool IsFreeWalk { get { return true; } }
 
 
 

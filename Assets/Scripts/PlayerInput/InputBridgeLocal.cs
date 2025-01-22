@@ -20,6 +20,7 @@ public class InputBridgeLocal : MonoBehaviour
     #region Camera Vars
     // for Camera context to access
     protected Vector3 camRotDir = Vector3.zero;
+    [SerializeField] protected float xClamp;
     #endregion
 
     // Methods
