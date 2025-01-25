@@ -11,9 +11,19 @@ using UnityEngine.Windows.WebCam;
 public class PlayerCameraContext : MonoBehaviour
 {
     // Vars
+<<<<<<< Updated upstream
     #region Cam State Vars
     protected PlayerCamState curCS = null;
     protected PlayerCamState lastCS = null;
+=======
+    #region Camera Refference
+
+    #endregion
+
+    #region 3D Cam Reff
+
+    #endregion 
+>>>>>>> Stashed changes
 
     protected PlayerCamState vrCS ;
     protected PlayerCamState threeDCS ;

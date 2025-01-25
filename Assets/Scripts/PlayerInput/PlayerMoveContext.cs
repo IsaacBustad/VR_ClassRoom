@@ -55,26 +55,34 @@ public class PlayerMoveContext : MonoBehaviour
     }
 
     #region Change State Methods
-    protected virtual void ChangState(PlayerMoveState aPMS)
+    /*protected virtual void ChangState(PlayerMoveState aPMS)
     {
-        if (curPMS != aPMS && lastPMS != curPMS)
-        {
-            lastPMS = curPMS;
-        }
+        
 
-        curPMS = aPMS;
-    }
+        
+    }*/
 
     public virtual void FreeWalk()
     {
         PlayerMoveState nPMS = curPMS.FreeWalk(this);
 
-        ChangState(nPMS);
+        if (lastPMS.IsFreeWalk != curPMS.IsFreeWalk)
+        {
+            lastPMS = curPMS;
+        }
+
+        curPMS = nPMS;
     }
     public virtual void LockToPoint()
     {
         PlayerMoveState nPMS = curPMS.LockToPoint(this);
-        ChangState(nPMS);
+
+        if (lastPMS.IsLockToPoint != curPMS.IsLockToPoint)
+        {
+            lastPMS = curPMS;
+        }
+
+        curPMS = nPMS; ;
     }
 
     #endregion

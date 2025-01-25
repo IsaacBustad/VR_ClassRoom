@@ -15,8 +15,18 @@ public class PMS_LockToPoint : PlayerMoveState
 
 
     // Methods
+<<<<<<< Updated upstream
     public override void FUActions(PlayerMoveContext aPMC)
     {
+=======
+    // do not move when locked to point
+    public override void FUActions(PlayerMoveContext aPMC)
+    {
+        base.FUActions(aPMC);
+    }
+    protected override void Move(Rigidbody aRB, Vector3 aMovDir, MoveStateParam_SCO aMSP_SCO)
+    {
+>>>>>>> Stashed changes
         
     }
 
