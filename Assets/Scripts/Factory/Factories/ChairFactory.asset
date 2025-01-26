@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b921ce8fb29a1c24088af473b1deaad2, type: 3}
   m_Name: ChairFactory
   m_EditorClassIdentifier: 
-  factoryItem: {fileID: 8645853107942822007, guid: b467e0780d1da10498aba9dde5974ad7, type: 3}
+  factoryItem: {fileID: 4747423611790198303, guid: bc435405efe57ec4aa0ed63326d1fd83, type: 3}

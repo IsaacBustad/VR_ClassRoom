@@ -33,10 +33,7 @@ public class PlayerMoveContext : MonoBehaviour
 
     // Methods
     protected virtual void OnEnable()
-    {
-        // lock RB rotation
-        rb.freezeRotation = true;
-
+    {        
         // Set Defaults
         curPMS = freeWalkPMS;
         lastPMS = curPMS;
@@ -49,7 +46,12 @@ public class PlayerMoveContext : MonoBehaviour
     {
         // collect Component refferences on this body
         rb = GetComponent<Rigidbody>();
+        // lock RB rotation
+        rb.freezeRotation = true;
+
+        Debug.Log("RB = " + rb.gameObject.name);
         ib = GetComponent<PlayerInputBridgeLocal>();
+        Debug.Log("IB = " + ib.gameObject.name);
     }
 
     protected virtual void FixedUpdate()
