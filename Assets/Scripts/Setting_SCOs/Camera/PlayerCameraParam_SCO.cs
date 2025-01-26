@@ -6,10 +6,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCameraParam : MonoBehaviour
+
+[CreateAssetMenu(fileName = "PlayerCameraParam_SCO", menuName = "ScriptableObject/PlayerCameraParam_SCO")]
+public class PlayerCameraParam_SCO : ScriptableObject
 {
     // Vars
     // "Sensitivity"
+    [SerializeField, Range(0, 90)] protected float maxRot = 90f;
     [SerializeField, Range(1,45)] protected float rotSpeed = 10f;
     [SerializeField, Range(0,3)] protected float timeToTween = 0.25f;
 

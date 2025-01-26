@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputBridgeLocal : MonoBehaviour
+public class PlayerInputBridgeLocal : MonoBehaviour
 {
     // Vars
     #region Movement Vars
@@ -20,7 +20,6 @@ public class InputBridgeLocal : MonoBehaviour
     #region Camera Vars
     // for Camera context to access
     protected Vector3 camRotDir = Vector3.zero;
-    [SerializeField] protected float xClamp;
     #endregion
 
     // Methods

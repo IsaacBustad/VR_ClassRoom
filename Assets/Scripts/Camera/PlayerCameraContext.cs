@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows.WebCam;
+
 
 public class PlayerCameraContext : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class PlayerCameraContext : MonoBehaviour
     protected PlayerCamState lastCS = null;
 
     #region Camera Refference
-
+    [SerializeField] protected Transform playerCamTF = null;
     #endregion
 
     #region 3D Cam Reff
@@ -33,7 +33,7 @@ public class PlayerCameraContext : MonoBehaviour
     #endregion
 
     #region Cam State Params
-    protected PlayerCameraParam player3DPCP = null;
+    protected PlayerCameraParam_SCO player3DPCP = null;
     #endregion
     #region VR Cam Controls
     #endregion

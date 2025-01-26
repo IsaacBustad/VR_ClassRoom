@@ -21,7 +21,7 @@ public class PlayerMoveContext : MonoBehaviour
 
     #region Movement Variables
     protected Rigidbody rb = null;
-    protected InputBridgeLocal ib = null;
+    protected PlayerInputBridgeLocal ib = null;
 
     #endregion
 
@@ -34,6 +34,9 @@ public class PlayerMoveContext : MonoBehaviour
     // Methods
     protected virtual void OnEnable()
     {
+        // lock RB rotation
+        rb.freezeRotation = true;
+
         // Set Defaults
         curPMS = freeWalkPMS;
         lastPMS = curPMS;
@@ -46,22 +49,15 @@ public class PlayerMoveContext : MonoBehaviour
     {
         // collect Component refferences on this body
         rb = GetComponent<Rigidbody>();
-        ib = GetComponent<InputBridgeLocal>();
+        ib = GetComponent<PlayerInputBridgeLocal>();
     }
 
     protected virtual void FixedUpdate()
     {
-
+        curPMS.FUActions(this);
     }
 
-    #region Change State Methods
-    /*protected virtual void ChangState(PlayerMoveState aPMS)
-    {
-        
-
-        
-    }*/
-
+    #region Change State Methods    
     public virtual void FreeWalk()
     {
         PlayerMoveState nPMS = curPMS.FreeWalk(this);
@@ -97,7 +93,7 @@ public class PlayerMoveContext : MonoBehaviour
 
     #region Access to move Vars
     public virtual Rigidbody RB { get { return rb; } }
-    public virtual InputBridgeLocal IB { get { return ib; } }
+    public virtual PlayerInputBridgeLocal IB { get { return ib; } }
     #endregion
 
     #region Access to Move State Params
