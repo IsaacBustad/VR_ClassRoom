@@ -1,34 +1,35 @@
 // Isaac Bustad
-// 11/6/2024
+// 1/27/2025
 
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
 using System.Linq;
+using UnityEngine;
 
 
 namespace BugFreeProductions.Tools
 {
-    public class ObjectPlacementReadWrite
+    public class ObjectPrefferenceReadWrite : MonoBehaviour
     {
-        protected string placementPath = "/ObjectPlacements.json";
+        // Vars
+        protected string placementPath = "/ObjectPrefferences.json";
         //protected string monstFilterName = "BtlShpTurt";
         //public MonsterStatList statList = new MonsterStatList();
 
         // singal instance
-        private static ObjectPlacementReadWrite instance;
+        private static ObjectPrefferenceReadWrite instance;
 
 
 
 
 
+        // Methods
 
-        public List<ObjectPlacement> ReadObjectPlacements()
+        public List<ObjectPrefference> ReadObjectPrefferences()
         {
             // hold a returnable list
-            List<ObjectPlacement> retLST = new List<ObjectPlacement>();
+            List<ObjectPrefference> retLST = new List<ObjectPrefference>();
 
             // hold String ref for json check
             string jsonSTR = CustomGatewayJSON.Instance.ReadJsonFile(placementPath);
@@ -36,13 +37,13 @@ namespace BugFreeProductions.Tools
             // if not default file value
             if (jsonSTR != CustomGatewayJSON.Instance.DefaultFileText)
             {
-                retLST = JsonUtility.FromJson<ObjectPlacementList>(CustomGatewayJSON.Instance.ReadJsonFile(placementPath)).objectPlacements.ToList();
+                retLST = JsonUtility.FromJson<ObjectPrefferenceList>(CustomGatewayJSON.Instance.ReadJsonFile(placementPath)).objectPrefferences.ToList();
             }
-           
+
             return retLST;
         }
 
-        public ObjectPlacement FindObjectPlacement(string aID)
+        public ObjectPlacement FindObjectPrefference(string aID)
         {
             ObjectPlacementList objLST = JsonUtility.FromJson<ObjectPlacementList>(CustomGatewayJSON.Instance.ReadJsonFile(placementPath));
 
@@ -55,29 +56,29 @@ namespace BugFreeProductions.Tools
             }
             return null;
         }
-
-        public void WriteObjectPlacements(ObjectPlacementList aPlacementLst)
+        public void WriteObjectPrefferences(ObjectPrefferenceList aPrefferenceLst)
         {
-            string JSONstr = JsonUtility.ToJson(aPlacementLst);
+            string JSONstr = JsonUtility.ToJson(aPrefferenceLst);
 
             CustomGatewayJSON.Instance.WriteJsonFile(placementPath, JSONstr);
         }
 
         // Constructors
-        private ObjectPlacementReadWrite() { }
+        private ObjectPrefferenceReadWrite() { }
 
 
         // Accessors
-        public static ObjectPlacementReadWrite Instance
+        public static ObjectPrefferenceReadWrite Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ObjectPlacementReadWrite();
+                    instance = new ObjectPrefferenceReadWrite();
                 }
                 return instance;
             }
         }
+
     }
 }
