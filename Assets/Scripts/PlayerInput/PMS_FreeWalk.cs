@@ -19,7 +19,7 @@ public class PMS_FreeWalk : PlayerMoveState
 
 
     // Accessors
-
+    public override bool IsFreeWalk { get { return true; } }
 
 
 

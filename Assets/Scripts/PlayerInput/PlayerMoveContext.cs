@@ -21,7 +21,7 @@ public class PlayerMoveContext : MonoBehaviour
 
     #region Movement Variables
     protected Rigidbody rb = null;
-    protected InputBridgeLocal ib = null;
+    protected PlayerInputBridgeLocal ib = null;
 
     #endregion
 
@@ -33,7 +33,7 @@ public class PlayerMoveContext : MonoBehaviour
 
     // Methods
     protected virtual void OnEnable()
-    {
+    {        
         // Set Defaults
         curPMS = freeWalkPMS;
         lastPMS = curPMS;
@@ -46,35 +46,41 @@ public class PlayerMoveContext : MonoBehaviour
     {
         // collect Component refferences on this body
         rb = GetComponent<Rigidbody>();
-        ib = GetComponent<InputBridgeLocal>();
+        // lock RB rotation
+        rb.freezeRotation = true;
+
+        Debug.Log("RB = " + rb.gameObject.name);
+        ib = GetComponent<PlayerInputBridgeLocal>();
+        Debug.Log("IB = " + ib.gameObject.name);
     }
 
     protected virtual void FixedUpdate()
     {
-
+        curPMS.FUActions(this);
     }
 
-    #region Change State Methods
-    protected virtual void ChangState(PlayerMoveState aPMS)
-    {
-        if (curPMS != aPMS && lastPMS != curPMS)
-        {
-            lastPMS = curPMS;
-        }
-
-        curPMS = aPMS;
-    }
-
+    #region Change State Methods    
     public virtual void FreeWalk()
     {
         PlayerMoveState nPMS = curPMS.FreeWalk(this);
 
-        ChangState(nPMS);
+        if (lastPMS.IsFreeWalk != curPMS.IsFreeWalk)
+        {
+            lastPMS = curPMS;
+        }
+
+        curPMS = nPMS;
     }
     public virtual void LockToPoint()
     {
         PlayerMoveState nPMS = curPMS.LockToPoint(this);
-        ChangState(nPMS);
+
+        if (lastPMS.IsLockToPoint != curPMS.IsLockToPoint)
+        {
+            lastPMS = curPMS;
+        }
+
+        curPMS = nPMS; ;
     }
 
     #endregion
@@ -89,7 +95,7 @@ public class PlayerMoveContext : MonoBehaviour
 
     #region Access to move Vars
     public virtual Rigidbody RB { get { return rb; } }
-    public virtual InputBridgeLocal IB { get { return ib; } }
+    public virtual PlayerInputBridgeLocal IB { get { return ib; } }
     #endregion
 
     #region Access to Move State Params

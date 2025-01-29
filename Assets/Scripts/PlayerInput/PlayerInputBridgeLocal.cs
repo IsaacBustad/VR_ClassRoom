@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputBridgeLocal : MonoBehaviour
+public class PlayerInputBridgeLocal : MonoBehaviour
 {
     // Vars
     #region Movement Vars

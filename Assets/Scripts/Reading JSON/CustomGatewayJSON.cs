@@ -14,16 +14,52 @@ namespace BugFreeProductions.Tools
         //[SerializeField] private TextAsset skillFile;
         private static CustomGatewayJSON instance;
 
+        private string defaultFileText = "NA";
+
 
 
         // Methods
         public string ReadJsonFile(string aPath)
         {
-            StreamReader streamReader = new StreamReader(Application.persistentDataPath + aPath);
-            string jsonTxt = streamReader.ReadToEnd();
+            StreamReader streamReader = null;
+            string jsonTxt = null;
+
+            if (File.Exists(Application.persistentDataPath + aPath))
+            {
+                streamReader = new StreamReader(Application.persistentDataPath + aPath);
+                jsonTxt = streamReader.ReadToEnd();
+                streamReader.Close();
+                return jsonTxt;
+            }
+
+            else
+            {
+                WriteJsonFile(aPath, DefaultFileText);
+
+                streamReader = new StreamReader(Application.persistentDataPath + aPath);
+                jsonTxt = streamReader.ReadToEnd();
+                streamReader.Close();
+                return jsonTxt;
+            }
+
+
+            //StreamReader streamReader = new StreamReader(Application.persistentDataPath + aPath);
+            /*if (streamReader == null)
+            {
+                // Close current writer
+                streamReader.Close();
+
+                // write a file to path
+                WriteJsonFile(Application.persistentDataPath + aPath, " ");
+
+                // re-define streamReader
+                streamReader = new StreamReader(Application.persistentDataPath + aPath);
+
+            }*/
+            //string jsonTxt = streamReader.ReadToEnd();
             //Debug.Log(jsonTxt);
-            streamReader.Close();
-            return jsonTxt;
+            //streamReader.Close();
+            //return jsonTxt;
 
         }
 
@@ -53,5 +89,6 @@ namespace BugFreeProductions.Tools
                 return instance;
             }
         }
+        public string DefaultFileText { get { return defaultFileText; } }
     }
 }
