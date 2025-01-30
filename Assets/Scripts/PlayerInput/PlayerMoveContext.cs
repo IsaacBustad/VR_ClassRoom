@@ -21,7 +21,7 @@ public class PlayerMoveContext : MonoBehaviour
 
     #region Movement Variables
     protected Rigidbody rb = null;
-    protected PlayerInputBridgeLocal ib = null;
+    protected PlayerInputBridge ib = null;
 
     #endregion
 
@@ -49,9 +49,9 @@ public class PlayerMoveContext : MonoBehaviour
         // lock RB rotation
         rb.freezeRotation = true;
 
-        Debug.Log("RB = " + rb.gameObject.name);
-        ib = GetComponent<PlayerInputBridgeLocal>();
-        Debug.Log("IB = " + ib.gameObject.name);
+        //Debug.Log("RB = " + rb.gameObject.name);
+        ib = GetComponent<PlayerInputBridge>();
+        //Debug.Log("IB = " + ib.gameObject.name);
     }
 
     protected virtual void FixedUpdate()
@@ -95,7 +95,7 @@ public class PlayerMoveContext : MonoBehaviour
 
     #region Access to move Vars
     public virtual Rigidbody RB { get { return rb; } }
-    public virtual PlayerInputBridgeLocal IB { get { return ib; } }
+    public virtual PlayerInputBridge IB { get { return ib; } }
     #endregion
 
     #region Access to Move State Params

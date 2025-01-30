@@ -24,36 +24,52 @@ public class PlayerCameraContext : MonoBehaviour
 
     #endregion 
 
-    protected PlayerCamState vrCS ;
-    protected PlayerCamState threeDCS ;
+    protected PlayerCamState FreeWalkPCS ;
+    protected PlayerCamState LockToPosPCS;
     #endregion
 
     #region Cam Vars
-    [SerializeField] protected Transform CamTF;
+    [SerializeField] protected PlayerCamMannager camMannager = null;
+    [SerializeField] protected Transform camAnker = null;
     #endregion
 
     #region Cam State Params
-    protected PlayerCameraParam_SCO player3DPCP = null;
+    protected PlayerCameraParam_SCO freeWalkCamParam_SCO = null;
+    protected PlayerCameraParam_SCO lockedToPosCamParam_SCO = null;
     #endregion
     #region VR Cam Controls
+    #endregion
+
+    #region Input and addditional refference
+    [SerializeField] protected PlayerInputBridge playerInputBridge = null;
     #endregion
 
 
     // Methods
     protected virtual void OnEnable()
     {
-
+        curCS = new PlayerCamState();
     }
 
     protected virtual void FixedUpdate()
     {
-
+        curCS.FUActions();
     }
     
 
 
 
     // Accessors
+    public Transform CamAnker { get { return camAnker; } }
+    public PlayerInputBridge PlayerInputBridge { get {  return playerInputBridge; } }
+    public PlayerCameraParam_SCO PlayerCameraParam_SCO { get { return curCS.PlayerCameraParam_SCO(this); } }
+
+    #region Accessors for player camera parameters
+    public PlayerCameraParam_SCO FreeWalkPlayerCamParam_SCO { get { return freeWalkCamParam_SCO; } }
+    #endregion
+
+
+    // Accesors for other class methods
 
 
 
