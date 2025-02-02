@@ -12,7 +12,7 @@ public class PlayerInputBridge : MonoBehaviour
 {
     // Vars
     #region Movement Vars
-    [SerializeField] protected PlayerMoveContext vrpmcl = null;
+    protected PlayerMoveContext playerMoveContext = null;
 
     // Vector to Move
     protected Vector3 moveDir = Vector3.zero;
@@ -24,6 +24,16 @@ public class PlayerInputBridge : MonoBehaviour
     #endregion
 
     // Methods
+    protected virtual void OnEnable()
+    {
+        CollectVars();
+    }
+
+    protected virtual void CollectVars()
+    {
+        playerMoveContext = GetComponent<PlayerMoveContext>();
+    }
+
     #region Keyboard Player Controls
     public virtual void MouseCamControles(InputAction.CallbackContext aCon)
     {

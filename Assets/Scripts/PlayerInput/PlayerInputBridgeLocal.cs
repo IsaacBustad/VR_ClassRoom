@@ -23,8 +23,9 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
     public override void MouseCamControles(InputAction.CallbackContext aCon)
     {
         Vector2 nDir = aCon.ReadValue<Vector2>();
-
-        camRotDir = new Vector3(nDir.y, nDir.x, 0);
+        //Debug.Log("In Direction" + nDir);
+        camRotDir = new Vector3(-nDir.y, nDir.x, 0);
+        //Debug.Log("Mouse Direction" + camRotDir);
     }
 
     public override void KeyBoardMove(InputAction.CallbackContext aCon)

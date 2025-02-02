@@ -20,12 +20,10 @@ public class PlayerCameraContext : MonoBehaviour
     [SerializeField] protected Transform playerCamTF = null;
     #endregion
 
-    #region 3D Cam Reff
+   
 
-    #endregion 
-
-    protected PlayerCamState FreeWalkPCS ;
-    protected PlayerCamState LockToPosPCS;
+    /*protected PlayerCamState freeWalkPCS  = new;
+    protected PlayerCamState lockToPosPCS = ;*/
     #endregion
 
     #region Cam Vars
@@ -34,8 +32,8 @@ public class PlayerCameraContext : MonoBehaviour
     #endregion
 
     #region Cam State Params
-    protected PlayerCameraParam_SCO freeWalkCamParam_SCO = null;
-    protected PlayerCameraParam_SCO lockedToPosCamParam_SCO = null;
+    [SerializeField] protected PlayerCameraParam_SCO freeWalkCamParam_SCO = null;
+    [SerializeField] protected PlayerCameraParam_SCO lockedToPosCamParam_SCO = null;
     #endregion
     #region VR Cam Controls
     #endregion

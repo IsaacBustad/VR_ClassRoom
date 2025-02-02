@@ -195,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 385357239}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.62, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -686,6 +686,8 @@ MonoBehaviour:
   playerCamTF: {fileID: 963194228}
   camMannager: {fileID: 1464651522}
   camAnker: {fileID: 1157175497}
+  freeWalkCamParam_SCO: {fileID: 11400000, guid: d94378f622f00264a82e8035ff11ba37, type: 2}
+  lockedToPosCamParam_SCO: {fileID: 11400000, guid: d94378f622f00264a82e8035ff11ba37, type: 2}
 --- !u!114 &1759689916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,19 +763,7 @@ MonoBehaviour:
     m_ActionId: 2b2bddd3-00f2-4139-be7a-d90d319065c2
     m_ActionName: Master_Player_Input/Primary_Action_Left[/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1816324639}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: c8c33909-d8e1-41de-95c6-e22278d178f6
     m_ActionName: Master_Player_Input/Primary_Action_Right_e[/Keyboard/e]
   - m_PersistentCalls:
@@ -781,7 +771,19 @@ MonoBehaviour:
     m_ActionId: 3ea6be12-c90c-4c39-b1be-f804e350a578
     m_ActionName: Master_Player_Input/Primary_Action_Right[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1759689918}
+        m_TargetAssemblyTypeName: PlayerInputBridgeLocal, Assembly-CSharp
+        m_MethodName: MouseCamControles
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0c8e48c6-b239-411b-9d6e-5fbae1becfe8
     m_ActionName: Master_Player_Input/Keyboard[/Mouse/delta/up,/Mouse/delta/down,/Mouse/delta/left,/Mouse/delta/right]
   m_NeverAutoSwitchControlSchemes: 0
@@ -828,7 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9de53df94e1b38449d139decc64335c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrpmcl: {fileID: 1759689914}
 --- !u!1 &1816324639
 GameObject:
   m_ObjectHideFlags: 0
