@@ -41,7 +41,7 @@ public class PlayerCameraContext : MonoBehaviour
     #endregion
 
     #region Input and addditional refference
-    [SerializeField] protected PlayerInputBridge playerInputBridge = null;
+    protected PlayerInputBridge playerInputBridge = null;
     #endregion
 
 
@@ -49,6 +49,18 @@ public class PlayerCameraContext : MonoBehaviour
     protected virtual void OnEnable()
     {
         curCS = new PlayerCamState();
+
+        CollectVars();
+    }
+
+    // Initialize variables
+
+    // Collect Variable Refferences
+    protected virtual void CollectVars()
+    {
+
+        // collect local object refferences
+        playerInputBridge = GetComponent<PlayerInputBridge>();
     }
 
     protected virtual void FixedUpdate()
