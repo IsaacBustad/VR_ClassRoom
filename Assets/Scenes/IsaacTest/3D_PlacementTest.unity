@@ -167,6 +167,111 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &364867961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 364867962}
+  - component: {fileID: 364867965}
+  - component: {fileID: 364867964}
+  - component: {fileID: 364867963}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &364867962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364867961}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.43, z: 0.47}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 385357240}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &364867963
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364867961}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &364867964
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364867961}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &364867965
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364867961}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &385357239
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +307,7 @@ Transform:
   - {fileID: 1971263498}
   - {fileID: 795012737}
   - {fileID: 1157175497}
+  - {fileID: 364867962}
   m_Father: {fileID: 1759689913}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &385357241
@@ -621,6 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camTF: {fileID: 963194228}
   playerCameraContext: {fileID: 1759689915}
+  TargCamAngle: {x: 0, y: 0, z: 0}
 --- !u!1 &1759689912
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183014ce04167fe469dfd1de7ef060cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotBodTF: {fileID: 385357240}
   freeWalkMSP: {fileID: 11400000, guid: 7d9913bb0818386488461e2b4044373c, type: 2}
 --- !u!114 &1759689915
 MonoBehaviour:
@@ -683,7 +791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029b102a4c0bb664f925442b3fe8b17b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamTF: {fileID: 963194228}
   camMannager: {fileID: 1464651522}
   camAnker: {fileID: 1157175497}
   freeWalkCamParam_SCO: {fileID: 11400000, guid: d94378f622f00264a82e8035ff11ba37, type: 2}

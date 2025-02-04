@@ -17,7 +17,7 @@ public class PlayerCameraContext : MonoBehaviour
     protected PlayerCamState lastCS = null;
 
     #region Camera Refference
-    [SerializeField] protected Transform playerCamTF = null;
+    //[SerializeField] protected Transform playerCamTF = null;
     #endregion
 
    
@@ -76,6 +76,7 @@ public class PlayerCameraContext : MonoBehaviour
 
     #region Accessors for player camera parameters
     public PlayerCameraParam_SCO FreeWalkPlayerCamParam_SCO { get { return freeWalkCamParam_SCO; } }
+    public Vector3 CamRot { get { return camMannager.CamRot; } }
     #endregion
 
 

@@ -30,30 +30,7 @@ public class PlayerCamMannager : MonoBehaviour
         transform.position = Vector3.Lerp(playerCameraContext.CamAnker.position, transform.position, playerCameraContext.PlayerCameraParam_SCO.TimeToTween);// ((playerCameraContext.CamAnker.position - transform.position) + transform.position) * playerCameraContext.PlayerCameraParam_SCO.TimeToTween;
     }
 
-    /* protected virtual void RotCamToPos()
-     {
-         // store current rotation
-         Vector3 rot = camTF.eulerAngles;
-         Debug.Log("current angle = " + rot);
-
-         rot += (playerCameraContext.PlayerInputBridge.CamRotDir * playerCameraContext.PlayerCameraParam_SCO.RotSpeed);
-         rot.z = 0f;
-         Debug.Log("Pre Clamped X angle = " + rot.x);
-
-         float clampedX = Mathf.Clamp(rot.x, 90, 360 - 90);
-         //rot.x = Mathf.Clamp(rot.x, -playerCameraContext.PlayerCameraParam_SCO.MaxRot, playerCameraContext.PlayerCameraParam_SCO.MaxRot);
-         rot.x = Mathf.Clamp(rot.x, 90, 360 - 90);
-         Debug.Log("Post Clamped X angle" + clampedX);
-
-         Debug.Log("target angle = " + rot);
-
-         // create new rotation as quaterenion
-         Quaternion nRot = Quaternion.Euler(rot);
-         Debug.Log("generated angle = " + nRot.eulerAngles);
-
-         // change cam rotation use Quaternion Lerp
-         camTF.rotation = Quaternion.Lerp(camTF.rotation, nRot, playerCameraContext.PlayerCameraParam_SCO.TimeToTween );
-     }*/
+    
 
     protected virtual void RotCamToPos()
     {
@@ -70,6 +47,7 @@ public class PlayerCamMannager : MonoBehaviour
 
     // Accessors
     public PlayerCameraContext PlayerCameraContext { get { return playerCameraContext; } }
+    public Vector3 CamRot { get { return camTF.localEulerAngles; } }
 
 
 

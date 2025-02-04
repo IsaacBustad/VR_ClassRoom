@@ -23,10 +23,20 @@ public class PlayerMoveContext : MonoBehaviour
     protected Rigidbody rb = null;
     protected PlayerInputBridge ib = null;
 
+    // body of the player to rotate
+    [SerializeField] protected Transform rotBodTF = null;
+
     #endregion
+
+    
 
     #region Move Settings SCO's
     [SerializeField] protected MoveStateParam_SCO freeWalkMSP = null;
+    #endregion
+
+
+    #region Camera Vars
+    protected PlayerCameraContext playerCameraContext = null;
     #endregion
     //protected PlayerMoveState pms_
 
@@ -46,6 +56,7 @@ public class PlayerMoveContext : MonoBehaviour
     {
         // collect Component refferences on this body
         rb = GetComponent<Rigidbody>();
+        playerCameraContext = GetComponent<PlayerCameraContext>();
         // lock RB rotation
         rb.freezeRotation = true;
 
@@ -96,10 +107,16 @@ public class PlayerMoveContext : MonoBehaviour
     #region Access to move Vars
     public virtual Rigidbody RB { get { return rb; } }
     public virtual PlayerInputBridge IB { get { return ib; } }
+    public virtual Transform RotBodTF {  get { return rotBodTF; } }
     #endregion
 
     #region Access to Move State Params
     public MoveStateParam_SCO FreeWalkMSP { get { return freeWalkMSP; } }
+    #endregion
+
+    #region Access to Cam Vars
+    public PlayerCameraContext PlayerCameraContext { get { return playerCameraContext; } }
+
     #endregion
 
 }
