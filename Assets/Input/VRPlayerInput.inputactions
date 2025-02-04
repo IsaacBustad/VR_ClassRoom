@@ -29,7 +29,7 @@
                     "id": "2b2bddd3-00f2-4139-be7a-d90d319065c2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -214,6 +214,17 @@
                     "action": "CursorMouseMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "633cdaa3-e8cb-4b19-9e2c-85b5cd2692ba",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Primary_Action_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
