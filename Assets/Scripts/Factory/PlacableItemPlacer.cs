@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,10 @@ namespace BugFreeProductions.Tools
         [SerializeField, Range(1, 100)] protected float maxPlaceDist = 5;
         protected bool isPlacing = false;
 
+
+        // temp vars for placement
+        protected FactoryItem factoryItem = null;
+        protected PlacableFactoryItem placableFactoryItem = null;
 
         // Methods
         protected virtual void OnEnable()
@@ -52,22 +57,27 @@ namespace BugFreeProductions.Tools
             {
                 lineRenderer.enabled = true;
                 isPlacing = true;
+
+                
             }
             else if (aCon.canceled == true)
             {
-                UsePlacer();
+                //PlaceItem();
                 isPlacing = false;
-                lineRenderer.enabled = false;
-                Debug.Log("Canceled");
+                lineRenderer.enabled = false;       
+
+                // assigned null for re use
+                factoryItem = null;
+                placableFactoryItem = null;
             }
             
         }
 
 
         // functionality to use placer
-        public override void UsePlacer()
+        protected override void PlaceItem()
         {
-            itemFactory.CreateItem(CalcObjectPlacementData());
+            placableFactoryItem.FinalizePlacement();
         }
 
         // Set up placement data via custom calculation
@@ -114,6 +124,16 @@ namespace BugFreeProductions.Tools
                 posRotHelperTF.rotation = transform.rotation;
 
                 DrawPlacementLine();
+                
+                // if we have not created an object to place create here
+                // validates that we are pointing at a valid position
+                if (factoryItem == null)
+                {
+                    itemFactory.CreateItem(ref factoryItem, CalcObjectPlacementData());
+                    placableFactoryItem = factoryItem.GetComponent<PlacableFactoryItem>();
+                }
+
+                factoryItem.transform.position = posRotHelperTF.position;
             }
             
         }

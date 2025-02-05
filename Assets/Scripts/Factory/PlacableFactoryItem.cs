@@ -14,12 +14,20 @@ namespace BugFreeProductions.Tools
         // Var
         [SerializeField] protected PlacableFactoryItemBody body;
 
+        // Components in body use get component to collect
 
 
 
         // Methods
+        
 
-
+        public virtual void FinalizePlacement()
+        {
+            if (body != null)
+            {
+                body.FinalizeBody();
+            }
+        }
 
 
         // Accessors

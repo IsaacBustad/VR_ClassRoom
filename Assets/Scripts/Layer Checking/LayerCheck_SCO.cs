@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace BugFreeProductions.Tools
 {
-    [CreateAssetMenu(fileName = "", menuName = "")]
+    [CreateAssetMenu(fileName = "LayerCheck_SCO", menuName = "ScriptableObject/LayerCheck_SCO")]
     public class LayerCheck_SCO : ScriptableObject
     {
         // Vars

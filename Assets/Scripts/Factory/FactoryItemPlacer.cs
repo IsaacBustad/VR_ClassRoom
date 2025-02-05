@@ -23,10 +23,10 @@ namespace BugFreeProductions.Tools
         // public for input testing
         public virtual void UsePlacer(InputAction.CallbackContext aCon)
         {
-            UsePlacer();
+            PlaceItem();
         }
 
-        public virtual void UsePlacer()
+        protected virtual void PlaceItem()
         {
             
         }
