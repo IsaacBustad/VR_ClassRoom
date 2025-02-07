@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 9
   Category: table
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   ItemPrefab: {fileID: 0}

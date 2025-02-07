@@ -3,11 +3,22 @@ using UnityEngine;
 
 public class CatalogItemData : MonoBehaviour
 {
+    //TODO remove the serialized fields, this is just for debug
+    [SerializeField]
     private string id;
+    [SerializeField]
     private string category;
+    [SerializeField]
     private Sprite sprite;
 
     public CatalogItemData(string name, string category, Sprite sprite)
+    {
+        this.id = name;
+        this.category = category;
+        this.sprite = sprite;
+    }
+
+    public void Initialize(string name, string category, Sprite sprite)
     {
         this.id = name;
         this.category = category;

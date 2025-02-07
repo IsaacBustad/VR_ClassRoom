@@ -1,5 +1,4 @@
 // Written by Aaron Williams
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,11 +9,16 @@ public class CatalogController : MonoBehaviour
     // TODO switch back to const string, not const rn to make testing easier and string visible/editable in editor
     [SerializeField]
     private string ITEM_FOLDER = "ClassItems";
-
+    [SerializeField]
+    private Transform canvasTransform;
     [SerializeField]
     private GameObject catalogItemPrefab;
     [SerializeField]
+    private GameObject filterTogglePrefab;
+    [SerializeField]
     private Transform contentPanel;
+
+    // TODO Create the filters with code instead of in the editor
     [SerializeField]
     private List<CatalogFilterToggle> categoryToggles;
     [SerializeField]
@@ -26,12 +30,37 @@ public class CatalogController : MonoBehaviour
 
     private void Start()
     {
-        foreach (CatalogFilterToggle filterToggle in categoryToggles)
-        {
-            filterToggle.onValueChanged.AddListener(delegate { UpdateCatalog(); });
-        }
         LoadItems();
+        TempDrawToggles();
         UpdateCatalog();
+    }
+
+    // TODO fix this to look how Isaac wants it
+    private void TempDrawToggles()
+    {
+        AssembleToggleButton(CategoryUtil.INTERACTABLE, -140f, 85f);
+
+        AssembleToggleButton(CategoryUtil.CHAIR, -140f, 55f);
+
+        AssembleToggleButton(CategoryUtil.TABLE, -140f, 25f);
+
+        AssembleToggleButton(CategoryUtil.UTILITY, -140f, -5f);
+
+        AssembleToggleButton(CategoryUtil.OTHER, -140f, -35f);
+    }
+
+    // TODO fix this to look how Isaac wants it
+    private void AssembleToggleButton(string category, float paramX, float paramY)
+    {
+        GameObject filterToggleGameObject = Instantiate(filterTogglePrefab, canvasTransform);
+        filterToggleGameObject.transform.localPosition = new Vector3(paramX, paramY, 0);
+
+        CatalogFilterToggle filterToggleComponent = filterToggleGameObject.GetComponent<CatalogFilterToggle>();
+        filterToggleComponent.Category = category;
+        filterToggleComponent.onValueChanged.AddListener(delegate { UpdateCatalog(); });
+        categoryToggles.Add(filterToggleComponent);
+
+        filterToggleGameObject.GetComponentInChildren<Text>().text = category;
     }
 
     private void LoadItems()
@@ -43,34 +72,30 @@ public class CatalogController : MonoBehaviour
 
         foreach (ItemSO item in items)
         {
-            allItems.Add(new CatalogItemData(item.Id, item.Category, item.Sprite));
+            GameObject catalogButton = Instantiate(catalogItemPrefab, contentPanel);
+            CatalogItemData catalogItemData = catalogButton.AddComponent<CatalogItemData>();
+            //TODO make a better way to load this
+            catalogButton.GetComponent<Image>().sprite = item.Sprite;
+            catalogItemData.Initialize(item.Id, item.Category, item.Sprite);
+            allItems.Add(catalogItemData);
         }
     }
 
     private void UpdateCatalog()
     {
-        // Get active categories
-        List<string> activeCategories = new List<string>();
-        foreach (var filterToggle in categoryToggles)
+        foreach (CatalogItemData item in allItems)
         {
-            if (filterToggle.isOn)
-            {
-                activeCategories.Add(filterToggle.Category);
-            }
-        }
+            bool shouldDisplay = false;
 
-        // enable filtered items
-        foreach (var item in allItems)
-        {
-            if (activeCategories.Contains(item.Category))
+            foreach (var filter in categoryToggles)
             {
-                // TODO need to test this to make sure that the grid resizes and reorghanizes when items are filtered/unfiltered
-                item.gameObject.SetActive(true);
+
+                if (filter.isOn && item.Category == filter.Category)
+                {
+                    shouldDisplay = true;
+                }
             }
-            else
-            {
-                item.gameObject.SetActive(false);
-            }
+            item.gameObject.SetActive(shouldDisplay);
         }
     }
 }
