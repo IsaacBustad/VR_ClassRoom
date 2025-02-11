@@ -12,14 +12,28 @@ namespace BugFreeProductions.Tools
     public class PlacableFactoryItem : FactoryItem
     {
         // Var
-        [SerializeField] protected PlacableFactoryItemBody body;
-
+        protected PlacableFactoryItemBody body;
+        protected Rigidbody rb;
         // Components in body use get component to collect
 
 
 
         // Methods
-        
+        #region Setup and Finalize placement
+        public virtual void OnEnable()
+        {
+            CollectVars();
+        }
+
+        protected virtual void CollectVars()
+        {
+            // get and default Rigidbody
+            rb = GetComponent<Rigidbody>();
+            rb.freezeRotation = true;
+
+            // collect bodyScript
+            body = GetComponent<PlacableFactoryItemBody>();
+        }
 
         public virtual void FinalizePlacement()
         {
@@ -28,8 +42,19 @@ namespace BugFreeProductions.Tools
                 body.FinalizeBody();
             }
         }
+        #endregion
 
 
+        #region Align Object to Point and Rotation
+        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
+        {
+            transform.position = aGlobePos;
+            body.PositionAndRotateBody(aGlobePos, aLookPos);
+        }
+
+
+
+        #endregion 
         // Accessors
 
 

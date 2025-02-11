@@ -22,6 +22,16 @@ namespace BugFreeProductions.Tools
 
 
         // Methods
+        #region Setup
+        protected virtual void OnEnable()
+        {
+            CollectVars();
+        }
+
+        protected virtual void CollectVars()
+        {
+            //material = GetComponent<Material>();
+        }
         protected virtual void OnTriggerEnter(Collider other)
         {
             objInTrig ++;
@@ -43,8 +53,29 @@ namespace BugFreeProductions.Tools
                 material.color = positiveColor;
             }
         }
+        #endregion
+
+        #region Align Object to Point and Rotation
+        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos, float aHeight)
+        {
+            PositionBody(aGlobePos, aHeight);
+        }
+
+        protected virtual void PositionBody(Vector3 aGlobePos, float aHeight)
+        {
+            Vector3 nPos = aGlobePos;
+
+            nPos.y += aHeight / 2;
+            transform.position = nPos;
+        }
+
+        protected virtual void RotateBody(Vector3 aLookPos)
+        {
+
+        }
 
 
+        #endregion
 
         // Accessors
 

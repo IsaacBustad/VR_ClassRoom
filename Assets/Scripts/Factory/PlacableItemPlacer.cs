@@ -64,7 +64,8 @@ namespace BugFreeProductions.Tools
             {
                 //PlaceItem();
                 isPlacing = false;
-                lineRenderer.enabled = false;       
+                lineRenderer.enabled = false;
+                PlaceItem();
 
                 // assigned null for re use
                 factoryItem = null;
@@ -116,7 +117,7 @@ namespace BugFreeProductions.Tools
             // store raycast hit
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, maxPlaceDist))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, maxPlaceDist, 31, QueryTriggerInteraction.Ignore))
             {
 
 
@@ -133,7 +134,12 @@ namespace BugFreeProductions.Tools
                     placableFactoryItem = factoryItem.GetComponent<PlacableFactoryItem>();
                 }
 
-                factoryItem.transform.position = posRotHelperTF.position;
+
+                // change item position
+                //factoryItem.transform.position = posRotHelperTF.position;
+
+                // change body position
+                placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position,transform.position);
             }
             
         }
