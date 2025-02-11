@@ -21,7 +21,7 @@ namespace BugFreeProductions.Tools
 
         // safe area trigger
         [SerializeField] protected GameObject safeAreaGO = null;
-        [SerializeField] protected GameObject safeArea = null;
+        [SerializeField] protected PlacableFactoryItemSafeArea safeArea = null;
 
         [SerializeField] protected Transform bodyObject = null;
         [SerializeField] protected Transform rotHelper = null;
@@ -92,7 +92,7 @@ namespace BugFreeProductions.Tools
         public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
         {
             PositionBody(aGlobePos);
-            //safeArea.PositionAndRotateBody
+            safeArea.PositionAndRotateBody(aGlobePos, aLookPos, height, CalcNewRot(aLookPos));
         }
 
         protected virtual void PositionBody(Vector3 aGlobePos)
@@ -105,7 +105,26 @@ namespace BugFreeProductions.Tools
 
         protected virtual void RotateBody(Vector3 aLookPos)
         {
+            
 
+            bodyObject.transform.rotation = CalcNewRot(aLookPos);
+
+        }
+
+        protected virtual Quaternion CalcNewRot(Vector3 aLookPos)
+        {
+            // find target rotation
+            rotHelper.LookAt(aLookPos);
+
+            // create new rot
+            Vector3 nRot = rotHelper.eulerAngles;
+
+            // adjust rot
+            nRot.z = 0;
+            nRot.x = 0;
+
+            Quaternion nQ = Quaternion.Euler(nRot);
+            return nQ;
         }
 
 

@@ -62,10 +62,11 @@ namespace BugFreeProductions.Tools
             }
             else if (aCon.canceled == true)
             {
+                PlaceItem();
                 //PlaceItem();
                 isPlacing = false;
                 lineRenderer.enabled = false;
-                PlaceItem();
+                
 
                 // assigned null for re use
                 factoryItem = null;

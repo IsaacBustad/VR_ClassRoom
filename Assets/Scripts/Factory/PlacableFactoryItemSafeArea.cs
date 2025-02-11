@@ -56,9 +56,10 @@ namespace BugFreeProductions.Tools
         #endregion
 
         #region Align Object to Point and Rotation
-        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos, float aHeight)
+        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos, float aHeight, Quaternion aLookRot)
         {
             PositionBody(aGlobePos, aHeight);
+            RotateBody(aLookRot);
         }
 
         protected virtual void PositionBody(Vector3 aGlobePos, float aHeight)
@@ -69,9 +70,9 @@ namespace BugFreeProductions.Tools
             transform.position = nPos;
         }
 
-        protected virtual void RotateBody(Vector3 aLookPos)
+        protected virtual void RotateBody(Quaternion aLookRot)
         {
-
+            transform.rotation = aLookRot;
         }
 
 

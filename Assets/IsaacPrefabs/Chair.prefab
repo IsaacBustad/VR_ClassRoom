@@ -81,7 +81,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4399594045084595629}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -400,7 +400,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodColliders:
   - {fileID: 3640189844798219721}
-  safeArea: {fileID: 4584208193729365980}
+  safeAreaGO: {fileID: 4584208193729365980}
+  safeArea: {fileID: 6193265091691689584}
   bodyObject: {fileID: 871792642117907424}
   rotHelper: {fileID: 1081452741305497737}
   width: 1
