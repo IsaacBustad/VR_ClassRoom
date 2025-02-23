@@ -65,6 +65,10 @@ namespace BugFreeProductions.Tools
         // final setup for all body components
         public virtual void FinalizeBody()
         {
+            // activate rb interections
+            rb.freezeRotation = false;
+            rb.useGravity = true;
+
             FinalizeBodyColiders();
             FinalizeSafeArea();
         }

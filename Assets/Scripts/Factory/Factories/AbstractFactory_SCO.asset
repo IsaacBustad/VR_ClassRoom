@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genericFactory_SCOs:
   - {fileID: 11400000, guid: bab67c8f1ccf174438395be5dfd41807, type: 2}
+  - {fileID: 11400000, guid: aa07d84344a81474e8c759d5e494fe18, type: 2}

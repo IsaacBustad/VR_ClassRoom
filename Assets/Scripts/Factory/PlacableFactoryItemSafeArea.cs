@@ -17,8 +17,11 @@ namespace BugFreeProductions.Tools
 
         [SerializeField] protected Material material = null;
 
+        [SerializeField] protected float yBuff = 0.001f;
+
 
         protected int objInTrig = 0;
+
 
 
         // Methods
@@ -67,6 +70,7 @@ namespace BugFreeProductions.Tools
             Vector3 nPos = aGlobePos;
 
             nPos.y += aHeight / 2;
+            nPos.y += yBuff;
             transform.position = nPos;
         }
 

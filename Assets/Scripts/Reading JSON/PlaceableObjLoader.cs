@@ -31,7 +31,12 @@ namespace BugFreeProductions.Tools
 
                 foreach (ObjectPlacement objPlacement in objPlacements)
                 {
-                    abf.CreateItem(objPlacement);
+                    FactoryItem aFI = null;
+                    abf.CreateItem( ref aFI, objPlacement);
+                    if (aFI != null)
+                    {
+                        aFI.GetComponent<PlacableFactoryItem>().FinalizePlacement();
+                    }
                 }
 
             }

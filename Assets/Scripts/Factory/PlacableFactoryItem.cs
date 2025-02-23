@@ -37,8 +37,9 @@ namespace BugFreeProductions.Tools
 
         public virtual void FinalizePlacement()
         {
+            body = GetComponent<PlacableFactoryItemBody>();
             if (body != null)
-            {
+            {                
                 body.FinalizeBody();
             }
         }
