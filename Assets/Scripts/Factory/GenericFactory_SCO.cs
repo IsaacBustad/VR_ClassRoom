@@ -55,36 +55,29 @@ namespace BugFreeProductions.Tools
         }
 
         public virtual void CreateItem(ObjectPlacement aPlacement)
+        {            
+            // create new item
+            GameObject nGO = Instantiate(factoryItem, Vector3.zero, Quaternion.identity);
+            FactoryItem fi = nGO.GetComponent<FactoryItem>();
+
+            if (fi != null)
+            {
+                fi.UseFactoryItem(aPlacement, pool);
+            }
+        }
+
+        public virtual void CreateItem(ref FactoryItem aFI, ObjectPlacement aPlacement)
         {
-            // create ref for pool to return to
-            Poolable aFact = null;
+            
+            // create new item
+            GameObject nGO = Instantiate(factoryItem, Vector3.zero, Quaternion.identity);
+            FactoryItem fi = nGO.GetComponent<FactoryItem>();
 
-            // check pool for reusable item
-            pool.PoolChk(ref aFact);
-
-            // use new only if none were pooled
-            if (aFact != null)
+            if (fi != null)
             {
-                // reuse pooled item
-                FactoryItem fi = aFact.GetComponent<FactoryItem>();
-                if (fi != null)
-                {
-                    fi.UseFactoryItem(aPlacement, pool);
-                }
-
+                fi.UseFactoryItem(aPlacement, pool);
+                aFI = fi;
             }
-            else
-            {
-                // create new item
-                GameObject nGO = Instantiate(factoryItem, Vector3.zero, Quaternion.identity);
-                FactoryItem fi = nGO.GetComponent<FactoryItem>();
-
-                if (fi != null)
-                {
-                    fi.UseFactoryItem(aPlacement, pool);
-                }
-            }
-
         }
 
         #endregion

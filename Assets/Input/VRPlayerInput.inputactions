@@ -29,7 +29,7 @@
                     "id": "2b2bddd3-00f2-4139-be7a-d90d319065c2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Keyboard",
+                    "name": "CursorMouseMovement",
                     "type": "PassThrough",
                     "id": "0c8e48c6-b239-411b-9d6e-5fbae1becfe8",
                     "expectedControlType": "Vector2",
@@ -117,61 +117,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "21e5a5c1-9cf1-49a1-b5ad-f782f6d2e630",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveInput",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "9ac9a5e5-af6d-455e-817a-1c3c43efead1",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveInput",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "24a41fd5-e71b-4b53-9101-097bdfe0295f",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveInput",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "47f59e0c-ebe8-4c73-a23e-52b63232ad66",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveInput",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "b244406d-2155-4e35-8b1c-c2ffa1f4ed0c",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveInput",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "27c549ac-3609-431f-b3cc-8b8dbd4dbf68",
                     "path": "<Keyboard>/q",
@@ -195,17 +140,6 @@
                 },
                 {
                     "name": "",
-                    "id": "fac06c3f-1a6f-4716-885a-911b6b772ed6",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Primary_Action_Left",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f19c66a5-e7a5-48e2-a4c3-de5052ede3b3",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -222,7 +156,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Keyboard",
+                    "action": "CursorMouseMovement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -233,7 +167,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Keyboard",
+                    "action": "CursorMouseMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -244,7 +178,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Keyboard",
+                    "action": "CursorMouseMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -255,7 +189,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Keyboard",
+                    "action": "CursorMouseMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -266,9 +200,20 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Keyboard",
+                    "action": "CursorMouseMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "633cdaa3-e8cb-4b19-9e2c-85b5cd2692ba",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Primary_Action_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

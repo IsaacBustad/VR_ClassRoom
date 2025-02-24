@@ -21,12 +21,22 @@ public class PlayerMoveContext : MonoBehaviour
 
     #region Movement Variables
     protected Rigidbody rb = null;
-    protected PlayerInputBridgeLocal ib = null;
+    protected PlayerInputBridge ib = null;
+
+    // body of the player to rotate
+    [SerializeField] protected Transform rotBodTF = null;
 
     #endregion
 
+    
+
     #region Move Settings SCO's
     [SerializeField] protected MoveStateParam_SCO freeWalkMSP = null;
+    #endregion
+
+
+    #region Camera Vars
+    protected PlayerCameraContext playerCameraContext = null;
     #endregion
     //protected PlayerMoveState pms_
 
@@ -46,12 +56,13 @@ public class PlayerMoveContext : MonoBehaviour
     {
         // collect Component refferences on this body
         rb = GetComponent<Rigidbody>();
+        playerCameraContext = GetComponent<PlayerCameraContext>();
         // lock RB rotation
         rb.freezeRotation = true;
 
-        Debug.Log("RB = " + rb.gameObject.name);
-        ib = GetComponent<PlayerInputBridgeLocal>();
-        Debug.Log("IB = " + ib.gameObject.name);
+        //Debug.Log("RB = " + rb.gameObject.name);
+        ib = GetComponent<PlayerInputBridge>();
+        //Debug.Log("IB = " + ib.gameObject.name);
     }
 
     protected virtual void FixedUpdate()
@@ -95,11 +106,17 @@ public class PlayerMoveContext : MonoBehaviour
 
     #region Access to move Vars
     public virtual Rigidbody RB { get { return rb; } }
-    public virtual PlayerInputBridgeLocal IB { get { return ib; } }
+    public virtual PlayerInputBridge IB { get { return ib; } }
+    public virtual Transform RotBodTF {  get { return rotBodTF; } }
     #endregion
 
     #region Access to Move State Params
     public MoveStateParam_SCO FreeWalkMSP { get { return freeWalkMSP; } }
+    #endregion
+
+    #region Access to Cam Vars
+    public PlayerCameraContext PlayerCameraContext { get { return playerCameraContext; } }
+
     #endregion
 
 }
