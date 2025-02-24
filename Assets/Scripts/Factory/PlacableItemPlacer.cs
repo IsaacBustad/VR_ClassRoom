@@ -157,7 +157,7 @@ namespace BugFreeProductions.Tools
         }
 
         // Accessors
-
+        public string ItemID { get { return itemID; } set { itemID = value; } }
 
 
     }
