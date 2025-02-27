@@ -1,14 +1,18 @@
 // Written by Aaron Williams
+using BugFreeProductions.Tools;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CatalogController : MonoBehaviour
 {
-    // TODO update this to the final folder name inside of Resources
+    // TODO update this to the final folder names inside of Resources
     // TODO switch back to const string, not const rn to make testing easier and string visible/editable in editor
     [SerializeField]
     private string ITEM_FOLDER = "ClassItems";
+    [SerializeField]
+    private string CATEGORIES_FOLDER = "Categories";
     [SerializeField]
     private Transform canvasTransform;
     [SerializeField]
@@ -16,65 +20,64 @@ public class CatalogController : MonoBehaviour
     [SerializeField]
     private GameObject filterTogglePrefab;
     [SerializeField]
-    private Transform contentPanel;
+    private Transform itemsContentPanel;
+    [SerializeField]
+    private Transform filtersContentPanel;
 
-    // TODO Create the filters with code instead of in the editor
+    private PlacableItemPlacer itemPlacer;
+
+    private const string togglesuffix = " toggle";
+
     [SerializeField]
     private List<CatalogFilterToggle> categoryToggles;
     [SerializeField]
     private List<CatalogItemData> allItems = new List<CatalogItemData>();
 
     public GameObject CatalogItemPrefab { get => catalogItemPrefab; set => catalogItemPrefab = value; }
-    public Transform ContentPanel { get => contentPanel; set => contentPanel = value; }
+    public Transform ItemsContentPanel { get => itemsContentPanel; set => itemsContentPanel = value; }
+    public Transform FiltersContentPanel { get => filtersContentPanel; set => filtersContentPanel = value; }
     public List<CatalogFilterToggle> CategoryToggles { get => categoryToggles; set => categoryToggles = value; }
 
     private void Start()
     {
         LoadItems();
-        TempDrawToggles();
+        LoadFilterToggles();
         UpdateCatalog();
     }
 
-    // TODO fix this to look how Isaac wants it
-    private void TempDrawToggles()
+    private void LoadFilterToggles()
     {
-        AssembleToggleButton(CategoryUtil.INTERACTABLE, -140f, 85f);
+        categoryToggles.Clear();
 
-        AssembleToggleButton(CategoryUtil.CHAIR, -140f, 55f);
+        // TODO change this to the final scriptableObject type when ready
+        CategorySO[] categories = Resources.LoadAll<CategorySO>(CATEGORIES_FOLDER);
 
-        AssembleToggleButton(CategoryUtil.TABLE, -140f, 25f);
+        foreach (CategorySO category in categories)
+        {
+            GameObject filterToggleGameObject = Instantiate(filterTogglePrefab, filtersContentPanel);
+            filterToggleGameObject.name = category + togglesuffix;
 
-        AssembleToggleButton(CategoryUtil.UTILITY, -140f, -5f);
+            CatalogFilterToggle filterToggleComponent = filterToggleGameObject.GetComponent<CatalogFilterToggle>();
+            filterToggleComponent.Category = category.Category;
+            filterToggleComponent.onValueChanged.AddListener(delegate { UpdateCatalog(); });
 
-        AssembleToggleButton(CategoryUtil.OTHER, -140f, -35f);
-    }
+            filterToggleGameObject.transform.GetChild(0).GetComponent<Image>().sprite = category.Sprite;
 
-    // TODO fix this to look how Isaac wants it
-    private void AssembleToggleButton(string category, float paramX, float paramY)
-    {
-        GameObject filterToggleGameObject = Instantiate(filterTogglePrefab, canvasTransform);
-        filterToggleGameObject.transform.localPosition = new Vector3(paramX, paramY, 0);
-
-        CatalogFilterToggle filterToggleComponent = filterToggleGameObject.GetComponent<CatalogFilterToggle>();
-        filterToggleComponent.Category = category;
-        filterToggleComponent.onValueChanged.AddListener(delegate { UpdateCatalog(); });
-        categoryToggles.Add(filterToggleComponent);
-
-        filterToggleGameObject.GetComponentInChildren<Text>().text = category;
+            categoryToggles.Add(filterToggleComponent);
+        }
     }
 
     private void LoadItems()
     {
         allItems.Clear();
 
-        // TODO change this to the final scriptableObject type when ready
         ItemSO[] items = Resources.LoadAll<ItemSO>(ITEM_FOLDER);
 
         foreach (ItemSO item in items)
         {
-            GameObject catalogButton = Instantiate(catalogItemPrefab, contentPanel);
+            GameObject catalogButton = Instantiate(catalogItemPrefab, itemsContentPanel);
+            catalogButton.GetComponent<Button>().onClick.AddListener(delegate { SelectObjectToPlace(catalogButton); });
             CatalogItemData catalogItemData = catalogButton.AddComponent<CatalogItemData>();
-            //TODO make a better way to load this
             catalogButton.GetComponent<Image>().sprite = item.Sprite;
             catalogItemData.Initialize(item.Id, item.Category, item.Sprite);
             allItems.Add(catalogItemData);
@@ -89,13 +92,17 @@ public class CatalogController : MonoBehaviour
 
             foreach (var filter in categoryToggles)
             {
-
-                if (filter.isOn && item.Category == filter.Category)
+                if (filter.isOn && (string.Equals(item.Category, filter.Category, StringComparison.OrdinalIgnoreCase)))
                 {
                     shouldDisplay = true;
                 }
             }
             item.gameObject.SetActive(shouldDisplay);
         }
+    }
+
+    private void SelectObjectToPlace(GameObject catalogButton)
+    {
+        itemPlacer.ItemID = catalogButton.GetComponent<CatalogItemData>().Id;
     }
 }
