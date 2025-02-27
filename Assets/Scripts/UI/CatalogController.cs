@@ -24,6 +24,7 @@ public class CatalogController : MonoBehaviour
     [SerializeField]
     private Transform filtersContentPanel;
 
+    [SerializeField]
     private PlacableItemPlacer itemPlacer;
 
     private const string togglesuffix = " toggle";

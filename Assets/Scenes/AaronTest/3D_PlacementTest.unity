@@ -206,46 +206,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 334173331460364241, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118835865026832855, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118835865026832855, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118835865026832855, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 2964273532409584004, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
+      propertyPath: itemPlacer
+      value: 
+      objectReference: {fileID: 795012738}
     - target: {fileID: 3064812581451802826, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
       propertyPath: m_Name
       value: RoomItemUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 3064812581451802826, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3663705539709807765, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 7626781713035990996, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7626781713035990996, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7626781713035990996, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 7626781713035990996, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -285,10 +257,6 @@ PrefabInstance:
     - target: {fileID: 7626781713035990996, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7626781713035990996, guid: f24b1e5badc0bfd48be3d6e1aaea0a4d, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -532,7 +500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &795012737
 Transform:
   m_ObjectHideFlags: 0
@@ -998,7 +966,6 @@ GameObject:
   - component: {fileID: 1759689914}
   - component: {fileID: 1759689918}
   - component: {fileID: 1759689919}
-  - component: {fileID: 1759689920}
   - component: {fileID: 1759689921}
   m_Layer: 0
   m_Name: WholeBod
@@ -1144,7 +1111,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1759689919}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: ToggleMenu
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1157,7 +1124,7 @@ MonoBehaviour:
     m_ActionName: Master_Player_Input/Primary_Action_Right_e[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1759689920}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: JankTempToggler, Assembly-CSharp
         m_MethodName: ToggleThing
         m_Mode: 1
@@ -1245,19 +1212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 370171562}
   playerTransform: {fileID: 385357240}
---- !u!114 &1759689920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759689912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 187ab1e114f1f31438b33f80d095daca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thing: {fileID: 795012736}
+  rightHand: {fileID: 795012736}
 --- !u!114 &1759689921
 MonoBehaviour:
   m_ObjectHideFlags: 0
