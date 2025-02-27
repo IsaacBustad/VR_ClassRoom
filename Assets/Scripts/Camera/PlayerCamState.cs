@@ -12,10 +12,14 @@ public class PlayerCamState
 
 
     // Methods
+    #region State Change Region
+
+
+    #endregion
     // actions to be executed in Fixed Update
     public virtual void FUActions()
     {
-        RotateCamera();
+        
     }
 
     // actions to be executed in Update
@@ -31,8 +35,12 @@ public class PlayerCamState
     }
 
     // Accessors
+    public virtual PlayerCameraParam_SCO PlayerCameraParam_SCO(PlayerCameraContext aPCC)
+    {
+        return aPCC.FreeWalkPlayerCamParam_SCO;
+    }
 
 
 
-   
+
 }

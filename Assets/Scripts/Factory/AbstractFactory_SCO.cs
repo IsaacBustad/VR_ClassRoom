@@ -66,6 +66,54 @@ namespace BugFreeProductions.Tools
             }
 
         }
+
+        public virtual void CreateItem(ref FactoryItem aFI, ObjectPlacement aPlacement)
+        {
+            // hold id to search for
+            string srchString = aPlacement.id;
+
+            // hold id we are looping through
+            string factID = null;
+
+
+            foreach (GenericFactory_SCO gf in genericFactory_SCOs)
+            {
+                // change ID we check against
+                factID = gf.ItemID;
+
+                // check Against search id
+                if (srchString == factID)
+                {
+                    gf.CreateItem(ref aFI, aPlacement);
+                }
+
+            }
+
+        }
+
+        public virtual void CreateItem(ObjectPlacement aPlacement, int aLayer)
+        {
+            // hold id to search for
+            string srchString = aPlacement.id;
+
+            // hold id we are looping through
+            string factID = null;
+
+
+            foreach (GenericFactory_SCO gf in genericFactory_SCOs)
+            {
+                // change ID we check against
+                factID = gf.ItemID;
+
+                // check Against search id
+                if (srchString == factID)
+                {
+                    gf.CreateItem(aPlacement);
+                }
+
+            }
+
+        }
         #endregion
 
 

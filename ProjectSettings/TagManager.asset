@@ -35,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - PlacableObject
   - PostProcessing
   m_SortingLayers:
   - name: Default

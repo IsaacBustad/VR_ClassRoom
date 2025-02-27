@@ -17,43 +17,70 @@ public class PlayerCameraContext : MonoBehaviour
     protected PlayerCamState lastCS = null;
 
     #region Camera Refference
-    [SerializeField] protected Transform playerCamTF = null;
+    //[SerializeField] protected Transform playerCamTF = null;
     #endregion
 
-    #region 3D Cam Reff
+   
 
-    #endregion 
-
-    protected PlayerCamState vrCS ;
-    protected PlayerCamState threeDCS ;
+    /*protected PlayerCamState freeWalkPCS  = new;
+    protected PlayerCamState lockToPosPCS = ;*/
     #endregion
 
     #region Cam Vars
-    [SerializeField] protected Transform CamTF;
+    [SerializeField] protected PlayerCamMannager camMannager = null;
+    [SerializeField] protected Transform camAnker = null;
     #endregion
 
     #region Cam State Params
-    protected PlayerCameraParam_SCO player3DPCP = null;
+    [SerializeField] protected PlayerCameraParam_SCO freeWalkCamParam_SCO = null;
+    [SerializeField] protected PlayerCameraParam_SCO lockedToPosCamParam_SCO = null;
     #endregion
     #region VR Cam Controls
+    #endregion
+
+    #region Input and addditional refference
+    protected PlayerInputBridge playerInputBridge = null;
     #endregion
 
 
     // Methods
     protected virtual void OnEnable()
     {
+        curCS = new PlayerCamState();
 
+        CollectVars();
+    }
+
+    // Initialize variables
+
+    // Collect Variable Refferences
+    protected virtual void CollectVars()
+    {
+
+        // collect local object refferences
+        playerInputBridge = GetComponent<PlayerInputBridge>();
     }
 
     protected virtual void FixedUpdate()
     {
-
+        curCS.FUActions();
     }
     
 
 
 
     // Accessors
+    public Transform CamAnker { get { return camAnker; } }
+    public PlayerInputBridge PlayerInputBridge { get {  return playerInputBridge; } }
+    public PlayerCameraParam_SCO PlayerCameraParam_SCO { get { return curCS.PlayerCameraParam_SCO(this); } }
+
+    #region Accessors for player camera parameters
+    public PlayerCameraParam_SCO FreeWalkPlayerCamParam_SCO { get { return freeWalkCamParam_SCO; } }
+    public Vector3 CamRot { get { return camMannager.CamRot; } }
+    #endregion
+
+
+    // Accesors for other class methods
 
 
 

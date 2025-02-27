@@ -24,6 +24,7 @@ public class PlayerCameraParam_SCO : ScriptableObject
 
     // Accessors
     public virtual float RotSpeed { get { return rotSpeed; } }
+    public virtual float MaxRot { get { return maxRot; } }
     public virtual float TimeToTween { get {  return timeToTween; } }
 
 
