@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: FreeWalkCameraParam_SCO
   m_EditorClassIdentifier: 
   maxRot: 90
-  rotSpeed: 2
+  rotSpeed: 1.6
   timeToTween: 0.25
-  reZeroSpeed: 0.75
   reZeroBuff: 0.025
