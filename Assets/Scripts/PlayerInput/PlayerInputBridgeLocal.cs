@@ -24,7 +24,7 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
     {
         Vector2 nDir = aCon.ReadValue<Vector2>();
         //Debug.Log("In Direction" + nDir);
-        camRotDir = new Vector3(-nDir.y, nDir.x, 0);
+        camRotDir += new Vector3(-nDir.y, nDir.x, 0);
         //Debug.Log("Mouse Direction" + camRotDir);
     }
 
@@ -43,6 +43,21 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
     public override void Primary_Action_Right_E(InputAction.CallbackContext aCon)
     {
 
+    }
+
+    protected virtual void Update()
+    {
+        LerpCamToZero();
+    }
+
+    protected virtual void LerpCamToZero()
+    {
+        if (camRotDir.magnitude > playerCameraContext.PlayerCameraParam_SCO.ReZeroBuff)
+        {
+            camRotDir = Vector3.Lerp(camRotDir, Vector3.zero, playerCameraContext.PlayerCameraParam_SCO.TimeToTween);
+        }
+        else camRotDir = Vector3.zero;
+        
     }
     #endregion
 

@@ -21,6 +21,9 @@ public class PlayerInputBridge : MonoBehaviour
     #region Camera Vars
     // for Camera context to access
     protected Vector3 camRotDir = Vector3.zero;
+
+    // to hold CamStateContext
+    protected PlayerCameraContext playerCameraContext = null;
     #endregion
 
     // Methods
@@ -31,7 +34,14 @@ public class PlayerInputBridge : MonoBehaviour
 
     protected virtual void CollectVars()
     {
+        // get move context
+        // should be on this object
         playerMoveContext = GetComponent<PlayerMoveContext>();
+
+        // get cam context
+        // should be on this object
+        playerCameraContext = GetComponent<PlayerCameraContext>();
+
     }
 
     #region Keyboard Player Controls
