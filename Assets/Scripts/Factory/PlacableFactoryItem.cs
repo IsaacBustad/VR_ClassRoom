@@ -56,6 +56,11 @@ namespace BugFreeProductions.Tools
 
 
         #endregion 
+
+        public virtual void RemoveItem()
+        {
+            Destroy(gameObject);
+        }
         // Accessors
 
 

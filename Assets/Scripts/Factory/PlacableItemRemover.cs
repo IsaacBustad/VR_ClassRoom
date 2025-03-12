@@ -19,13 +19,17 @@ namespace BugFreeProductions.Tools {
         [SerializeField] protected Transform posRotHelperTF = null;
 
         // temp selected item ref
-        protected PlacableFactoryItem placableFactoryItem = null;
+        protected PlacableItemHighlighter placableItemRemoval = null;
 
 
         // Methods
         protected virtual void OnEnable()
         {
             CollectVars();
+        }
+        protected virtual void FixedUpdate()
+        {
+            CastAndCheckforPlacement();
         }
 
         protected virtual void CollectVars()
@@ -56,13 +60,19 @@ namespace BugFreeProductions.Tools {
 
                 // get the placable Factory Item from an object if it exist
                 // else placableFactoryItem will be null
-                placableFactoryItem = hit.collider.gameObject.GetComponent<PlacableFactoryItem>();
+                PlacableItemHighlighter buffItem = placableItemRemoval;
+                placableItemRemoval = hit.collider.gameObject.GetComponent<PlacableItemHighlighter>();
 
                 // if the placable Factory Item exist
                 // run the method to highlight
-                if (placableFactoryItem != null)
+                if (placableItemRemoval != null)
                 {
+                    placableItemRemoval.HighlighNegative(); 
+                }
 
+                if (buffItem != null && buffItem != placableItemRemoval)
+                {
+                    buffItem.DeHighlight();
                 }
 
 
@@ -79,8 +89,14 @@ namespace BugFreeProductions.Tools {
             }
             else if (aCon.canceled)
             {
-                
+                RemoveObject();
+                isRemoving = false;    
             }
+        }
+
+        protected virtual void RemoveObject()
+        {
+            placableItemRemoval.GetComponent<PlacableFactoryItem>().RemoveItem();
         }
 
         protected virtual void DrawRemovalLine()
