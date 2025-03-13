@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 546670837246252439}
   - component: {fileID: 5698856301142818228}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: new chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1081452741305497737}
-  - {fileID: 4891654961412056605}
   - {fileID: 6414715082581543270}
   m_Father: {fileID: 3269074817065981551}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -189,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7943081352019639325
 Transform:
   m_ObjectHideFlags: 0
@@ -200,7 +199,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 1, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3269074817065981551}
@@ -220,7 +219,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4584208193729365980}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -291,6 +290,8 @@ MonoBehaviour:
   positiveColor: {r: 0, g: 1, b: 0.08777261, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   material: {fileID: 2100000, guid: ff9a278126fc4be4ca4ee19f73c55754, type: 2}
+  placableItemHighlighter: {fileID: 5099876502608371226}
+  yBuff: 0.001
 --- !u!1 &4747423611790198303
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +306,7 @@ GameObject:
   - component: {fileID: 8697142804425760618}
   - component: {fileID: 5450771590007832862}
   - component: {fileID: 857242620011642341}
+  - component: {fileID: 5099876502608371226}
   m_Layer: 0
   m_Name: Chair
   m_TagString: Untagged
@@ -439,86 +441,19 @@ MonoBehaviour:
   rotHelper: {fileID: 1081452741305497737}
   width: 1
   height: 1
---- !u!1001 &4896323012454491557
-PrefabInstance:
+--- !u!114 &5099876502608371226
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 871792642117907424}
-    m_Modifications:
-    - target: {fileID: -8120887257766393524, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1578530219999206, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_Name
-      value: chair 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1578530219999206, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23920774639449924, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 23920774639449924, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 23920774639449924, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 30b92673b9b7ef44c9c11a474d9910c9, type: 2}
-    m_RemovedComponents:
-    - {fileID: -8120887257766393524, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
---- !u!4 &4891654961412056605 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4958332315337656, guid: 698ed8e74ba9e78498465c68d7fb1830, type: 3}
-  m_PrefabInstance: {fileID: 4896323012454491557}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747423611790198303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd963a102fdc1e4aa3e83a7a197da5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 546670837246252439}
+  primaryMat: {fileID: 2100000, guid: 30b92673b9b7ef44c9c11a474d9910c9, type: 2}
+  positiveHighlightMat: {fileID: 2100000, guid: d6ee1268c594bbc4c9fac1a042879b00, type: 2}
+  negativeHighlightMat: {fileID: 2100000, guid: 3fc3f1bacbc0e034586944bd6d4ab684, type: 2}

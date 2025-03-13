@@ -2,6 +2,7 @@
 // 1/17/2025
 
 
+using BugFreeProductions.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,16 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
 {
     // Vars
     #region Movement Vars
-    
+
     #endregion
 
     #region Camera Vars
-    
+
+    #endregion
+
+    #region
+    // for additional rotation testing
+    [SerializeField] protected PlacableItemPlacer placableItemPlacer = null;
     #endregion
 
     // Methods
@@ -44,6 +50,10 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
     {
 
     }
+    public virtual void MouseScroll(InputAction.CallbackContext aCon)
+    {
+        //placableItemPlacer
+    }
 
     protected virtual void Update()
     {
@@ -59,11 +69,21 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
         else camRotDir = Vector3.zero;
         
     }
-    #endregion
 
+
+    #endregion
+    protected virtual void LerpAdditionalRotationToZero()
+    {
+        if (additionalBodyRotation.magnitude > playerCameraContext.PlayerCameraParam_SCO.ReZeroBuff)
+        {
+            additionalBodyRotation = Vector3.Lerp(additionalBodyRotation, Vector3.zero, playerCameraContext.PlayerCameraParam_SCO.TimeToTween);
+        }
+        else camRotDir = Vector3.zero;
+
+    }
 
     // Accessors
-    
+
 
 
 }

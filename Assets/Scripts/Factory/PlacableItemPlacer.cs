@@ -24,6 +24,8 @@ namespace BugFreeProductions.Tools
         protected FactoryItem factoryItem = null;
         protected PlacableFactoryItem placableFactoryItem = null;
 
+        
+
         // Methods
         protected virtual void OnEnable()
         {

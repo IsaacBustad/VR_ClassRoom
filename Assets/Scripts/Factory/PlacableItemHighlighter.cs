@@ -33,9 +33,9 @@ namespace BugFreeProductions.Tools
 
         public virtual void HighlighPositive()
         {
-            if (meshRenderer != null && negativeHighlightMat != null)
+            if (meshRenderer != null && positiveHighlightMat != null)
             {
-                meshRenderer.material = negativeHighlightMat;
+                meshRenderer.material = positiveHighlightMat;
             }
         }
 

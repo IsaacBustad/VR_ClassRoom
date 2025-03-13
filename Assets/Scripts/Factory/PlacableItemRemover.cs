@@ -19,7 +19,7 @@ namespace BugFreeProductions.Tools {
         [SerializeField] protected Transform posRotHelperTF = null;
 
         // temp selected item ref
-        protected PlacableItemHighlighter placableItemRemoval = null;
+        protected PlacableItemHighlighter placableItemHighlighter = null;
 
 
         // Methods
@@ -46,39 +46,39 @@ namespace BugFreeProductions.Tools {
 
         protected virtual void CastAndCheckforPlacement()
         {
-            // store raycast hit
-            RaycastHit hit;
-
-            if (Physics.Raycast(transform.position, transform.forward, out hit, maxRemoveDist, 31, QueryTriggerInteraction.Ignore))
+            if (isRemoving == true)
             {
+                // store raycast hit
+                RaycastHit hit;
 
-
-                posRotHelperTF.position = hit.point;
-                posRotHelperTF.rotation = transform.rotation;
-
-                DrawRemovalLine();
-
-                // get the placable Factory Item from an object if it exist
-                // else placableFactoryItem will be null
-                PlacableItemHighlighter buffItem = placableItemRemoval;
-                placableItemRemoval = hit.collider.gameObject.GetComponent<PlacableItemHighlighter>();
-
-                // if the placable Factory Item exist
-                // run the method to highlight
-                if (placableItemRemoval != null)
+                if (Physics.Raycast(transform.position, transform.forward, out hit, maxRemoveDist, 31, QueryTriggerInteraction.Ignore))
                 {
-                    placableItemRemoval.HighlighNegative(); 
+
+
+                    posRotHelperTF.position = hit.point;
+                    posRotHelperTF.rotation = transform.rotation;
+
+                    DrawRemovalLine();
+
+                    // get the placable Factory Item from an object if it exist
+                    // else placableFactoryItem will be null
+                    PlacableItemHighlighter buffItem = placableItemHighlighter;
+                    placableItemHighlighter = hit.collider.gameObject.GetComponentInParent<PlacableItemHighlighter>();
+
+                    // if the placable Factory Item exist
+                    // run the method to highlight
+                    if (placableItemHighlighter != null)
+                    {
+                        placableItemHighlighter.HighlighNegative();
+                    }
+
+                    if (buffItem != null && buffItem != placableItemHighlighter)
+                    {
+                        buffItem.DeHighlight();
+                    }
+
                 }
-
-                if (buffItem != null && buffItem != placableItemRemoval)
-                {
-                    buffItem.DeHighlight();
-                }
-
-
-
             }
-
         }
 
         public virtual void UseRemover(InputAction.CallbackContext aCon)
@@ -86,22 +86,28 @@ namespace BugFreeProductions.Tools {
             if (aCon.started)
             {
                 isRemoving = true;
+                lineRenderer.enabled = true;
             }
             else if (aCon.canceled)
             {
                 RemoveObject();
+                lineRenderer.enabled = false;
                 isRemoving = false;    
             }
         }
 
         protected virtual void RemoveObject()
         {
-            placableItemRemoval.GetComponent<PlacableFactoryItem>().RemoveItem();
+            if (placableItemHighlighter != null)
+            {
+                placableItemHighlighter.GetComponent<PlacableFactoryItem>().RemoveItem();
+            }
+            
         }
 
         protected virtual void DrawRemovalLine()
         {
-            //lineRenderer.enabled = true;
+            
 
             // create array of line points
             Vector3[] posArray = new Vector3[] { transform.position, posRotHelperTF.position };

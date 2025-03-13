@@ -26,6 +26,10 @@ public class PlayerInputBridge : MonoBehaviour
     protected PlayerCameraContext playerCameraContext = null;
     #endregion
 
+    #region Additional rotation for object placement
+    protected Vector3 additionalBodyRotation = Vector3.zero;
+    #endregion
+
     // Methods
     protected virtual void OnEnable()
     {
