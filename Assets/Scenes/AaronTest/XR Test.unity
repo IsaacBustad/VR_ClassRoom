@@ -22342,7 +22342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc5c234723e3a54d8dd09b131117743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshType: 1
+  _meshType: 5
 --- !u!114 &863346094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22373,7 +22373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2609c54f376cffc4da1ab9401cc1a36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skeletonType: 1
+  _skeletonType: 5
   _updateRootPose: 0
   _updateRootScale: 1
   _enablePhysicsCapsules: 0
@@ -29155,7 +29155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1094208927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33545,7 +33545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc5c234723e3a54d8dd09b131117743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshType: 0
+  _meshType: 4
 --- !u!114 &1246928657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33576,7 +33576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2609c54f376cffc4da1ab9401cc1a36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skeletonType: 0
+  _skeletonType: 4
   _updateRootPose: 0
   _updateRootScale: 1
   _enablePhysicsCapsules: 0
@@ -35382,6 +35382,68 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00616638, y: -0.030066561, z: -0.020585023}
     m_Extent: {x: 0.033926036, y: 0.041736547, z: 0.054627255}
   m_DirtyAABB: 0
+--- !u!1 &1322080184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1322080186}
+  - component: {fileID: 1322080187}
+  m_Layer: 0
+  m_Name: XRRoomGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1322080186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322080184}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.026865, y: 14.796876, z: 10.585819}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1322080187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322080184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26012f3385ea2e4aac3da98a1e9a8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightControllerTransform: {fileID: 1087492263}
+  maxRayDistance: 100
+  rayWidth: 0.01
+  validPlacementColor: {r: 0, g: 1, b: 0, a: 1}
+  invalidPlacementColor: {r: 1, g: 0, b: 0, a: 1}
+  pointSelectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  spherePrefab: {fileID: 6748686251990118325, guid: be6dd3186f2110242a5d064084ee3cc1, type: 3}
+  sphereRadius: 0.1
+  floorMaterial: {fileID: 2100000, guid: bd6a9036ea11691418017ac154f84290, type: 2}
+  generateRoomButton: 1
+  floorHeight: 0.01
+  wallMaterial: {fileID: 2100000, guid: 63777614ba704cf448433c715da14ac4, type: 2}
+  wallHeight: 2.5
+  edgeHighlightColor: {r: 0.8, g: 0.2, b: 0.8, a: 1}
+  edgeSelectionThreshold: 0.2
+  edgeHighlightWidth: 0.03
+  raycastActivationButton: 16384
+  placeRoomCornerButton: 8192
 --- !u!1 &1326745211
 GameObject:
   m_ObjectHideFlags: 0
@@ -43840,7 +43902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1682859130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49112,7 +49174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1901874974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55508,3 +55570,4 @@ SceneRoots:
   - {fileID: 1201546520}
   - {fileID: 108087179}
   - {fileID: 1094208934}
+  - {fileID: 1322080186}
