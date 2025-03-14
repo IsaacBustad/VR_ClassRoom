@@ -24,6 +24,9 @@ namespace BugFreeProductions.Tools
         protected FactoryItem factoryItem = null;
         protected PlacableFactoryItem placableFactoryItem = null;
 
+        // for additional rotation
+        PlayerInputBridge playerInputBridge = null;
+
         
 
         // Methods
@@ -81,7 +84,10 @@ namespace BugFreeProductions.Tools
         // functionality to use placer
         protected override void PlaceItem()
         {
-            placableFactoryItem.FinalizePlacement();
+            if ( placableFactoryItem != null)
+            {
+                placableFactoryItem.FinalizePlacement();
+            }
         }
 
         // Set up placement data via custom calculation
@@ -142,7 +148,8 @@ namespace BugFreeProductions.Tools
                 //factoryItem.transform.position = posRotHelperTF.position;
 
                 // change body position
-                placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position,transform.position);
+                
+                placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position,transform.position,playerInputBridge.AdditionalRotation);
             }
             
         }
@@ -161,6 +168,7 @@ namespace BugFreeProductions.Tools
         // Accessors
         public string ItemID { get { return itemID; } set { itemID = value; } }
 
+        public PlayerInputBridge PlayerInputBridge { get { return playerInputBridge; } set { playerInputBridge = value; } }
 
     }
 }

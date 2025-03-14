@@ -74,6 +74,7 @@ public class PlayerInputBridge : MonoBehaviour
     // Accessors
     public Vector3 MoveDir { get { return moveDir; } }
     public Vector3 CamRotDir { get { return camRotDir; } }
+    public Vector3 AdditionalRotation { get { return additionalBodyRotation; } }
 
 
 }

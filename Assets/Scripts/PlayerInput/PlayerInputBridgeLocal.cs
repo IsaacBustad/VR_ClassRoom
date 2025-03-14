@@ -6,6 +6,7 @@ using BugFreeProductions.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class PlayerInputBridgeLocal : PlayerInputBridge
@@ -46,18 +47,28 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
 
     }
 
+    public virtual void Primary_Action_Left_Click(InputAction.CallbackContext aCon)
+    {
+        placableItemPlacer.PlayerInputBridge = this;
+        placableItemPlacer.UsePlacer(aCon);
+    }
+
     public override void Primary_Action_Right_E(InputAction.CallbackContext aCon)
     {
 
     }
     public virtual void MouseScroll(InputAction.CallbackContext aCon)
     {
-        //placableItemPlacer
+        /*float nVall = ((float)aCon.ReadValue<double>());
+        additionalBodyRotation.y += Mathf.Clamp(nVall, -1f, 1f);*/
+        //additionalBodyRotation.y += ((float)aCon.ReadValue<Axis>());
+        additionalBodyRotation += aCon.ReadValue<Vector3>();
     }
 
     protected virtual void Update()
     {
         LerpCamToZero();
+        LerpAdditionalRotationToZero();
     }
 
     protected virtual void LerpCamToZero()
@@ -78,12 +89,12 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
         {
             additionalBodyRotation = Vector3.Lerp(additionalBodyRotation, Vector3.zero, playerCameraContext.PlayerCameraParam_SCO.TimeToTween);
         }
-        else camRotDir = Vector3.zero;
+        else additionalBodyRotation = Vector3.zero;
 
     }
 
     // Accessors
-
+    
 
 
 }

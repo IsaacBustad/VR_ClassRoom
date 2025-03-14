@@ -1129,9 +1129,9 @@ MonoBehaviour:
     m_ActionName: Master_Player_Input/Primary_Action_Left_Q[/Keyboard/q]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 795012738}
-        m_TargetAssemblyTypeName: BugFreeProductions.Tools.PlacableItemPlacer, Assembly-CSharp
-        m_MethodName: UsePlacer
+      - m_Target: {fileID: 1759689918}
+        m_TargetAssemblyTypeName: PlayerInputBridgeLocal, Assembly-CSharp
+        m_MethodName: Primary_Action_Left_Click
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1179,6 +1179,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0c8e48c6-b239-411b-9d6e-5fbae1becfe8
     m_ActionName: Master_Player_Input/Keyboard[/Mouse/delta/up,/Mouse/delta/down,/Mouse/delta/left,/Mouse/delta/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1759689918}
+        m_TargetAssemblyTypeName: PlayerInputBridgeLocal, Assembly-CSharp
+        m_MethodName: MouseScroll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 670d77bd-0cf5-40bc-8275-e4980c847993
+    m_ActionName: Master_Player_Input/Mouse_Scroll[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Master_Player_Input
@@ -1223,6 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9de53df94e1b38449d139decc64335c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placableItemPlacer: {fileID: 795012738}
 --- !u!1 &1816324639
 GameObject:
   m_ObjectHideFlags: 0

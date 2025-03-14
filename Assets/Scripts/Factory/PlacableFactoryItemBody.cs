@@ -107,6 +107,14 @@ namespace BugFreeProductions.Tools
             safeArea.PositionAndRotateBody(aGlobePos, height, CalcNewRot(aLookPos));
         }
 
+        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos, Vector3 aAdditionalRotation)
+        {
+            bodyAdditionalRotation += aAdditionalRotation;
+            PositionBody(aGlobePos);
+            RotateBody(aLookPos);
+            safeArea.PositionAndRotateBody(aGlobePos, height, CalcNewRot(aLookPos));
+        }
+
         protected virtual void PositionBody(Vector3 aGlobePos)
         {
             Vector3 nPos = aGlobePos;
@@ -130,6 +138,7 @@ namespace BugFreeProductions.Tools
 
             // create new rot
             Vector3 nRot = rotHelper.eulerAngles;
+            nRot += bodyAdditionalRotation;
 
             // adjust rot
             nRot.z = 0;
