@@ -30,13 +30,15 @@ public class PlayerCamMannager : MonoBehaviour
         transform.position = Vector3.Lerp(playerCameraContext.CamAnker.position, transform.position, playerCameraContext.PlayerCameraParam_SCO.TimeToTween);// ((playerCameraContext.CamAnker.position - transform.position) + transform.position) * playerCameraContext.PlayerCameraParam_SCO.TimeToTween;
     }
 
-    
+
 
     protected virtual void RotCamToPos()
     {
-        TargCamAngle.y += playerCameraContext.PlayerInputBridge.CamRotDir.y * playerCameraContext.PlayerCameraParam_SCO.RotSpeed;
+        TargCamAngle.y += Mathf.Clamp(playerCameraContext.PlayerInputBridge.CamRotDir.y, -playerCameraContext.PlayerCameraParam_SCO.RotSpeed, playerCameraContext.PlayerCameraParam_SCO.RotSpeed)
+                                        * playerCameraContext.PlayerCameraParam_SCO.RotSpeed;
 
-        TargCamAngle.x += playerCameraContext.PlayerInputBridge.CamRotDir.x * playerCameraContext.PlayerCameraParam_SCO.RotSpeed;
+        TargCamAngle.x += Mathf.Clamp(playerCameraContext.PlayerInputBridge.CamRotDir.x,-playerCameraContext.PlayerCameraParam_SCO.RotSpeed, playerCameraContext.PlayerCameraParam_SCO.RotSpeed) 
+                                        * playerCameraContext.PlayerCameraParam_SCO.RotSpeed;
 
         TargCamAngle.x = Mathf.Clamp(TargCamAngle.x, -90, 90);
 

@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+//using UnityEngine.InputSystem;
 
 namespace BugFreeProductions.Tools
 {
@@ -28,6 +29,12 @@ namespace BugFreeProductions.Tools
 
         [SerializeField, Range(1,20)] protected float width = 1;
         [SerializeField, Range(1, 20)] protected float height = 1;
+
+
+        // vars for additional rotation
+        protected Vector3 bodyAdditionalRotation = Vector3.zero;
+
+
 
         // Methods
         #region Default and Finalize
@@ -88,7 +95,7 @@ namespace BugFreeProductions.Tools
         // finalize / remove safe area trigger
         protected virtual void FinalizeSafeArea()
         {
-            safeAreaGO.SetActive(false);
+            safeArea.FinalizeSafeArea();
         }
         #endregion
 
@@ -96,7 +103,16 @@ namespace BugFreeProductions.Tools
         public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
         {
             PositionBody(aGlobePos);
-            safeArea.PositionAndRotateBody(aGlobePos, aLookPos, height, CalcNewRot(aLookPos));
+            RotateBody(aLookPos);
+            safeArea.PositionAndRotateBody(aGlobePos, height, CalcNewRot(aLookPos));
+        }
+
+        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos, Vector3 aAdditionalRotation)
+        {
+            bodyAdditionalRotation += aAdditionalRotation;
+            PositionBody(aGlobePos);
+            RotateBody(aLookPos);
+            safeArea.PositionAndRotateBody(aGlobePos, height, CalcNewRot(aLookPos));
         }
 
         protected virtual void PositionBody(Vector3 aGlobePos)
@@ -122,6 +138,7 @@ namespace BugFreeProductions.Tools
 
             // create new rot
             Vector3 nRot = rotHelper.eulerAngles;
+            nRot += bodyAdditionalRotation;
 
             // adjust rot
             nRot.z = 0;
@@ -135,8 +152,10 @@ namespace BugFreeProductions.Tools
         #endregion
 
 
-        // Accessors
 
+
+        // Accessors        
+        public Vector3 BodyAdditionalRotation { get { return bodyAdditionalRotation; } set { bodyAdditionalRotation = value; } }
 
 
 

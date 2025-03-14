@@ -53,9 +53,18 @@ namespace BugFreeProductions.Tools
             body.PositionAndRotateBody(aGlobePos, aLookPos);
         }
 
-
+        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos,  Vector3 aAdditionalRotation)
+        {
+            transform.position = aGlobePos;
+            body.PositionAndRotateBody(aGlobePos, aLookPos, aAdditionalRotation);
+        }
 
         #endregion 
+
+        public virtual void RemoveItem()
+        {
+            Destroy(gameObject);
+        }
         // Accessors
 
 

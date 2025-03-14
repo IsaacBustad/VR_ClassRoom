@@ -16,6 +16,7 @@ namespace BugFreeProductions.Tools
         [SerializeField] protected Color negativeColor = Color.white;
 
         [SerializeField] protected Material material = null;
+        [SerializeField] protected PlacableItemHighlighter placableItemHighlighter = null;
 
         [SerializeField] protected float yBuff = 0.001f;
 
@@ -34,6 +35,8 @@ namespace BugFreeProductions.Tools
         protected virtual void CollectVars()
         {
             //material = GetComponent<Material>();
+            placableItemHighlighter = GetComponentInParent<PlacableItemHighlighter>();
+
         }
         protected virtual void OnTriggerEnter(Collider other)
         {
@@ -49,17 +52,17 @@ namespace BugFreeProductions.Tools
         {
             if (objInTrig > 0)
             {
-                material.color = negativeColor;
+                placableItemHighlighter.HighlighNegative();
             }
-            else if (objInTrig == 0)
+            else 
             {
-                material.color = positiveColor;
+                placableItemHighlighter.HighlighPositive();
             }
         }
         #endregion
 
         #region Align Object to Point and Rotation
-        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos, float aHeight, Quaternion aLookRot)
+        public virtual void PositionAndRotateBody(Vector3 aGlobePos, float aHeight, Quaternion aLookRot)
         {
             PositionBody(aGlobePos, aHeight);
             RotateBody(aLookRot);
@@ -79,6 +82,15 @@ namespace BugFreeProductions.Tools
             transform.rotation = aLookRot;
         }
 
+
+        #endregion
+
+        #region Finalize Safe Area
+        public virtual void FinalizeSafeArea()
+        {
+            placableItemHighlighter.DeHighlight();
+            gameObject.SetActive(false);
+        }
 
         #endregion
 
