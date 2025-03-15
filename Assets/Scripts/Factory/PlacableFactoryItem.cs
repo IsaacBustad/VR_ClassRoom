@@ -47,15 +47,45 @@ namespace BugFreeProductions.Tools
 
 
         #region Align Object to Point and Rotation
-        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
+        
+
+        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos,  Vector3 aAdditionalRotation)
         {
             transform.position = aGlobePos;
-            body.PositionAndRotateBody(aGlobePos, aLookPos);
+            body.PositionAndRotateBody(aGlobePos, aLookPos, aAdditionalRotation);
         }
 
 
+        public override ObjectPlacement ObjectPlacement()
+        {
+            ObjectPlacement nObjPlace = new ObjectPlacement();
+
+            nObjPlace.id = id;
+
+            Vector3 nObjPos = body.BodyPosition;
+            Debug.Log( gameObject.name + " my Saved transform = " + " " +  nObjPos);
+
+            nObjPlace.tpX = nObjPos.x;
+            nObjPlace.tpY = nObjPos.y;
+            nObjPlace.tpZ = nObjPos.z;
+
+            Vector3 nObjRot = body.BodyRotation;
+            Debug.Log(gameObject.name + " my Saved rotation = " + " " + nObjRot);
+
+            nObjPlace.trX = nObjRot.x;
+            nObjPlace.trY = nObjRot.y;
+            nObjPlace.trZ = nObjRot.z;
+
+            return nObjPlace;
+        }
+
 
         #endregion 
+
+        public virtual void RemoveItem()
+        {
+            Destroy(gameObject);
+        }
         // Accessors
 
 
