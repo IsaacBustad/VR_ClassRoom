@@ -10,4 +10,15 @@ public static class UIUtils
         color.a = Mathf.Clamp01(percent);
         image.color = color;
     }
+
+    public static void EnableUILock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    public static void DisableUILock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 }

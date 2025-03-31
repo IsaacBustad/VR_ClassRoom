@@ -2,7 +2,9 @@
 using BugFreeProductions.Tools;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class CatalogController : MonoBehaviour
@@ -27,7 +29,7 @@ public class CatalogController : MonoBehaviour
     [SerializeField]
     private PlacableItemPlacer itemPlacer;
 
-    private const string togglesuffix = " toggle";
+    private const string toggleSuffix = " toggle";
 
     [SerializeField]
     private List<CatalogFilterToggle> categoryToggles;
@@ -46,6 +48,10 @@ public class CatalogController : MonoBehaviour
         UpdateCatalog();
     }
 
+    private void OnEnable()
+    {
+        EnableMenu();
+    }
     private void LoadFilterToggles()
     {
         categoryToggles.Clear();
@@ -56,7 +62,7 @@ public class CatalogController : MonoBehaviour
         foreach (CategorySO category in categories)
         {
             GameObject filterToggleGameObject = Instantiate(filterTogglePrefab, filtersContentPanel);
-            filterToggleGameObject.name = category + togglesuffix;
+            filterToggleGameObject.name = category + toggleSuffix;
 
             CatalogFilterToggle filterToggleComponent = filterToggleGameObject.GetComponent<CatalogFilterToggle>();
             filterToggleComponent.Category = category.Category;
@@ -106,4 +112,30 @@ public class CatalogController : MonoBehaviour
     {
         itemPlacer.ItemID = catalogButton.GetComponent<CatalogItemData>().Id;
     }
+
+    public void EnableMenu()
+    {
+        if (!canvasTransform.gameObject.activeSelf)
+        {
+            //if(isVR)
+            //{
+            //    //Vector3 spawnPosition = playerTransform.position + playerTransform.forward * 2.5f;
+            //    //Quaternion spawnRotation = Quaternion.LookRotation(playerTransform.forward);
+            //    //menu.gameObject.transform.position = new Vector3(spawnPosition.x, 0.5f, spawnPosition.z);
+            //    //menu.gameObject.transform.rotation = spawnRotation;
+
+            //    //rightHand.SetActive(false);
+            //}
+            Debug.Log("Cursor should be visible");
+            canvasTransform.gameObject.SetActive(true);
+            UIUtils.EnableUILock();
+        }
+        else
+        {
+            canvasTransform.gameObject.SetActive(false);
+            //rightHand.SetActive(true);
+            UIUtils.DisableUILock();
+        }
+    }
+
 }

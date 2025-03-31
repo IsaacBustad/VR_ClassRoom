@@ -2,9 +2,13 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class XRRoomGenerator : MonoBehaviour
 {
+    [Header("Is In Virtual Reality")]
+    [SerializeField] private bool isVR;
+
     [Header("Floor Point Settings")]
     [SerializeField] private GameObject floorPointPrefab;
 
@@ -38,7 +42,7 @@ public class XRRoomGenerator : MonoBehaviour
     [SerializeField] private Material ceilingMaterial;
 
     private const string EDGE_LINE_RENDERER_NAME = "Edge LineRenderer";
-    private LineRenderer targetLineRenderer;
+    [SerializeField] private LineRenderer targetLineRenderer;
     private LineRenderer edgeLineRenderer;
     private Color currentTargetLineColor;
 
@@ -65,18 +69,26 @@ public class XRRoomGenerator : MonoBehaviour
     private Vector3 edgeEndPoint;
 
     private int movingPointLayerMask;
+    private bool isTargetLineVisible = false;
 
     private void Start()
     {
-        targetLineRenderer = InitializeLineRenderer(targetLineWidth, invalidTargetColor, false);
+        if (targetLineRenderer == null)
+        {
+            targetLineRenderer = InitializeLineRenderer(targetLineWidth, invalidTargetColor, false);
+        }
+        else
+        {
+            targetLineRenderer = InitializeLineRenderer(targetLineWidth, invalidTargetColor, false, null, targetLineRenderer);
+        }
+
         edgeLineRenderer = InitializeLineRenderer(edgeLineWidth, edgeLineColor, true, EDGE_LINE_RENDERER_NAME);
         movingPointLayerMask = ~(LayerMask.GetMask("Floor", "Walls"));
     }
 
     private void Update()
     {
-        // TODO: Integrate input into Isaac's input
-        if (OVRInput.Get(targetLineActivationButton, ovrController))
+        if (isTargetLineVisible)
         {
             UpdateTargetLine();
         }
@@ -84,32 +96,71 @@ public class XRRoomGenerator : MonoBehaviour
         {
             DeactivateTargetLine();
         }
-        if (OVRInput.GetDown(placeFloorPointButton, ovrController))
-        {
-            HandlePlaceSelectPoint();
-        }
-        if (OVRInput.GetUp(placeFloorPointButton, ovrController))
-        {
-            if(selectedPointIndex >= 0)
-            {
-                DeselectPoint();
-            }
-        }
-        if (OVRInput.GetDown(generateRoomButton, ovrController))
-        {
-            GenerateRoom();
-        }
+
+        // TODO: Update VR Input to use new system
+        //if (OVRInput.GetDown(placeFloorPointButton, ovrController))
+        //{
+        //    HandlePlaceSelectPoint();
+        //}
+        //if (OVRInput.GetUp(placeFloorPointButton, ovrController))
+        //{
+        //    if(selectedPointIndex >= 0)
+        //    {
+        //        DeselectPoint();
+        //    }
+        //}
+        //if (OVRInput.GetDown(generateRoomButton, ovrController))
+        //{
+        //    GenerateRoom();
+        //}
         
         if (selectedPointIndex >= 0)
         {
             UpdateSelectedPointPosition();
         }
     }
-
-    private LineRenderer InitializeLineRenderer(float width, Color color, bool isDistinctGameObject, string gameObjectName = null)
+    public void HandleToggleTargetLineInoutKBM(InputAction.CallbackContext context)
     {
-        LineRenderer lineRenderer = isDistinctGameObject ? new GameObject(gameObjectName).AddComponent<LineRenderer>() : gameObject.AddComponent<LineRenderer>();
-        if (isDistinctGameObject) { lineRenderer.transform.parent = transform; }
+        if (context.started)
+        {
+            isTargetLineVisible = true;
+        }
+        if (context.canceled)
+        {
+            isTargetLineVisible = false;
+        }
+    }
+
+    public void HandlePlaceFloorButtonInputKBM(InputAction.CallbackContext context)
+    {
+        if (context.started && isTargetLineVisible)
+        {
+            HandlePlaceSelectPoint();
+        }
+        else if (context.canceled)
+        {
+            if (selectedPointIndex >= 0)
+            {
+                DeselectPoint();
+            }
+        }     
+    }
+
+    public void HandleGenerateRoomButtonInputKBM(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            GenerateRoom();
+        }
+    }
+
+    private LineRenderer InitializeLineRenderer(float width, Color color, bool isDistinctGameObject, string gameObjectName = null, LineRenderer lineRenderer = null)
+    {
+        if(lineRenderer == null)
+        {
+            lineRenderer = isDistinctGameObject ? new GameObject(gameObjectName).AddComponent<LineRenderer>() : gameObject.AddComponent<LineRenderer>();
+            if (isDistinctGameObject) { lineRenderer.transform.parent = transform; }
+        }
 
         lineRenderer.startWidth = width;
         lineRenderer.endWidth = width;

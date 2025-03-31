@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Primary_Action_Right_E",
+                    "name": "Primary_Action_Right_F",
                     "type": "Button",
                     "id": "c8c33909-d8e1-41de-95c6-e22278d178f6",
                     "expectedControlType": "Button",
@@ -64,6 +64,15 @@
                     "type": "PassThrough",
                     "id": "670d77bd-0cf5-40bc-8275-e4980c847993",
                     "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftTab",
+                    "type": "Button",
+                    "id": "64f1f28e-7413-4b8b-a077-3dbe11881b2f",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -139,11 +148,11 @@
                 {
                     "name": "",
                     "id": "45c1098f-ec40-43fa-88a2-466ec8242104",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Primary_Action_Right_E",
+                    "action": "Primary_Action_Right_F",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -300,6 +309,17 @@
                     "action": "Mouse_Scroll",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "35775c2d-df8d-4c4f-bec0-0ab955bbacb3",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftTab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -12,7 +12,7 @@ public class MenuController : MonoBehaviour
     public Transform playerTransform;
     public GameObject rightHand;
 
-    public void ToggleMenu(InputAction.CallbackContext context)
+    public void ToggleItemCatalogMenu(InputAction.CallbackContext context)
     {
         if (context.canceled)
         {
@@ -26,12 +26,14 @@ public class MenuController : MonoBehaviour
                 rightHand.SetActive(false);
                 menu.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
             else
             {
                 menu.SetActive(false);
                 rightHand.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
     }
