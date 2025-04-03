@@ -103,6 +103,8 @@ namespace BugFreeProductions.Tools
         // Accessors
         public virtual string ItemID { get { return factoryItem.GetComponent<FactoryItem>().ID; } }
 
+        public virtual GenericPool Pool { get { return pool; } }
+
 
     }
 }
