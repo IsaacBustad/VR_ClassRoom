@@ -73,8 +73,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-Packages/manifest.json
-Packages/packages-lock.json
-Assets/XR/Settings/OpenXR Package Settings.asset
-Assets/Resources/OculusRuntimeSettings.asset.meta
-Assets/Resources/OculusRuntimeSettings.asset
+
+# Cosntantly changing unity jsons
+*/[Pp]ackages/manifest.json
+*/[Pp]ackages/packages-lock.json
+*/[Aa]ssets/XR/Settings/OpenXR Package Settings.asset
+*/[Aa]ssets/Resources/OculusRuntimeSettings.asset.meta
+*/[Aa]ssets/Resources/OculusRuntimeSettings.asset
