@@ -27,14 +27,16 @@ namespace BugFreeProductions.Tools
 
         protected virtual void OnEnable()
         {
-            placement = ObjectPlacementReadWrite.Instance.FindObjectPlacement(id);
-            ReadPose();
+            //placement = ObjectPlacementReadWrite.Instance.FindObjectPlacement(id);
+            /*ReadPose();
             ReadRot();
             AssignPos();
-            AssignRot();
+            AssignRot();*/
         }
 
-        #region Read from OBJ Placement
+        // drpricated due to optimization as of 4/3/2025
+
+        /*#region Read from OBJ Placement
         protected virtual void ReadPose()
         {
             if (placement != null)
@@ -78,7 +80,7 @@ namespace BugFreeProductions.Tools
         {
             transform.position = targPose;
         }
-        #endregion
+        #endregion*/
 
         // Accessors
         //public virtual string ID { get { return id; } }
