@@ -93,8 +93,19 @@ public class PlayerInputBridgeLocal : PlayerInputBridge
 
     }
 
+    #region UI
+    // Move to local input bridge
+    public void HandleToggleRadialMenu(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            UIUtils.HandleToggleRadialMenuKBM();
+        }
+    }
+    #endregion
+
     // Accessors
-    
+
 
 
 }

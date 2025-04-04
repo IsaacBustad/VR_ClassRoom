@@ -71,6 +71,8 @@ public class XRRoomGenerator : MonoBehaviour
     private int movingPointLayerMask;
     private bool isTargetLineVisible = false;
 
+    public List<Vector3> FloorPoints { get => floorPoints; set => floorPoints = value; }
+
     private void Start()
     {
         if (targetLineRenderer == null)

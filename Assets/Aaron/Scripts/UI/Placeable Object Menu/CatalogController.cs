@@ -126,7 +126,6 @@ public class CatalogController : MonoBehaviour
 
             //    //rightHand.SetActive(false);
             //}
-            Debug.Log("Cursor should be visible");
             canvasTransform.gameObject.SetActive(true);
             UIUtils.EnableUILock();
         }

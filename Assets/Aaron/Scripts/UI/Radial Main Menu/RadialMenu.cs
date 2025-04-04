@@ -1,3 +1,4 @@
+// Written by Aaron Williams
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -84,19 +85,15 @@ public class RadialMenu : MonoBehaviour
             SelectMenuOption();
         }
     }
-
-    public void HandleKBMInput(InputAction.CallbackContext context)
+    public void HandleToggleRadialMenuKBM()
     {
-        if (context.canceled)
+        if (!menuCanvas.gameObject.activeInHierarchy)
         {
-            if (!menuCanvas.gameObject.activeInHierarchy)
-            {
-                EnableRadialMenu();
-            }
-            else
-            {
-                DisableRadialMenu(false);
-            }
+            EnableRadialMenu();
+        }
+        else
+        {
+            DisableRadialMenu(false);
         }
     }
 
@@ -162,7 +159,7 @@ public class RadialMenu : MonoBehaviour
         {
             if (i == selectedMenuOption)
             {
-                radialMenuOption[i].GetComponent<Image>().color = Color.green;
+                radialMenuOption[i].GetComponent<Image>().color = i == 1 ? Color.red : Color.green;
                 radialMenuOption[i].transform.localScale = 1.1f * Vector3.one;
                 radialMenuOption[i].GetComponentInChildren<Text>().enabled = true;
                 centerText.GetComponent<Text>().text = Menus[selectedMenuOption].MenuName;
@@ -211,9 +208,8 @@ public class RadialMenu : MonoBehaviour
         Vector3 eulerAngles = GetTransform().rotation.eulerAngles;
         eulerAngles.x = 0;
         eulerAngles.z = 0;
-        menuCanvas.rotation = Quaternion.Euler(eulerAngles);
-
-        menuCanvas.position = GetTransform().position + (Vector3.forward * GetDistanceOffset());
+        
+        menuCanvas.SetPositionAndRotation(GetTransform().position + (Vector3.forward * GetDistanceOffset()), Quaternion.Euler(eulerAngles));
     }
 
     public void DisableRadialMenu(bool selectedNewMenu)
