@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abf_SCO: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
-  roomConfigPath: /Default
+  roomConfigPath: Default
   roomID: Room
 --- !u!1 &364867961
 GameObject:

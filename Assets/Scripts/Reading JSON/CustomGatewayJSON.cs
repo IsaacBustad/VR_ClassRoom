@@ -29,7 +29,9 @@ namespace BugFreeProductions.Tools
                 streamReader = new StreamReader(Application.persistentDataPath + aPath);
                 jsonTxt = streamReader.ReadToEnd();
                 streamReader.Close();
+                Debug.Log(Application.persistentDataPath + aPath);
                 return jsonTxt;
+
             }
 
             else
@@ -39,9 +41,10 @@ namespace BugFreeProductions.Tools
                 streamReader = new StreamReader(Application.persistentDataPath + aPath);
                 jsonTxt = streamReader.ReadToEnd();
                 streamReader.Close();
+                Debug.Log(Application.persistentDataPath + aPath);
                 return jsonTxt;
             }
-
+            
 
             //StreamReader streamReader = new StreamReader(Application.persistentDataPath + aPath);
             /*if (streamReader == null)
@@ -68,6 +71,7 @@ namespace BugFreeProductions.Tools
             StreamWriter streamWriter = new StreamWriter(Application.persistentDataPath + aPath);
             streamWriter.Write(anObjStr);
             streamWriter.Close();
+            Debug.Log(Application.persistentDataPath + aPath);
         }
 
 

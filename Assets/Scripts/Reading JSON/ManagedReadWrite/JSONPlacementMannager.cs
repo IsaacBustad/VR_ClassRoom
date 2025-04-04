@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 namespace BugFreeProductions.Tools
@@ -22,6 +23,7 @@ namespace BugFreeProductions.Tools
         [SerializeField] private string roomConfigPath = "Default";
         private string objectPlacementPath = "ObjectPlacements.json";
         private string roomPlacementPath = "RoomPointPlacements.json";
+        private string roomNamePath = "RoomNames.json";
 
 
         // Mannaged readers and writers
@@ -31,6 +33,8 @@ namespace BugFreeProductions.Tools
         // Room object ID and Pool
         [SerializeField] private string roomID = "Room";
         [SerializeField] private GenericPool pool = new GenericPool();
+
+        // 
 
 
 
@@ -59,9 +63,27 @@ namespace BugFreeProductions.Tools
 
         public void WriteRoomConfig()
         {            
-            jsonWriter.WriteObjPlacementData("/" +roomConfigPath + roomPlacementPath, roomConfigPath + objectPlacementPath);
+            jsonWriter.WriteObjPlacementData("/" + roomConfigPath + roomPlacementPath, "/" + roomConfigPath + objectPlacementPath);
         }
+        
 
+        public void AddRoom(string aString)
+        {
+            JSONRoomList rooms = JsonUtility.FromJson<JSONRoomList>(CustomGatewayJSON.Instance.ReadJsonFile("/" + roomNamePath));
+
+            if (rooms.roomsLST.Contains(aString) == false)
+            {
+                List<string> nRoomLST = new List<string>();
+                
+                foreach (string n in rooms.roomsLST)
+                {
+                    nRoomLST.Add(n);
+                }
+                nRoomLST.Add((aString));
+
+                rooms.roomsLST = nRoomLST.ToArray();
+            }
+        }
 
         #endregion
 
@@ -90,6 +112,10 @@ namespace BugFreeProductions.Tools
         public string RoomID { get { return roomID; } }
 
         public GenericPool Pool { get { return pool; } set { pool = value; } }
+
+        //public string RoomConfigPath { get { return roomConfigPath; } set {  roomConfigPath = value; } }
+
+        public JSONRoomList RoomList { get { return JsonUtility.FromJson<JSONRoomList>(CustomGatewayJSON.Instance.ReadJsonFile("/" + roomNamePath)); } }
 
     }
 }
