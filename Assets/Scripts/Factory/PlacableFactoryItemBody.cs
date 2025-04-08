@@ -61,7 +61,7 @@ namespace BugFreeProductions.Tools
             {
                 foreach (Collider col in bodColliders)
                 {
-                    col.enabled = false;
+                    col.isTrigger = true;
                 }
             }
 
@@ -89,7 +89,7 @@ namespace BugFreeProductions.Tools
             {
                 foreach (Collider col in bodColliders)
                 {
-                    col.enabled = true;
+                    col.isTrigger = false;
                 }
             }
         }
@@ -132,7 +132,7 @@ namespace BugFreeProductions.Tools
         {
             Vector3 nPos = aGlobePos;
 
-            nPos.y += height / 2;
+            nPos.y += 0.01f;
             bodyObject.position = nPos;
         }
 

@@ -8,12 +8,13 @@ using UnityEngine.PlayerLoop;
 
 namespace BugFreeProductions.Tools
 {
+    [RequireComponent(typeof(Collider))]
     public class PlacableFactoryItemSafeArea : MonoBehaviour
     {
         // Vars
         //colors
-        [SerializeField] protected Color positiveColor = Color.white;
-        [SerializeField] protected Color negativeColor = Color.white;
+        //[SerializeField] protected Color positiveColor = Color.white;
+        //[SerializeField] protected Color negativeColor = Color.white;
 
         [SerializeField] protected Material material = null;
         [SerializeField] protected PlacableItemHighlighter placableItemHighlighter = null;
@@ -36,11 +37,12 @@ namespace BugFreeProductions.Tools
         {
             //material = GetComponent<Material>();
             placableItemHighlighter = GetComponentInParent<PlacableItemHighlighter>();
-
+            
         }
         protected virtual void OnTriggerEnter(Collider other)
         {
             objInTrig ++;
+            Debug.Log("We finnish");
         }
 
         protected virtual void OnTriggerExit()
@@ -64,8 +66,8 @@ namespace BugFreeProductions.Tools
         #region Align Object to Point and Rotation
         public virtual void PositionAndRotateBody(Vector3 aGlobePos, float aHeight, Quaternion aLookRot)
         {
-            PositionBody(aGlobePos, aHeight);
-            RotateBody(aLookRot);
+            //PositionBody(aGlobePos, aHeight);
+            //RotateBody(aLookRot);
         }
 
         protected virtual void PositionBody(Vector3 aGlobePos, float aHeight)
@@ -88,8 +90,13 @@ namespace BugFreeProductions.Tools
         #region Finalize Safe Area
         public virtual void FinalizeSafeArea()
         {
+            
+            gameObject.GetComponent<Collider>().isTrigger = false;
             placableItemHighlighter.DeHighlight();
-            gameObject.SetActive(false);
+
+            enabled = false;
+
+            //gameObject.SetActive(false);
         }
 
         #endregion
