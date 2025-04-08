@@ -86,6 +86,10 @@ namespace BugFreeProductions.Tools
                 {
                     gf.CreateItem(ref aFI, aPlacement);
                 }
+                if (aFI.ID == JSONPlacementMannager.Instance.RoomID)
+                {
+                    JSONPlacementMannager.Instance.Pool = gf.Pool;
+                }
 
             }
 
@@ -116,22 +120,67 @@ namespace BugFreeProductions.Tools
         }
         #endregion
 
-
+        //
         #region Gather Factory Item Position Save Info
         public virtual ObjectPlacementList GatherFactItemPosInfo()
         {
             ObjectPlacementList retLst = new ObjectPlacementList();
 
+            // for the items placed in the room
             List<ObjectPlacement> totalObjPlacs = new List<ObjectPlacement>();
 
+            
             foreach (GenericFactory_SCO gf in genericFactory_SCOs)
             {
                 List<ObjectPlacement> nl = gf.GatherFactItemPosInfo();
+
+
                 foreach (ObjectPlacement op in nl)
                 {
                     totalObjPlacs.Add(op);
                 }
             }
+
+            retLst.objectPlacements = totalObjPlacs.ToArray();
+
+
+            return retLst;
+        }
+
+        public virtual ObjectPlacementList GatherFactItemPosInfo(ref ObjectPlacementList aRoomPointLST)
+        {
+            ObjectPlacementList retLst = new ObjectPlacementList();
+
+            // for the items placed in the room
+            List<ObjectPlacement> totalObjPlacs = new List<ObjectPlacement>();
+
+            // for room drawing points
+            List<ObjectPlacement> totalRoomPoints = new List<ObjectPlacement>();
+
+            foreach (GenericFactory_SCO gf in genericFactory_SCOs)
+            {
+                List<ObjectPlacement> nl = gf.GatherFactItemPosInfo();
+                if (gf.ItemID != "Room")
+                {
+                    foreach (ObjectPlacement op in nl)
+                    {
+                        totalObjPlacs.Add(op);
+                    }
+                }
+                else
+                {
+                    foreach (ObjectPlacement op in nl)
+                    {
+                        totalRoomPoints.Add(op);
+                    }
+                }
+                /*foreach (ObjectPlacement op in nl)
+                {
+                    totalObjPlacs.Add(op);
+                }*/
+            }
+
+            aRoomPointLST.objectPlacements = totalObjPlacs.ToArray();
 
             retLst.objectPlacements = totalObjPlacs.ToArray();
 

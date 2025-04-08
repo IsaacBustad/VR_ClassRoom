@@ -34,7 +34,8 @@ namespace BugFreeProductions.Tools
         // vars for additional rotation
         protected Vector3 bodyAdditionalRotation = Vector3.zero;
 
-
+        // finialize fix
+        protected bool nPlaced = false; 
 
         // Methods
         #region Default and Finalize
@@ -60,7 +61,7 @@ namespace BugFreeProductions.Tools
             {
                 foreach (Collider col in bodColliders)
                 {
-                    col.enabled = false;
+                    col.isTrigger = true;
                 }
             }
 
@@ -76,6 +77,7 @@ namespace BugFreeProductions.Tools
             rb.freezeRotation = false;
             rb.useGravity = true;
 
+            //PositionAndRotateBody();
             FinalizeBodyColiders();
             FinalizeSafeArea();
         }
@@ -87,7 +89,7 @@ namespace BugFreeProductions.Tools
             {
                 foreach (Collider col in bodColliders)
                 {
-                    col.enabled = true;
+                    col.isTrigger = false;
                 }
             }
         }
@@ -98,6 +100,17 @@ namespace BugFreeProductions.Tools
             safeArea.FinalizeSafeArea();
         }
         #endregion
+
+        public virtual void PositionAndRotateBody()
+        {
+            if (nPlaced != true)
+            {
+                PositionBody(transform.position);
+            }
+            
+            //RotateBody(aLookPos);
+            safeArea.PositionAndRotateBody(transform.position, height, CalcNewRot(transform.rotation.eulerAngles));
+        }
 
         #region Align Object to Point and Rotation
         public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
@@ -119,7 +132,7 @@ namespace BugFreeProductions.Tools
         {
             Vector3 nPos = aGlobePos;
 
-            nPos.y += height / 2;
+            nPos.y += 0.01f;
             bodyObject.position = nPos;
         }
 
@@ -157,6 +170,8 @@ namespace BugFreeProductions.Tools
         // Accessors        
         public Vector3 BodyAdditionalRotation { get { return bodyAdditionalRotation; } set { bodyAdditionalRotation = value; } }
 
+        public Vector3 BodyRotation { get { return bodyObject.rotation.eulerAngles; } }
+        public Vector3 BodyPosition { get { return bodyObject.position; } }
 
 
 
