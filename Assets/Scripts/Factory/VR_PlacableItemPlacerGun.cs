@@ -6,8 +6,7 @@ using BugFreeProductions.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Oculus.Interaction;
-using Oculus.Interaction.HandGrab;
+
 
 namespace BugFreeProductions.Tools
 {
@@ -28,9 +27,11 @@ namespace BugFreeProductions.Tools
         protected FactoryItem factoryItem = null;
         protected PlacableFactoryItem placableFactoryItem = null;
 
-        // for additional rotation
-        PlayerInputBridge playerInputBridge = null;
 
+        // for additional rotation
+        // PlayerInputBridge playerInputBridge = null;
+        protected Vector3 additionalRot = Vector3.zero;
+        [SerializeField, Range(0, 90)] protected float rotSense = 1f; 
 
 
         // Methods
@@ -45,6 +46,26 @@ namespace BugFreeProductions.Tools
             {
                 CastAndCheckforPlacement();
             }
+            else
+            {
+                ClearAdditionalRot();
+            }
+
+        }
+
+        public virtual void SaveRoomConfig()
+        {
+            JSONPlacementMannager.Instance.WriteRoomConfig();
+        }
+
+        public virtual void AddAdditionalRot(float aRotDir)
+        {
+            float nRotDir = Mathf.Clamp(aRotDir,-1,1);
+            additionalRot.y += aRotDir * Time.deltaTime * rotSense;
+        }
+        public virtual void ClearAdditionalRot()
+        {
+            additionalRot.y = 0;
         }
 
         protected virtual void CollectVars()
@@ -59,7 +80,7 @@ namespace BugFreeProductions.Tools
             lineRenderer.enabled = false;
         }
 
-        // input testing
+        // input converted to bool callback to allow mapper mapping
         public void UsePlacer(bool aCon)
         {
             if (aCon == true)
@@ -153,7 +174,7 @@ namespace BugFreeProductions.Tools
 
                 // change body position
 
-                placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position, transform.position, playerInputBridge.AdditionalRotation);
+                placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position, transform.position, additionalRot/*, playerInputBridge.AdditionalRotation*/);
             }
 
         }
@@ -172,7 +193,7 @@ namespace BugFreeProductions.Tools
         // Accessors
         public string ItemID { get { return itemID; } set { itemID = value; } }
 
-        public PlayerInputBridge PlayerInputBridge { get { return playerInputBridge; } set { playerInputBridge = value; } }
+        // public PlayerInputBridge PlayerInputBridge { get { return playerInputBridge; } set { playerInputBridge = value; } }
 
 
     }

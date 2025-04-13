@@ -21,8 +21,8 @@ namespace BugFreeProductions.Tools
 
 
         // safe area trigger
-        [SerializeField] protected GameObject safeAreaGO = null;
-        [SerializeField] protected PlacableFactoryItemSafeArea safeArea = null;
+        //[SerializeField] protected GameObject safeAreaGO = null;
+        protected PlacableFactoryItemSafeArea safeArea = null;
 
         [SerializeField] protected Transform bodyObject = null;
         [SerializeField] protected Transform rotHelper = null;
@@ -49,6 +49,7 @@ namespace BugFreeProductions.Tools
         protected virtual void CollectVars()
         {
             rb = GetComponent<Rigidbody>();
+            safeArea = GetComponent<PlacableFactoryItemSafeArea>();
         }
 
         protected virtual void DefaultVars()
@@ -66,7 +67,7 @@ namespace BugFreeProductions.Tools
             }
 
             // ensure sfe area trigger is enabled
-            safeAreaGO.SetActive(true);
+            //safeAreaGO.SetActive(true);
 
         }
 
@@ -97,6 +98,10 @@ namespace BugFreeProductions.Tools
         // finalize / remove safe area trigger
         protected virtual void FinalizeSafeArea()
         {
+            /*if (safeArea == null)
+            {
+                safeArea = GetComponent<PlacableFactoryItemSafeArea>();
+            }*/
             safeArea.FinalizeSafeArea();
         }
         #endregion

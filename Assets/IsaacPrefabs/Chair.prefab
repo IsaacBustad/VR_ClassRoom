@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3979959778532964239}
   - component: {fileID: 546670837246252439}
   - component: {fileID: 5698856301142818228}
-  - component: {fileID: 711899916140659188}
   m_Layer: 0
   m_Name: new chair
   m_TagString: Untagged
@@ -106,21 +105,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.61429006, y: 1.0084144, z: 0.75704396}
   m_Center: {x: 0.003494203, y: 0.5029517, z: 0.060129225}
---- !u!114 &711899916140659188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1177103651590871574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b8a76cd159edd5439906afc93b080e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: ff9a278126fc4be4ca4ee19f73c55754, type: 2}
-  placableItemHighlighter: {fileID: 5099876502608371226}
-  yBuff: 0.001
 --- !u!1 &3120632229510229340
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8a76cd159edd5439906afc93b080e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: ff9a278126fc4be4ca4ee19f73c55754, type: 2}
   placableItemHighlighter: {fileID: 5099876502608371226}
   yBuff: 0.001
 --- !u!1 &4747423611790198303
@@ -321,6 +304,7 @@ GameObject:
   - component: {fileID: 5450771590007832862}
   - component: {fileID: 857242620011642341}
   - component: {fileID: 5099876502608371226}
+  - component: {fileID: 6351527764620423213}
   m_Layer: 0
   m_Name: Chair
   m_TagString: Untagged
@@ -398,8 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodColliders:
   - {fileID: 5698856301142818228}
-  safeAreaGO: {fileID: 4584208193729365980}
-  safeArea: {fileID: 711899916140659188}
+  safeArea: {fileID: 6351527764620423213}
   bodyObject: {fileID: 871792642117907424}
   rotHelper: {fileID: 1081452741305497737}
   width: 1
@@ -420,6 +403,20 @@ MonoBehaviour:
   primaryMat: {fileID: 2100000, guid: 30b92673b9b7ef44c9c11a474d9910c9, type: 2}
   positiveHighlightMat: {fileID: 2100000, guid: d6ee1268c594bbc4c9fac1a042879b00, type: 2}
   negativeHighlightMat: {fileID: 2100000, guid: 3fc3f1bacbc0e034586944bd6d4ab684, type: 2}
+--- !u!114 &6351527764620423213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747423611790198303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8a76cd159edd5439906afc93b080e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placableItemHighlighter: {fileID: 5099876502608371226}
+  yBuff: 0.001
 --- !u!1 &8274270403207298709
 GameObject:
   m_ObjectHideFlags: 0
