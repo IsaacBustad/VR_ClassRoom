@@ -25,7 +25,7 @@ namespace BugFreeProductions.Tools
         protected PlacableFactoryItemSafeArea safeArea = null;
 
         [SerializeField] protected Transform bodyObject = null;
-        [SerializeField] protected Transform rotHelper = null;
+        protected Transform rotHelper = null;
 
         [SerializeField, Range(1,20)] protected float width = 1;
         [SerializeField, Range(1, 20)] protected float height = 1;
@@ -48,6 +48,7 @@ namespace BugFreeProductions.Tools
 
         protected virtual void CollectVars()
         {
+            rotHelper = new GameObject().transform;
             rb = GetComponent<Rigidbody>();
             safeArea = GetComponent<PlacableFactoryItemSafeArea>();
         }
@@ -118,12 +119,12 @@ namespace BugFreeProductions.Tools
         }
 
         #region Align Object to Point and Rotation
-        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
+        /*public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
         {
             PositionBody(aGlobePos);
             RotateBody(aLookPos);
             safeArea.PositionAndRotateBody(aGlobePos, height, CalcNewRot(aLookPos));
-        }
+        }*/
 
         public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos, Vector3 aAdditionalRotation)
         {

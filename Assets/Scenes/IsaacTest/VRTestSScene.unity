@@ -9426,13 +9426,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1056761439}
     m_Modifications:
+    - target: {fileID: 255276255563542622, guid: a3f2153e65d3b4f43821a1679eb7ab69, type: 3}
+      propertyPath: itemID
+      value: RadicalShelf
+      objectReference: {fileID: 0}
+    - target: {fileID: 255276255563542622, guid: a3f2153e65d3b4f43821a1679eb7ab69, type: 3}
+      propertyPath: rotSense
+      value: 10.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1330268553093927050, guid: a3f2153e65d3b4f43821a1679eb7ab69, type: 3}
       propertyPath: m_Name
       value: Gun
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397296893541577082, guid: a3f2153e65d3b4f43821a1679eb7ab69, type: 3}
-      propertyPath: _buttonClickActions.Array.data[4].Button
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8567623116765230556, guid: a3f2153e65d3b4f43821a1679eb7ab69, type: 3}
       propertyPath: m_LocalPosition.x

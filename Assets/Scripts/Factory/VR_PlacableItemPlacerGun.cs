@@ -46,10 +46,8 @@ namespace BugFreeProductions.Tools
             {
                 CastAndCheckforPlacement();
             }
-            else
-            {
-                ClearAdditionalRot();
-            }
+            ClearAdditionalRot();
+            
 
         }
 
