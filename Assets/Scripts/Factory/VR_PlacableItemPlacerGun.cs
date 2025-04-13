@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 
 public class VR_PlacableItemPlacerGun : PlacableItemPlacer
 {
