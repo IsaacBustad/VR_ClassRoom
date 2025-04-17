@@ -52,6 +52,7 @@ namespace BugFreeProductions.Tools
             {
                 instance = this;
                 ReadRoomConfif();
+                ReadRoomsInPath.FindRoomNames();
             }
         }
 
@@ -87,6 +88,20 @@ namespace BugFreeProductions.Tools
 
         #endregion
 
+        #region Get Room Info
+
+        /*private List<string> ReadRooms()
+        {
+            List<string> roomsLST = new List<string>();
+
+
+
+            return roomsLST;
+        }*/
+
+
+        #endregion
+
 
 
 
@@ -116,6 +131,8 @@ namespace BugFreeProductions.Tools
         //public string RoomConfigPath { get { return roomConfigPath; } set {  roomConfigPath = value; } }
 
         public JSONRoomList RoomList { get { return JsonUtility.FromJson<JSONRoomList>(CustomGatewayJSON.Instance.ReadJsonFile("/" + roomNamePath)); } }
+
+        public string ObjectPlacementPath { get { return objectPlacementPath; }  }
 
     }
 }

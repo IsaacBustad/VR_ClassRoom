@@ -81,25 +81,29 @@ namespace BugFreeProductions.Tools
         // input converted to bool callback to allow mapper mapping
         public void UsePlacer(bool aCon)
         {
-            if (aCon == true)
+            if (gameObject.activeSelf == true)
             {
-                lineRenderer.enabled = true;
-                isPlacing = true;
+                if (aCon == true)
+                {
+                    lineRenderer.enabled = true;
+                    isPlacing = true;
 
 
+                }
+                else if (aCon == false)
+                {
+                    PlaceItem();
+                    //PlaceItem();
+                    isPlacing = false;
+                    lineRenderer.enabled = false;
+
+
+                    // assigned null for re use
+                    factoryItem = null;
+                    placableFactoryItem = null;
+                }
             }
-            else if (aCon == false)
-            {
-                PlaceItem();
-                //PlaceItem();
-                isPlacing = false;
-                lineRenderer.enabled = false;
-
-
-                // assigned null for re use
-                factoryItem = null;
-                placableFactoryItem = null;
-            }
+            
 
         }
 
