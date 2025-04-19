@@ -82,17 +82,21 @@ namespace BugFreeProductions.Tools
 
         public virtual void UseRemover(bool aCon)
         {
-            if (aCon == true)
+            if(gameObject.activeSelf == true)
             {
-                isRemoving = true;
-                lineRenderer.enabled = true;
+                if (aCon == true)
+                {
+                    isRemoving = true;
+                    lineRenderer.enabled = true;
+                }
+                else if (aCon == false)
+                {
+                    RemoveObject();
+                    lineRenderer.enabled = false;
+                    isRemoving = false;
+                }
             }
-            else if (aCon == false)
-            {
-                RemoveObject();
-                lineRenderer.enabled = false;
-                isRemoving = false;
-            }
+            
         }
 
         protected virtual void RemoveObject()
