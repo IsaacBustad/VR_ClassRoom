@@ -8,7 +8,7 @@ using UnityEngine.PlayerLoop;
 
 namespace BugFreeProductions.Tools
 {
-    [RequireComponent(typeof(Collider))]
+    //[RequireComponent(typeof(Collider))]
     public class PlacableFactoryItemSafeArea : MonoBehaviour
     {
         // Vars
@@ -16,8 +16,8 @@ namespace BugFreeProductions.Tools
         //[SerializeField] protected Color positiveColor = Color.white;
         //[SerializeField] protected Color negativeColor = Color.white;
 
-        [SerializeField] protected Material material = null;
-        [SerializeField] protected PlacableItemHighlighter placableItemHighlighter = null;
+        //[SerializeField] protected Material material = null;
+        protected PlacableItemHighlighter placableItemHighlighter = null;
 
         [SerializeField] protected float yBuff = 0.001f;
 
@@ -36,7 +36,7 @@ namespace BugFreeProductions.Tools
         protected virtual void CollectVars()
         {
             //material = GetComponent<Material>();
-            placableItemHighlighter = GetComponentInParent<PlacableItemHighlighter>();
+            placableItemHighlighter = GetComponent<PlacableItemHighlighter>();
             
         }
         protected virtual void OnTriggerEnter(Collider other)
@@ -70,14 +70,14 @@ namespace BugFreeProductions.Tools
             //RotateBody(aLookRot);
         }
 
-        protected virtual void PositionBody(Vector3 aGlobePos, float aHeight)
+        /*protected virtual void PositionBody(Vector3 aGlobePos, float aHeight)
         {
             Vector3 nPos = aGlobePos;
 
             nPos.y += aHeight / 2;
             nPos.y += yBuff;
             transform.position = nPos;
-        }
+        }*/
 
         protected virtual void RotateBody(Quaternion aLookRot)
         {
@@ -91,7 +91,7 @@ namespace BugFreeProductions.Tools
         public virtual void FinalizeSafeArea()
         {
             
-            gameObject.GetComponent<Collider>().isTrigger = false;
+            //gameObject.GetComponent<Collider>().isTrigger = false;
             placableItemHighlighter.DeHighlight();
 
             enabled = false;

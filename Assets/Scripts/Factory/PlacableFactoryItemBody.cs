@@ -21,11 +21,11 @@ namespace BugFreeProductions.Tools
 
 
         // safe area trigger
-        [SerializeField] protected GameObject safeAreaGO = null;
-        [SerializeField] protected PlacableFactoryItemSafeArea safeArea = null;
+        //[SerializeField] protected GameObject safeAreaGO = null;
+        protected PlacableFactoryItemSafeArea safeArea = null;
 
         [SerializeField] protected Transform bodyObject = null;
-        [SerializeField] protected Transform rotHelper = null;
+        protected Transform rotHelper = null;
 
         [SerializeField, Range(1,20)] protected float width = 1;
         [SerializeField, Range(1, 20)] protected float height = 1;
@@ -48,7 +48,9 @@ namespace BugFreeProductions.Tools
 
         protected virtual void CollectVars()
         {
+            rotHelper = new GameObject().transform;
             rb = GetComponent<Rigidbody>();
+            safeArea = GetComponent<PlacableFactoryItemSafeArea>();
         }
 
         protected virtual void DefaultVars()
@@ -66,7 +68,7 @@ namespace BugFreeProductions.Tools
             }
 
             // ensure sfe area trigger is enabled
-            safeAreaGO.SetActive(true);
+            //safeAreaGO.SetActive(true);
 
         }
 
@@ -97,6 +99,10 @@ namespace BugFreeProductions.Tools
         // finalize / remove safe area trigger
         protected virtual void FinalizeSafeArea()
         {
+            /*if (safeArea == null)
+            {
+                safeArea = GetComponent<PlacableFactoryItemSafeArea>();
+            }*/
             safeArea.FinalizeSafeArea();
         }
         #endregion
@@ -113,12 +119,12 @@ namespace BugFreeProductions.Tools
         }
 
         #region Align Object to Point and Rotation
-        public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
+        /*public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos)
         {
             PositionBody(aGlobePos);
             RotateBody(aLookPos);
             safeArea.PositionAndRotateBody(aGlobePos, height, CalcNewRot(aLookPos));
-        }
+        }*/
 
         public virtual void PositionAndRotateBody(Vector3 aGlobePos, Vector3 aLookPos, Vector3 aAdditionalRotation)
         {

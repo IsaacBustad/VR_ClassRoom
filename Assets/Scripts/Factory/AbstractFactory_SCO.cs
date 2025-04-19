@@ -86,7 +86,8 @@ namespace BugFreeProductions.Tools
                 {
                     gf.CreateItem(ref aFI, aPlacement);
                 }
-                if (aFI.ID == JSONPlacementMannager.Instance.RoomID)
+
+                if (aFI != null && aFI.ID.Equals( JSONPlacementMannager.Instance.RoomID) == true)
                 {
                     JSONPlacementMannager.Instance.Pool = gf.Pool;
                 }
