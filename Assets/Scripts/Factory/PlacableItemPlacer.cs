@@ -143,9 +143,6 @@ namespace BugFreeProductions.Tools
                 }
 
 
-                // change item position
-                //factoryItem.transform.position = posRotHelperTF.position;
-
                 // change body position
                 
                 placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position,transform.position,playerInputBridge.AdditionalRotation);

@@ -20,15 +20,15 @@ namespace BugFreeProductions.Tools
         {
             if (JSONPlacementMannager.Instance.ABF_SCO != null)
             {
-                ObjectPlacementList roomPointLST = new ObjectPlacementList();
+                // ObjectPlacementList roomPointLST = new ObjectPlacementList();
                 // get the placable object info
-                ObjectPlacementList opl = JSONPlacementMannager.Instance.ABF_SCO.GatherFactItemPosInfo(ref roomPointLST);
+                ObjectPlacementList opl = JSONPlacementMannager.Instance.ABF_SCO.GatherFactItemPosInfo(/*ref roomPointLST*/);
 
                 // write object info
                 ObjectPlacementReadWrite.Instance.WriteObjectPlacements(opl, aObjectFilePath);
 
                 // Write room points
-                ObjectPlacementReadWrite.Instance.WriteObjectPlacements(opl, aRoomFilePath);
+                // ObjectPlacementReadWrite.Instance.WriteObjectPlacements(opl, aRoomFilePath);
             }
         }
 
