@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CatalogItemData : MonoBehaviour
 {
-    //TODO remove the serialized fields, this is just for debug
     [SerializeField]
     private string id;
     [SerializeField]

@@ -23,7 +23,7 @@ public static class MeshGenerator
         for (int i = 0; i < vertices.Count - 2; i++)
         {
             // Magic
-            if (name.Equals(XRRoomGenerator.CEILING_MESH_NAME, StringComparison.OrdinalIgnoreCase))
+            if (name.Equals(RoomGenerator.CEILING_MESH_NAME, StringComparison.OrdinalIgnoreCase))
             {
                 triangles[i * 3] = 0;
                 triangles[i * 3 + 1] = i + 2;

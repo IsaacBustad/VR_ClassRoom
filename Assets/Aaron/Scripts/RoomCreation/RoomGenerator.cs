@@ -1,10 +1,11 @@
 // Written by Aaron Williams
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class XRRoomGenerator : MonoBehaviour
+public class RoomGenerator : MonoBehaviour
 {
     [Header("Is In Virtual Reality")]
     [SerializeField] private bool isVR;
@@ -99,29 +100,32 @@ public class XRRoomGenerator : MonoBehaviour
             DeactivateTargetLine();
         }
 
-        // TODO: Update VR Input to use new system
-        //if (OVRInput.GetDown(placeFloorPointButton, ovrController))
-        //{
-        //    HandlePlaceSelectPoint();
-        //}
-        //if (OVRInput.GetUp(placeFloorPointButton, ovrController))
-        //{
-        //    if(selectedPointIndex >= 0)
-        //    {
-        //        DeselectPoint();
-        //    }
-        //}
-        //if (OVRInput.GetDown(generateRoomButton, ovrController))
-        //{
-        //    GenerateRoom();
-        //}
-        
+        // TODO: Update VR Input to use new VR input system once we have that all good to go
+        if (isVR)
+        {
+            if (OVRInput.GetDown(placeFloorPointButton, ovrController))
+            {
+                HandlePlaceSelectPoint();
+            }
+            if (OVRInput.GetUp(placeFloorPointButton, ovrController))
+            {
+                if (selectedPointIndex >= 0)
+                {
+                    DeselectPoint();
+                }
+            }
+            if (OVRInput.GetDown(generateRoomButton, ovrController))
+            {
+                GenerateRoom();
+            }
+        }
         if (selectedPointIndex >= 0)
         {
             UpdateSelectedPointPosition();
         }
     }
-    public void HandleToggleTargetLineInoutKBM(InputAction.CallbackContext context)
+
+    public void HandleToggleTargetLineInputKBM(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -265,7 +269,7 @@ public class XRRoomGenerator : MonoBehaviour
                 closestIndex = i;
             }
         }
-
+        Debug.Log("selected point: " + closestIndex );
         return closestIndex;
     }
 

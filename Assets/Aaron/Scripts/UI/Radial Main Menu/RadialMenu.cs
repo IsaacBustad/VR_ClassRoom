@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class RadialMenu : MonoBehaviour
 {
+    public InputMapManager InputMapManager;
+
     [Header("Is In Virtual Reality")]
     [SerializeField] private bool isVR;
     [SerializeField] private Camera mainCamera;
