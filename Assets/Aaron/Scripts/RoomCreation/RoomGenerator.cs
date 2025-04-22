@@ -1,5 +1,6 @@
 // Written by Aaron Williams
 
+using BugFreeProductions.Tools;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,12 @@ public class RoomGenerator : MonoBehaviour
 
     [Header("Floor Point Settings")]
     [SerializeField] private GameObject floorPointPrefab;
+
+    private const string FLOOR_POINT_ITEM_ID = "ROOM";
+    private FactoryItem factoryItem = null;
+    private PlacableFactoryItem placeableFactoryItem = null;
+    [SerializeField]
+    protected AbstractFactory_SCO itemFactory = null;
 
     [Header("Controller Settings")]
     [SerializeField] private Transform controllerTransform;
@@ -251,7 +258,8 @@ public class RoomGenerator : MonoBehaviour
         }
         else if (isTargetValid)
         {
-            CreateFloorPoint();
+            //CreateFloorPoint();
+            CreateFloorPoint2();
         }
     }
 
@@ -352,12 +360,10 @@ public class RoomGenerator : MonoBehaviour
             Vector3 edge = edgeEndPoint - edgeStartPoint;
             Vector3 edgeDirection = edge / edge.magnitude;
 
-            // Magic
             Vector3 edgeStartPointToHitPoint = hitPoint - edgeStartPoint;
             float projection = Vector3.Dot(edgeStartPointToHitPoint, edgeDirection);
             if (projection < 0 || projection > edge.magnitude) { continue; }
             Vector3 closestPoint = edgeStartPoint + edgeDirection * projection;
-            // End Magic
 
             float distance = Vector3.Distance(hitPoint, closestPoint);
 
@@ -384,11 +390,9 @@ public class RoomGenerator : MonoBehaviour
         Vector3 edge = edgeEndPoint - edgeStartPoint;
         Vector3 edgeDirection = edge / edge.magnitude;
 
-        // Magic
         float projection = Vector3.Dot(targetHitPoint - edgeStartPoint, edgeDirection);
         Vector3 pointPosition = edgeStartPoint + edgeDirection * projection;
         int insertIndex = (edgeStartIndex < edgeEndIndex) ? edgeEndIndex : (edgeEndIndex == 0) ? floorPoints.Count : edgeEndIndex;
-        // End Magic
 
         floorPoints.Insert(insertIndex, new Vector3(pointPosition.x, 0, pointPosition.z));
         floorPointPrefabs.Insert(insertIndex, Instantiate(floorPointPrefab, pointPosition, Quaternion.identity));
@@ -398,4 +402,38 @@ public class RoomGenerator : MonoBehaviour
         edgeStartIndex = -1;
         edgeEndIndex = -1;
     }
+
+    private void CreateFloorPoint2()
+    {
+        floorPoints.Add(targetHitPoint);
+        //floorPointPrefabs.Add(Instantiate(floorPointPrefab, targetHitPoint, Quaternion.identity));
+
+        if (factoryItem == null)
+        {
+            itemFactory.CreateItem(ref factoryItem, CreateObjectPlacementData());
+            floorPointPrefabs.Add(factoryItem.gameObject);
+            //placeableFactoryItem = factoryItem.GetComponent<PlacableFactoryItem>();
+        }
+    }
+    private ObjectPlacement CreateObjectPlacementData()
+    {
+        // declair returning var
+        ObjectPlacement objectPlacement = new ObjectPlacement();
+
+        // Set ID
+        objectPlacement.id = FLOOR_POINT_ITEM_ID;
+
+        // set transfom information of currently stored hit point
+        objectPlacement.tpX = targetHitPoint.x;
+        objectPlacement.tpY = targetHitPoint.y;
+        objectPlacement.tpZ = targetHitPoint.z;
+
+        objectPlacement.trX = 0;
+        objectPlacement.trY = 0;
+        objectPlacement.trZ = 0;
+
+        // return calculated placement data
+        return objectPlacement;
+    }
+
 }
