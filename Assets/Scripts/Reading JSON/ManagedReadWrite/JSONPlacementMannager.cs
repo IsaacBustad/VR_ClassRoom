@@ -88,19 +88,7 @@ namespace BugFreeProductions.Tools
 
         #endregion
 
-        #region Get Room Info
-
-        /*private List<string> ReadRooms()
-        {
-            List<string> roomsLST = new List<string>();
-
-
-
-            return roomsLST;
-        }*/
-
-
-        #endregion
+        
 
 
 
