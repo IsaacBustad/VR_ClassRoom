@@ -34,13 +34,9 @@ namespace BugFreeProductions.Tools
         [SerializeField, Range(0, 90)] protected float rotSense = 1f; 
 
 
-
-
-
         // Methods
         protected virtual void OnEnable()
         {
-            //JSONPlacementMannager
             CollectVars();
         }
 
