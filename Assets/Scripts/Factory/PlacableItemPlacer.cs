@@ -52,6 +52,8 @@ namespace BugFreeProductions.Tools
             lineRenderer.startWidth = 0.2f;
             lineRenderer.endWidth = 0.2f;
             lineRenderer.enabled = false;
+            lineRenderer.startColor = Color.green;
+            lineRenderer.endColor = Color.green;
         }
 
         // input testing

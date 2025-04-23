@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class RoomGenerator : MonoBehaviour
 {
@@ -18,8 +19,7 @@ public class RoomGenerator : MonoBehaviour
     private List<PlacableFactoryItem> floorPointReferences = new List<PlacableFactoryItem>();
     private FactoryItem factoryItem = null;
     private PlacableFactoryItem placeableFactoryItem = null;
-    [SerializeField]
-    protected AbstractFactory_SCO itemFactory = null;
+    [SerializeField] protected AbstractFactory_SCO itemFactory = null;
 
     [Header("Controller Settings")]
     [SerializeField] private Transform controllerTransform;
@@ -91,6 +91,18 @@ public class RoomGenerator : MonoBehaviour
 
         edgeLineRenderer = InitializeLineRenderer(edgeLineWidth, edgeLineColor, true, EDGE_LINE_RENDERER_NAME);
         movingPointLayerMask = ~(LayerMask.GetMask("Floor", "Walls"));
+    }
+
+    private void OnEnable()
+    {
+        if (targetLineRenderer == null)
+        {
+            targetLineRenderer = InitializeLineRenderer(targetLineWidth, invalidTargetColor, false);
+        }
+        else
+        {
+            targetLineRenderer = InitializeLineRenderer(targetLineWidth, invalidTargetColor, false, null, targetLineRenderer);
+        }
     }
 
     private void Update()
@@ -406,6 +418,7 @@ public class RoomGenerator : MonoBehaviour
             if (insertIndex < floorPointReferences.Count)
             {
                 floorPointReferences.Insert(insertIndex, newEdgeInsertedFloorPoint);
+                JSONPlacementMannager.Instance.Pool.ReorderQueue(insertIndex);
             }
             else
             {

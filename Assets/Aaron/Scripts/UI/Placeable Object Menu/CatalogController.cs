@@ -48,10 +48,6 @@ public class CatalogController : MonoBehaviour
         UpdateCatalog();
     }
 
-    private void OnEnable()
-    {
-        EnableMenu();
-    }
     private void LoadFilterToggles()
     {
         categoryToggles.Clear();
@@ -113,9 +109,9 @@ public class CatalogController : MonoBehaviour
         itemPlacer.ItemID = catalogButton.GetComponent<CatalogItemData>().Id;
     }
 
-    public void EnableMenu()
+    public void ToggleMenu()
     {
-        if (!canvasTransform.gameObject.activeSelf)
+        if (!canvasTransform.gameObject.activeInHierarchy)
         {
             //if(isVR)
             //{

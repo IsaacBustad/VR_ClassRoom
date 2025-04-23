@@ -22,7 +22,7 @@ namespace BugFreeProductions.Tools
         #region Setup and Finalize placement
         public virtual void OnEnable()
         {
-            //CollectVars();
+           CollectVars();
         }
 
         protected virtual void CollectVars()
