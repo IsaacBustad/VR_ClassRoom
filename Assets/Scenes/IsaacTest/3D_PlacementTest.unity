@@ -122,51 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &81805156
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 81805158}
-  - component: {fileID: 81805157}
-  m_Layer: 0
-  m_Name: Writer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &81805157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81805156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb1c9d33a12db6e4f93eb7f551c024ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abf_SCO: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
---- !u!4 &81805158
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81805156}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &149293549
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea87453cec55c474dae397627b1e5adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: Chair
+  itemID: Black_Chair_2
   itemFactory: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
   maxPlaceDist: 16.3
 --- !u!120 &795012739
@@ -1419,6 +1374,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 1930165280}
   - {fileID: 1028960885}
-  - {fileID: 81805158}
   - {fileID: 1423102730}
   - {fileID: 3990153548450027494}
