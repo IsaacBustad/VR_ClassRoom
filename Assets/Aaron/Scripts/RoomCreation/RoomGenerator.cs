@@ -14,7 +14,8 @@ public class RoomGenerator : MonoBehaviour
     [Header("Floor Point Settings")]
     [SerializeField] private GameObject floorPointPrefab;
 
-    private const string FLOOR_POINT_ITEM_ID = "ROOM";
+    private const string FLOOR_POINT_ITEM_ID = "Room";
+    private List<PlacableFactoryItem> floorPointReferences = new List<PlacableFactoryItem>();
     private FactoryItem factoryItem = null;
     private PlacableFactoryItem placeableFactoryItem = null;
     [SerializeField]
@@ -54,8 +55,6 @@ public class RoomGenerator : MonoBehaviour
     private LineRenderer edgeLineRenderer;
     private Color currentTargetLineColor;
 
-    private List<Vector3> floorPoints = new();
-    private List<GameObject> floorPointPrefabs = new();
 
     public const string FLOOR_MESH_NAME = "Floor Mesh";
     public const string CEILING_MESH_NAME = "Ceiling Mesh";
@@ -78,8 +77,6 @@ public class RoomGenerator : MonoBehaviour
 
     private int movingPointLayerMask;
     private bool isTargetLineVisible = false;
-
-    public List<Vector3> FloorPoints { get => floorPoints; set => floorPoints = value; }
 
     private void Start()
     {
@@ -215,7 +212,7 @@ public class RoomGenerator : MonoBehaviour
 
             isTargetValid = hit.point.y < 0.01f;
 
-            if (selectedPointIndex < 0 && floorGameObject != null && floorPoints.Count >= 3)
+            if (selectedPointIndex < 0 && floorGameObject != null && floorPointReferences.Count >= 3)
             {
                 isPointNearby = IsFloorPointNearHit(targetHitPoint);
                 if (!isPointNearby) { CheckForEdgeHit(targetHitPoint); }
@@ -235,11 +232,10 @@ public class RoomGenerator : MonoBehaviour
 
     private void UpdateSelectedPointPosition()
     {
-        if (isTargetValid)
+        if (isTargetValid && selectedPointIndex >= 0)
         {
-            floorPoints[selectedPointIndex] = new Vector3(targetHitPoint.x, 0, targetHitPoint.z);
+            floorPointReferences[selectedPointIndex].transform.position = targetHitPoint;
             selectedSphere.transform.position = targetHitPoint;
-
             RegenerateRoom();
         }
     }
@@ -250,7 +246,7 @@ public class RoomGenerator : MonoBehaviour
 
         if (selectedPointIndex >= 0)
         {
-            selectedSphere = floorPointPrefabs[selectedPointIndex];
+            selectedSphere = floorPointReferences[selectedPointIndex].gameObject;
         }
         else if (isTargetOnEdge)
         {
@@ -258,8 +254,7 @@ public class RoomGenerator : MonoBehaviour
         }
         else if (isTargetValid)
         {
-            //CreateFloorPoint();
-            CreateFloorPoint2();
+            CreateFloorPoint();
         }
     }
 
@@ -268,16 +263,15 @@ public class RoomGenerator : MonoBehaviour
         int closestIndex = -1;
         float closestDistance = floorPointSelectionPadding;
 
-        for (int i = 0; i < floorPoints.Count; i++)
+        for (int i = 0; i < floorPointReferences.Count; i++)
         {
-            float distanceToHit = Vector3.Distance(floorPoints[i], targetHitPoint);
+            float distanceToHit = Vector3.Distance(floorPointReferences[i].transform.position, targetHitPoint);
             if (distanceToHit < closestDistance)
             {
                 closestDistance = distanceToHit;
                 closestIndex = i;
             }
         }
-        Debug.Log("selected point: " + closestIndex );
         return closestIndex;
     }
 
@@ -289,7 +283,7 @@ public class RoomGenerator : MonoBehaviour
 
     private void RegenerateRoom()
     {
-        if (floorGameObject != null && wallGameObjects != null && floorPoints.Count >= 3)
+        if (floorGameObject != null && wallGameObjects != null && floorPointReferences.Count >= 3)
         {
             GenerateRoom();
         }
@@ -297,7 +291,7 @@ public class RoomGenerator : MonoBehaviour
 
     private void GenerateRoom()
     {
-        if (floorPoints.Count >= 3)
+        if (floorPointReferences.Count >= 3)
         {
             if (floorGameObject != null) { Destroy(floorGameObject); }
             if (ceilingGameObject != null) { Destroy(ceilingGameObject); }
@@ -310,23 +304,25 @@ public class RoomGenerator : MonoBehaviour
                 }
             }
 
+            List<Vector3> floorVertices = new();
             List<Vector3> ceilingVertices = new();
-            foreach (Vector3 point in floorPoints)
+            foreach (PlacableFactoryItem point in floorPointReferences)
             {
-                ceilingVertices.Add(new Vector3(point.x, wallHeight, point.z));
+                floorVertices.Add(point.transform.position);
+                ceilingVertices.Add(new Vector3(point.transform.position.x, wallHeight, point.transform.position.z));
             }
 
             ceilingGameObject = MeshGenerator.GenerateFlatMesh(ceilingVertices, ceilingMaterial, CEILING_MESH_NAME);
-            floorGameObject = MeshGenerator.GenerateFlatMesh(floorPoints, floorMaterial, FLOOR_MESH_NAME);
-            wallGameObjects = MeshGenerator.GenerateWallMeshes(floorPoints, wallMaterial, wallHeight);
+            floorGameObject = MeshGenerator.GenerateFlatMesh(floorVertices, floorMaterial, FLOOR_MESH_NAME);
+            wallGameObjects = MeshGenerator.GenerateWallMeshes(floorVertices, wallMaterial, wallHeight);
         }
     }
 
     private bool IsFloorPointNearHit(Vector3 hitPoint)
     {
-        foreach (Vector3 floorPoint in floorPoints)
+        foreach (PlacableFactoryItem floorPoint in floorPointReferences)
         {
-            if (Vector3.Distance(floorPoint, hitPoint) < floorPointSelectionPadding) { return true; }
+            if (Vector3.Distance(floorPoint.transform.position, hitPoint) < floorPointSelectionPadding) { return true; }
         }
         return false;
     }
@@ -336,10 +332,13 @@ public class RoomGenerator : MonoBehaviour
         lineRenderer.SetPositions(new Vector3[] { start, end });
         lineRenderer.material.color = color;
     }
+
     private void CreateFloorPoint()
     {
-        floorPoints.Add(targetHitPoint);
-        floorPointPrefabs.Add(Instantiate(floorPointPrefab, targetHitPoint, Quaternion.identity));
+        factoryItem = null;
+
+        itemFactory.CreateItem(ref factoryItem, CreateObjectPlacementData());
+        floorPointReferences.Add(factoryItem.GetComponent<PlacableFactoryItem>());
     }
 
     private void CheckForEdgeHit(Vector3 hitPoint)
@@ -351,12 +350,12 @@ public class RoomGenerator : MonoBehaviour
 
         float closestDistance = edgeSelectionPadding;
 
-        for (int i = 0; i < floorPoints.Count; i++)
+        for (int i = 0; i < floorPointReferences.Count; i++)
         {
-            int nextIndex = (i + 1) % floorPoints.Count;
+            int nextIndex = (i + 1) % floorPointReferences.Count;
 
-            Vector3 edgeStartPoint = floorPoints[i];
-            Vector3 edgeEndPoint = floorPoints[nextIndex];
+            Vector3 edgeStartPoint = floorPointReferences[i].transform.position;
+            Vector3 edgeEndPoint = floorPointReferences[nextIndex].transform.position;
             Vector3 edge = edgeEndPoint - edgeStartPoint;
             Vector3 edgeDirection = edge / edge.magnitude;
 
@@ -385,17 +384,34 @@ public class RoomGenerator : MonoBehaviour
 
     private void InsertFloorPointOnEdge()
     {
-        Vector3 edgeStartPoint = floorPoints[edgeStartIndex];
-        Vector3 edgeEndPoint = floorPoints[edgeEndIndex];
+        Vector3 edgeStartPoint = floorPointReferences[edgeStartIndex].transform.position;
+        Vector3 edgeEndPoint = floorPointReferences[edgeEndIndex].transform.position;
         Vector3 edge = edgeEndPoint - edgeStartPoint;
         Vector3 edgeDirection = edge / edge.magnitude;
 
         float projection = Vector3.Dot(targetHitPoint - edgeStartPoint, edgeDirection);
         Vector3 pointPosition = edgeStartPoint + edgeDirection * projection;
-        int insertIndex = (edgeStartIndex < edgeEndIndex) ? edgeEndIndex : (edgeEndIndex == 0) ? floorPoints.Count : edgeEndIndex;
+        targetHitPoint = new Vector3(pointPosition.x, 0, pointPosition.z);
 
-        floorPoints.Insert(insertIndex, new Vector3(pointPosition.x, 0, pointPosition.z));
-        floorPointPrefabs.Insert(insertIndex, Instantiate(floorPointPrefab, pointPosition, Quaternion.identity));
+        CreateFloorPoint();
+
+        int insertIndex = (edgeStartIndex < edgeEndIndex) ? edgeEndIndex : (edgeEndIndex == 0) ? floorPointReferences.Count : edgeEndIndex;
+
+        if (insertIndex < floorPointReferences.Count - 1)
+        {
+            PlacableFactoryItem newEdgeInsertedFloorPoint = floorPointReferences[floorPointReferences.Count - 1];
+
+            floorPointReferences.RemoveAt(floorPointReferences.Count - 1);
+
+            if (insertIndex < floorPointReferences.Count)
+            {
+                floorPointReferences.Insert(insertIndex, newEdgeInsertedFloorPoint);
+            }
+            else
+            {
+                floorPointReferences.Add(newEdgeInsertedFloorPoint);
+            }
+        }
 
         RegenerateRoom();
 
@@ -403,27 +419,13 @@ public class RoomGenerator : MonoBehaviour
         edgeEndIndex = -1;
     }
 
-    private void CreateFloorPoint2()
-    {
-        floorPoints.Add(targetHitPoint);
-        //floorPointPrefabs.Add(Instantiate(floorPointPrefab, targetHitPoint, Quaternion.identity));
-
-        if (factoryItem == null)
-        {
-            itemFactory.CreateItem(ref factoryItem, CreateObjectPlacementData());
-            floorPointPrefabs.Add(factoryItem.gameObject);
-            //placeableFactoryItem = factoryItem.GetComponent<PlacableFactoryItem>();
-        }
-    }
+    // From Isaac's placer gun script
     private ObjectPlacement CreateObjectPlacementData()
     {
-        // declair returning var
         ObjectPlacement objectPlacement = new ObjectPlacement();
 
-        // Set ID
         objectPlacement.id = FLOOR_POINT_ITEM_ID;
 
-        // set transfom information of currently stored hit point
         objectPlacement.tpX = targetHitPoint.x;
         objectPlacement.tpY = targetHitPoint.y;
         objectPlacement.tpZ = targetHitPoint.z;
@@ -432,8 +434,6 @@ public class RoomGenerator : MonoBehaviour
         objectPlacement.trY = 0;
         objectPlacement.trZ = 0;
 
-        // return calculated placement data
         return objectPlacement;
     }
-
 }
