@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 
 namespace BugFreeProductions.Tools
@@ -25,6 +26,9 @@ namespace BugFreeProductions.Tools
         private string roomPlacementPath = "RoomPointPlacements.json";
         private string roomNamePath = "RoomNames.json";
 
+        // not a room refference
+        private string notRoom = "N/A";
+
 
         // Mannaged readers and writers
         private MannagedJSONReader jsonReader = new MannagedJSONReader();
@@ -41,6 +45,7 @@ namespace BugFreeProductions.Tools
         // Methods
         private void OnEnable()
         {
+            SceneManager.sceneLoaded += OnSceneLoaded;
             if (instance != null)
             {
                 if (instance != this)
@@ -56,10 +61,24 @@ namespace BugFreeProductions.Tools
             }
         }
 
+        // onScene change
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            ReadRoomConfif();
+        }
+
+        // remove from delegate on destroy
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
         #region Room Saving
         public void ReadRoomConfif()
         {
-            jsonReader.SpawnObjects("/" + roomConfigPath + objectPlacementPath);
+            if (roomConfigPath != notRoom)
+            {
+                jsonReader.SpawnObjects("/" + roomConfigPath + objectPlacementPath);
+            }            
         }
 
         public void WriteRoomConfig()
@@ -68,7 +87,7 @@ namespace BugFreeProductions.Tools
         }
         
 
-        public void AddRoom(string aString)
+        /*public void AddRoom(string aString)
         {
             JSONRoomList rooms = JsonUtility.FromJson<JSONRoomList>(CustomGatewayJSON.Instance.ReadJsonFile("/" + roomNamePath));
 
@@ -84,7 +103,7 @@ namespace BugFreeProductions.Tools
 
                 rooms.roomsLST = nRoomLST.ToArray();
             }
-        }
+        }*/
 
         #endregion
 
@@ -121,6 +140,8 @@ namespace BugFreeProductions.Tools
         public List<string> RoomList { get { return ReadRoomsInPath.FindRoomNames(); } }
 
         public string ObjectPlacementPath { get { return objectPlacementPath; }  }
+
+        public string NotRoom { get { return notRoom; } }
 
     }
 }
