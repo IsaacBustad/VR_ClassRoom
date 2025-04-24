@@ -27,8 +27,8 @@ namespace BugFreeProductions.Tools
         [SerializeField] protected Transform bodyObject = null;
         protected Transform rotHelper = null;
 
-        [SerializeField, Range(1,20)] protected float width = 1;
-        [SerializeField, Range(1, 20)] protected float height = 1;
+        [SerializeField, Range(0.1f,20)] protected float width = 1;
+        [SerializeField, Range(0.1f, 20)] protected float height = 1;
 
 
         // vars for additional rotation

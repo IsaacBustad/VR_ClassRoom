@@ -72,8 +72,6 @@ public static class MeshGenerator
             Vector3 floorPointB = floorPoints[next];
 
             GameObject wallObject = new GameObject("Wall");
-            wallObject.transform.SetParent(wallGameObjectParent.transform);
-
             wallObject.layer = LayerMask.NameToLayer("Walls");
 
             MeshFilter meshFilter = wallObject.AddComponent<MeshFilter>();
