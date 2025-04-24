@@ -856,13 +856,13 @@ MonoBehaviour:
     m_ActionName: Master_Player_Input1/Primary_Action_Right_F[/Keyboard/f]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1841852564}
+        m_TargetAssemblyTypeName: BugFreeProductions.Tools.PlacableItemRemover, Assembly-CSharp
+        m_MethodName: UseRemover
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -936,13 +936,14 @@ MonoBehaviour:
     m_ActionName: Default State Input1/MoveInput[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 286155562}
+        m_TargetAssemblyTypeName: BugFreeProductions.Tools.JSONPlacementMannager,
+          Assembly-CSharp
+        m_MethodName: WriteRoomConfig
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1237,6 +1238,17 @@ MonoBehaviour:
   playerInput: {fileID: 210345093}
   roomGenerator: {fileID: 1841852563}
   placableItemPlacer: {fileID: 1841852561}
+--- !u!114 &286155562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4158969046781334587, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
+  m_PrefabInstance: {fileID: 378866012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4161c4c850b17314895dda4b483b2953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &378866012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1328,7 +1340,7 @@ PrefabInstance:
       objectReference: {fileID: 210345096}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: menuActivationKey
@@ -1340,6 +1352,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[1].menuName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
+      propertyPath: Menus.Array.data[2].menuName
       value: Room Editor
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
@@ -1363,11 +1379,19 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
+      propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[0].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[1].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
+      propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
@@ -1379,6 +1403,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 210345096}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
+      propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 210345096}
+    - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[0].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -1387,11 +1415,19 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
+      propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[0].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchToItemPlacementActionMap
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[1].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchToDefaultActionMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
+      propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchToRoomCreationActionMap
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
@@ -1403,11 +1439,19 @@ PrefabInstance:
       value: InputMapManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
+      propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InputMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[0].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[1].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
+      propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1920544570798258707, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
@@ -4188,6 +4232,7 @@ GameObject:
   - component: {fileID: 1841852562}
   - component: {fileID: 1841852561}
   - component: {fileID: 1841852563}
+  - component: {fileID: 1841852564}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -4223,7 +4268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea87453cec55c474dae397627b1e5adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 
+  itemID: Chair
   itemFactory: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
   maxPlaceDist: 16.3
 --- !u!120 &1841852562
@@ -4365,6 +4410,20 @@ MonoBehaviour:
   wallMaterial: {fileID: 2100000, guid: 63777614ba704cf448433c715da14ac4, type: 2}
   ceilingMaterial: {fileID: 2100000, guid: fa4eb5242cc840c44a6b97c085b53641, type: 2}
   targetLineRenderer: {fileID: 1841852562}
+--- !u!114 &1841852564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841852559}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d564ff1d188fdba49a2179c4a21e0964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRemoveDist: 5
+  posRotHelperTF: {fileID: 0}
 --- !u!1 &1984969049
 GameObject:
   m_ObjectHideFlags: 0
