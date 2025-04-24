@@ -17,6 +17,8 @@ public class InputMapManager : MonoBehaviour
 
     public const string ITEM_PLACEMENT_INPUT_MAP = "Item_Placement_Input";
 
+    public const string CATALOG_MENU_INPUT_MAP = "Catalog_Menu_Input";
+
     public RoomGenerator roomGenerator;
 
     public PlacableItemPlacer placableItemPlacer;
@@ -37,7 +39,7 @@ public class InputMapManager : MonoBehaviour
         else
         {
             instance = this;
-            Invoke("SwitchToDefaultActionMap", 0.2f);
+            SwitchToDefaultActionMap();
         }
     }
 
@@ -52,7 +54,7 @@ public class InputMapManager : MonoBehaviour
             return instance;
         }
     }
-    
+
     public void OnOpenRadialMenuUI()
     {
         previousActionMap = playerInput.currentActionMap.name;
@@ -108,5 +110,13 @@ public class InputMapManager : MonoBehaviour
         placableItemPlacer.enabled = true;
         placableItemRemover.enabled = true;
         roomGenerator.enabled = false;
-}
+    }
+
+    public void SwitchToCatalogMenuActionMap()
+    {
+        playerInput.SwitchCurrentActionMap(CATALOG_MENU_INPUT_MAP);
+        placableItemPlacer.enabled = false;
+        placableItemRemover.enabled = false;
+        roomGenerator.enabled = false;
+    }
 }

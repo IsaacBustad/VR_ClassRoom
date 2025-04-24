@@ -1165,6 +1165,50 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e66a0ac9-8acd-42dd-8742-93d30664b4bd
     m_ActionName: Room Creation Input1/LeftTab[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 21abebec-2535-4a74-9279-848bfdc6fbdd
+    m_ActionName: Catalog_Menu_Input/MoveInput[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8c7e726-0f88-4b34-82ff-3bb123ba2578
+    m_ActionName: Catalog_Menu_Input/Primary_Action_Left_Q[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ab77edfd-9047-451b-9f17-b4ca53fda979
+    m_ActionName: Catalog_Menu_Input/Primary_Action_Left[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1638863514}
+        m_TargetAssemblyTypeName: CatalogController, Assembly-CSharp
+        m_MethodName: ToggleMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 508b85bf-8913-4c38-92ef-310633e74b8d
+    m_ActionName: Catalog_Menu_Input/Primary_Action_Right_F[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ec1c2431-6679-46e7-a5f9-14558ce81820
+    m_ActionName: Catalog_Menu_Input/Primary_Action_Right[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3925de16-38a8-4c78-979f-9b2ab38c0b84
+    m_ActionName: Catalog_Menu_Input/CursorMouseMovement[/Mouse/delta/up,/Mouse/delta/down,/Mouse/delta/left,/Mouse/delta/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 81c9f7ea-fa1b-45dd-be1d-8b7118719fda
+    m_ActionName: Catalog_Menu_Input/Mouse_Scroll[/Mouse/scroll/up,/Mouse/scroll/down]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 852ea84d-cf0d-44f4-b3c8-0ab3d4f88905
+    m_ActionName: Catalog_Menu_Input/LeftTab[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Default_State_Input

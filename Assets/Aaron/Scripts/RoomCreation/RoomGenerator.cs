@@ -3,6 +3,7 @@
 using BugFreeProductions.Tools;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -16,7 +17,7 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GameObject floorPointPrefab;
 
     private const string FLOOR_POINT_ITEM_ID = "Room";
-    private List<PlacableFactoryItem> floorPointReferences = new List<PlacableFactoryItem>();
+    public List<PlacableFactoryItem> floorPointReferences = new List<PlacableFactoryItem>();
     private FactoryItem factoryItem = null;
     private PlacableFactoryItem placeableFactoryItem = null;
     [SerializeField] protected AbstractFactory_SCO itemFactory = null;
@@ -91,6 +92,8 @@ public class RoomGenerator : MonoBehaviour
 
         edgeLineRenderer = InitializeLineRenderer(edgeLineWidth, edgeLineColor, true, EDGE_LINE_RENDERER_NAME);
         movingPointLayerMask = ~(LayerMask.GetMask("Floor", "Walls"));
+
+        Invoke("LoadIntoRoom", 1f);
     }
 
     private void OnEnable()
@@ -448,5 +451,39 @@ public class RoomGenerator : MonoBehaviour
         objectPlacement.trZ = 0;
 
         return objectPlacement;
+    }
+
+    private void CollectRoomPoints()
+    {
+        List<Poolable> poolables = JSONPlacementMannager.Instance.Pool.PoolList;
+        if(JSONPlacementMannager.Instance.Pool.PoolList == null)
+        {
+            Debug.LogError("Poolables list is null");
+        }
+        else
+        {
+            Debug.Log("Poolables list count: " + poolables.Count);
+        }
+
+            foreach (Poolable poolable in poolables)
+            {
+                FactoryItem factoryItem = poolable.GetComponent<FactoryItem>();
+                if (factoryItem != null)
+                {
+                    PlacableFactoryItem floorPoint = factoryItem.GetComponent<PlacableFactoryItem>();
+                    if (floorPoint != null)
+                    {
+                        floorPointReferences.Add(floorPoint);
+                        Debug.Log("Found floor point: " + floorPoint.gameObject.name);
+                    }
+                }
+            }
+        Debug.Log("Total floor points collected: " + floorPointReferences.Count);
+    }
+
+    private void LoadIntoRoom()
+    {
+        CollectRoomPoints();
+        GenerateRoom();
     }
 }

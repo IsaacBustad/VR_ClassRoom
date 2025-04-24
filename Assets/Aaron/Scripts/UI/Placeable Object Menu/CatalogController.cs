@@ -12,6 +12,8 @@ public class CatalogController : MonoBehaviour
     // TODO update this to the final folder names inside of Resources
     // TODO switch back to const string, not const rn to make testing easier and string visible/editable in editor
     [SerializeField]
+    private bool isVR = false;
+    [SerializeField]
     private string ITEM_FOLDER = "ClassItems";
     [SerializeField]
     private string CATEGORIES_FOLDER = "Categories";
@@ -113,23 +115,36 @@ public class CatalogController : MonoBehaviour
     {
         if (!canvasTransform.gameObject.activeInHierarchy)
         {
-            //if(isVR)
-            //{
-            //    //Vector3 spawnPosition = playerTransform.position + playerTransform.forward * 2.5f;
-            //    //Quaternion spawnRotation = Quaternion.LookRotation(playerTransform.forward);
-            //    //menu.gameObject.transform.position = new Vector3(spawnPosition.x, 0.5f, spawnPosition.z);
-            //    //menu.gameObject.transform.rotation = spawnRotation;
+            if (isVR)
+            {
+                //Vector3 spawnPosition = playerTransform.position + playerTransform.forward * 2.5f;
+                //Quaternion spawnRotation = Quaternion.LookRotation(playerTransform.forward);
+                //menu.gameObject.transform.position = new Vector3(spawnPosition.x, 0.5f, spawnPosition.z);
+                //menu.gameObject.transform.rotation = spawnRotation;
 
-            //    //rightHand.SetActive(false);
-            //}
+                //rightHand.SetActive(false);
+            }
+            
+            if(!isVR)
+            {
+                InputMapManager.Instance.SwitchToCatalogMenuActionMap();
+                UIUtils.EnableUILock();
+            }
             canvasTransform.gameObject.SetActive(true);
-            UIUtils.EnableUILock();
         }
         else
         {
+            if (isVR)
+            {
+                //rightHand.SetActive(true);
+            }
+
+            if (!isVR)
+            {
+                InputMapManager.Instance.SwitchToItemPlacementActionMap();
+                UIUtils.DisableUILock();
+            }
             canvasTransform.gameObject.SetActive(false);
-            //rightHand.SetActive(true);
-            UIUtils.DisableUILock();
         }
     }
 
