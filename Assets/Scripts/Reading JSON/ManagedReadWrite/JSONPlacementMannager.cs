@@ -35,7 +35,7 @@ namespace BugFreeProductions.Tools
         private MannagedJSONWriter jsonWriter = new MannagedJSONWriter();
 
         // Room object ID and Pool
-        [SerializeField] private string roomID = "Room";
+        private string roomID = "Room";
         [SerializeField] private GenericPool pool = new GenericPool();
 
         // 

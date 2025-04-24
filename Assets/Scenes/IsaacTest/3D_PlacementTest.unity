@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea87453cec55c474dae397627b1e5adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: Piano
+  itemID: Globe
   itemFactory: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
   maxPlaceDist: 16.3
 --- !u!120 &795012739
