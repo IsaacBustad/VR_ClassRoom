@@ -21,6 +21,10 @@ public class InputMapManager : MonoBehaviour
 
     public PlacableItemPlacer placableItemPlacer;
 
+    public PlacableItemRemover placableItemRemover;
+
+    private string previousActionMap = null;
+
     private void OnEnable()
     {
         if (instance != null)
@@ -33,7 +37,7 @@ public class InputMapManager : MonoBehaviour
         else
         {
             instance = this;
-            SwitchToDefaultActionMap();
+            Invoke("SwitchToDefaultActionMap", 0.2f);
         }
     }
 
@@ -48,6 +52,34 @@ public class InputMapManager : MonoBehaviour
             return instance;
         }
     }
+    
+    public void OnOpenRadialMenuUI()
+    {
+        previousActionMap = playerInput.currentActionMap.name;
+
+        if (previousActionMap != DEFAULT_INPUT_MAP)
+        {
+            playerInput.SwitchCurrentActionMap(DEFAULT_INPUT_MAP);
+        }
+    }
+
+    public void OnCloseRadialMenuUI()
+    {
+        switch (previousActionMap)
+        {
+            case ROOM_CREATION_INPUT_MAP:
+                SwitchToRoomCreationActionMap();
+                break;
+            case ITEM_PLACEMENT_INPUT_MAP:
+                SwitchToItemPlacementActionMap();
+                break;
+            default:
+                SwitchToDefaultActionMap();
+                break;
+        }
+
+        previousActionMap = null;
+    }
 
     public void SwitchToActionMap(string actionMapName)
     {
@@ -58,6 +90,7 @@ public class InputMapManager : MonoBehaviour
     {
         playerInput.SwitchCurrentActionMap(DEFAULT_INPUT_MAP);
         placableItemPlacer.enabled = false;
+        placableItemRemover.enabled = false;
         roomGenerator.enabled = false;
     }
 
@@ -65,6 +98,7 @@ public class InputMapManager : MonoBehaviour
     {
         playerInput.SwitchCurrentActionMap(ROOM_CREATION_INPUT_MAP);
         placableItemPlacer.enabled = false;
+        placableItemRemover.enabled = false;
         roomGenerator.enabled = true;
     }
 
@@ -72,6 +106,7 @@ public class InputMapManager : MonoBehaviour
     {
         playerInput.SwitchCurrentActionMap(ITEM_PLACEMENT_INPUT_MAP);
         placableItemPlacer.enabled = true;
+        placableItemRemover.enabled = true;
         roomGenerator.enabled = false;
 }
 }

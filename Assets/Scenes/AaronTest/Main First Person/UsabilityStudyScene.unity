@@ -808,13 +808,14 @@ MonoBehaviour:
     m_ActionName: Master_Player_Input1/MoveInput[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 286155562}
+        m_TargetAssemblyTypeName: BugFreeProductions.Tools.JSONPlacementMannager,
+          Assembly-CSharp
+        m_MethodName: WriteRoomConfig
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -855,19 +856,7 @@ MonoBehaviour:
     m_ActionId: 1ef1682d-5bcb-45c7-8653-8825c26f0f97
     m_ActionName: Master_Player_Input1/Primary_Action_Right_F[/Keyboard/f]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1841852564}
-        m_TargetAssemblyTypeName: BugFreeProductions.Tools.PlacableItemRemover, Assembly-CSharp
-        m_MethodName: UseRemover
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: dea43dc7-364d-45de-8c42-abc8ac928e34
     m_ActionName: Master_Player_Input1/Primary_Action_Right[/Mouse/rightButton]
   - m_PersistentCalls:
@@ -1065,13 +1054,14 @@ MonoBehaviour:
     m_ActionName: Room Creation Input1/MoveInput[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 286155562}
+        m_TargetAssemblyTypeName: BugFreeProductions.Tools.JSONPlacementMannager,
+          Assembly-CSharp
+        m_MethodName: WriteRoomConfig
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1113,13 +1103,13 @@ MonoBehaviour:
     m_ActionName: Room Creation Input1/Primary_Action_Right_F[/Keyboard/f]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1841852564}
+        m_TargetAssemblyTypeName: BugFreeProductions.Tools.PlacableItemRemover, Assembly-CSharp
+        m_MethodName: UseRemover
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1238,6 +1228,7 @@ MonoBehaviour:
   playerInput: {fileID: 210345093}
   roomGenerator: {fileID: 1841852563}
   placableItemPlacer: {fileID: 1841852561}
+  placableItemRemover: {fileID: 1841852564}
 --- !u!114 &286155562 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4158969046781334587, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
@@ -1340,7 +1331,7 @@ PrefabInstance:
       objectReference: {fileID: 210345096}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: menuActivationKey
@@ -1352,11 +1343,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[1].menuName
-      value: Close
+      value: Room Editor
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[2].menuName
-      value: Room Editor
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[0].menuGameObject
@@ -1380,7 +1371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[0].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1424,7 +1415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[1].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchToDefaultActionMap
+      value: SwitchToRoomCreationActionMap
       objectReference: {fileID: 0}
     - target: {fileID: 145280179167464197, guid: beea3364ee494894b9ec2a0697bb62dd, type: 3}
       propertyPath: Menus.Array.data[2].onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -4382,13 +4373,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841852559}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ffd522b9db680e43bf8d00c32329f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isVR: 0
   floorPointPrefab: {fileID: 9217609688440255084, guid: e64ab0f70fb1d3043894d72c740000cc, type: 3}
+  floorPointReferences: []
   itemFactory: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
   controllerTransform: {fileID: 1841852560}
   ovrController: 2

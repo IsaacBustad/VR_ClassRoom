@@ -196,7 +196,6 @@ public class RadialMenu : MonoBehaviour
             {
                 Menus[selectedMenuOptionIndex].MenuGameObject.SetActive(true);
             }
-            Debug.Log($"Selected Menu Option: {Menus[selectedMenuOptionIndex].MenuName}");  
             DisableRadialMenu(false);
             Menus[selectedMenuOptionIndex].OnSelect?.Invoke();
         }
@@ -211,6 +210,7 @@ public class RadialMenu : MonoBehaviour
         if(!isVR)
         {
             UIUtils.EnableUILock();
+            InputMapManager.Instance.OnOpenRadialMenuUI();
         }
 
         menuCanvas.gameObject.SetActive(true);
@@ -227,6 +227,7 @@ public class RadialMenu : MonoBehaviour
         if (!isVR && !selectedNewMenu)
         {
             UIUtils.DisableUILock();
+            InputMapManager.Instance.OnCloseRadialMenuUI();
         }
         menuCanvas.gameObject.SetActive(false);
     }
