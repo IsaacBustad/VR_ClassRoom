@@ -16,7 +16,7 @@ public class PlayerCamMannager : MonoBehaviour
     // Methods
     protected virtual void OnEnable()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     protected virtual void FixedUpdate()

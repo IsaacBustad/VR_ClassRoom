@@ -52,9 +52,24 @@ namespace BugFreeProductions.Tools
             }
         }
 
-        // Accessors
-        public virtual List<Poolable> PoolList { get { return poolables.ToList(); } 
+        public virtual void ReorderQueue(int index)
+        {
+            if (poolables.Count <= 1)
+            {
+                return;
+            }
+
+            List<Poolable> poolList = poolables.ToList();
+            Poolable lastItem = poolList[poolList.Count - 1];
+
+            poolList.RemoveAt(poolList.Count - 1);
+            poolList.Insert(index, lastItem);
+
+            RefillQueue(poolList);
         }
+
+        // Accessors
+        public virtual List<Poolable> PoolList { get { return poolables.ToList(); } }
 
     }
 }

@@ -22,7 +22,7 @@ namespace BugFreeProductions.Tools
         #region Setup and Finalize placement
         public virtual void OnEnable()
         {
-            CollectVars();
+           CollectVars();
         }
 
         protected virtual void CollectVars()
@@ -59,23 +59,30 @@ namespace BugFreeProductions.Tools
         public override ObjectPlacement ObjectPlacement()
         {
             ObjectPlacement nObjPlace = new ObjectPlacement();
+            if (body == null)
+            {
+                nObjPlace = base.ObjectPlacement();
+            }
+            else
+            {
+                
 
-            nObjPlace.id = id;
+                nObjPlace.id = id;
 
-            Vector3 nObjPos = body.BodyPosition;
-            Debug.Log( gameObject.name + " my Saved transform = " + " " +  nObjPos);
+                Vector3 nObjPos = body.BodyPosition;
+                Debug.Log(gameObject.name + " my Saved transform = " + " " + nObjPos);
 
-            nObjPlace.tpX = nObjPos.x;
-            nObjPlace.tpY = nObjPos.y;
-            nObjPlace.tpZ = nObjPos.z;
+                nObjPlace.tpX = nObjPos.x;
+                nObjPlace.tpY = nObjPos.y;
+                nObjPlace.tpZ = nObjPos.z;
 
-            Vector3 nObjRot = body.BodyRotation;
-            Debug.Log(gameObject.name + " my Saved rotation = " + " " + nObjRot);
+                Vector3 nObjRot = body.BodyRotation;
+                Debug.Log(gameObject.name + " my Saved rotation = " + " " + nObjRot);
 
-            nObjPlace.trX = nObjRot.x;
-            nObjPlace.trY = nObjRot.y;
-            nObjPlace.trZ = nObjRot.z;
-
+                nObjPlace.trX = nObjRot.x;
+                nObjPlace.trY = nObjRot.y;
+                nObjPlace.trZ = nObjRot.z;
+            }
             return nObjPlace;
         }
 

@@ -9,6 +9,8 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+*[Aa]vatar2_SampleAssets/
+*[Aa]vatar2/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -71,3 +73,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Cosntantly changing unity jsons
+*/[Pp]ackages/manifest.json
+*/[Pp]ackages/packages-lock.json
+*/[Aa]ssets/XR/Settings/OpenXR Package Settings.asset
+*/[Aa]ssets/Resources/OculusRuntimeSettings.asset.meta
+*/[Aa]ssets/Resources/OculusRuntimeSettings.asset
