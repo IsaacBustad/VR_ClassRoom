@@ -21,7 +21,7 @@ namespace BugFreeProductions.Tools
         [SerializeField] private AbstractFactory_SCO abf_SCO = null;
 
         // pathing varriables
-        [SerializeField] private string roomConfigPath = "Default";
+        [SerializeField] private string roomConfigPath = "N/A";
         private string objectPlacementPath = "ObjectPlacements.json";
         private string roomPlacementPath = "RoomPointPlacements.json";
         private string roomNamePath = "RoomNames.json";
