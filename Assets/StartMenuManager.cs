@@ -1,3 +1,4 @@
+// Written by Aaron Williams
 using BugFreeProductions.Tools;
 using System.Collections;
 using System.Collections.Generic;

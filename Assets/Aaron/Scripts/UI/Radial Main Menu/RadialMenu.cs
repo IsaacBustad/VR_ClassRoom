@@ -9,18 +9,12 @@ using UnityEngine.Events;
 
 public class RadialMenu : MonoBehaviour
 {
-    public InputMapManager InputMapManager;
-
     [Header("Is In Virtual Reality")]
     [SerializeField] private bool isVR;
     [SerializeField] private Camera mainCamera;
 
     [Header("UI Options")]
     [SerializeField] private List<MenuOption> Menus;
-
-    [Header("VR Controller Settings")]
-    [SerializeField] private OVRInput.Controller ovrController = OVRInput.Controller.RTouch;
-    [SerializeField] private OVRInput.Button selectOptionButton = OVRInput.Button.PrimaryIndexTrigger;
 
     [Header("Keybaord + Mouse Settings")]
     [SerializeField] private KeyCode menuActivationKey;
@@ -51,11 +45,7 @@ public class RadialMenu : MonoBehaviour
     }
     private void Update()
     {
-        if(isVR)
-        {
-            HandleVRInput();
-        }
-        else
+        if (!isVR)
         {
             if (menuCanvas.gameObject.activeInHierarchy)
             {
@@ -69,24 +59,26 @@ public class RadialMenu : MonoBehaviour
         }
     }
 
-    private void HandleVRInput()
-    {
-        // TODO: Update to new input system
-        if (OVRInput.GetDown(selectOptionButton, ovrController))
-        {
-            EnableRadialMenu();
-        }
+    // Old method, left for now, so we can see what methods are assigned to what buttons in case the inspector breaks
+        //private void HandleVRInput()
+        //{
+        //
+        //    if (OVRInput.GetDown(selectOptionButton, ovrController))
+        //    {
+        //        EnableRadialMenu();
+        //    }
 
-        if (OVRInput.Get(selectOptionButton, ovrController))
-        {
-            GetSelectedRadialPart();
-        }
+        //    if (OVRInput.Get(selectOptionButton, ovrController))
+        //    {
+        //        GetSelectedRadialPart();
+        //    }
 
-        if (OVRInput.GetUp(selectOptionButton, ovrController))
-        {
-            SelectMenuOption();
-        }
-    }
+        //    if (OVRInput.GetUp(selectOptionButton, ovrController))
+        //    {
+        //        SelectMenuOption();
+        //    }
+        //}
+
     public void HandleToggleRadialMenuKBM()
     {
         if (!menuCanvas.gameObject.activeInHierarchy)
@@ -110,9 +102,18 @@ public class RadialMenu : MonoBehaviour
             menuCanvas.gameObject.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         }
 
-        // this is sort of hard coded for now until a UI/UX master comes in and reworks the UI in the future, as I am just a humble code monkey
+        // this Close option is sort of hard coded for now until a UI/UX master comes in and reworks the UI in the future, as I am just a humble code monkey
         MenuOption closeMenuOption = new MenuOption(CLOSE);
-        closeMenuOption.OnSelect.AddListener(() => InputMapManager.SwitchToDefaultActionMap());
+
+        if(isVR)
+        {
+            closeMenuOption.OnSelect.AddListener(() => VRInputMapManager.Instance.SwitchToDefaultMode());
+        }
+        else
+        {
+            closeMenuOption.OnSelect.AddListener(() => InputMapManager.Instance.SwitchToDefaultActionMap());
+        }
+
         Menus.Insert(1, closeMenuOption);
 
         for (int i = 0; i < Menus.Count; i++)
@@ -130,7 +131,7 @@ public class RadialMenu : MonoBehaviour
         }
     }
 
-    private void GetSelectedRadialPart()
+    public void GetSelectedRadialPart()
     {
         Vector3 selectionPoint;
 
@@ -178,24 +179,13 @@ public class RadialMenu : MonoBehaviour
         }
     }
 
-    private void SelectMenuOption()
+    public void SelectMenuOption()
     {
         radialMenuOption[selectedMenuOptionIndex].SetActive(true);
 
-        foreach (MenuOption menu in Menus)
-        {
-            if (menu.MenuGameObject != null)
-            {
-                menu.MenuGameObject.SetActive(false);
-            }
-        }
-
         if (selectedMenuOptionIndex < radialMenuOption.Count && Menus[selectedMenuOptionIndex].MenuName != CLOSE)
         {
-            if (Menus[selectedMenuOptionIndex].MenuGameObject != null)
-            {
-                Menus[selectedMenuOptionIndex].MenuGameObject.SetActive(true);
-            }
+
             DisableRadialMenu(false);
             Menus[selectedMenuOptionIndex].OnSelect?.Invoke();
         }
@@ -246,18 +236,15 @@ public class RadialMenu : MonoBehaviour
 public class MenuOption
 {
     [SerializeField] private string menuName;
-    [SerializeField] private GameObject menuGameObject;
     // This is cool, it's how the unity input maps let you assigns methods to be ran on an action.
     [SerializeField] private UnityEvent onSelect;
 
     public string MenuName { get => menuName; set => menuName = value; }
-    public GameObject MenuGameObject { get => menuGameObject; set => menuGameObject = value; }
     public UnityEngine.Events.UnityEvent OnSelect { get => onSelect; set => onSelect = value; }
 
-    public MenuOption(string name, GameObject menu = null)
+    public MenuOption(string name)
     {
         this.menuName = name;
-        this.menuGameObject = menu;
         this.onSelect = new();
     }
 }

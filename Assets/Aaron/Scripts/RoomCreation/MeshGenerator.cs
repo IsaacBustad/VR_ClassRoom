@@ -59,9 +59,9 @@ public static class MeshGenerator
        
     }
 
-    public static List<GameObject> GenerateWallMeshes(List<Vector3> floorPoints, Material wallMaterial, float wallHeight)
+    public static GameObject GenerateWallMeshes(List<Vector3> floorPoints, Material wallMaterial, float wallHeight)
     {
-        List<GameObject> wallObjects = new List<GameObject>();
+        GameObject wallGameObjectParent = new GameObject("Walls");
 
         int wallsCount = floorPoints.Count;
 
@@ -72,6 +72,8 @@ public static class MeshGenerator
             Vector3 floorPointB = floorPoints[next];
 
             GameObject wallObject = new GameObject("Wall");
+            wallObject.transform.SetParent(wallGameObjectParent.transform);
+
             wallObject.layer = LayerMask.NameToLayer("Walls");
 
             MeshFilter meshFilter = wallObject.AddComponent<MeshFilter>();
@@ -113,10 +115,8 @@ public static class MeshGenerator
 
             meshFilter.mesh = mesh;
             meshCollider.sharedMesh = mesh;
-
-            wallObjects.Add(wallObject);
         }
 
-        return wallObjects;
+        return wallGameObjectParent;
     }
 }

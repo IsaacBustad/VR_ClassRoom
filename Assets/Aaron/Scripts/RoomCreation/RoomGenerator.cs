@@ -24,10 +24,6 @@ public class RoomGenerator : MonoBehaviour
 
     [Header("Controller Settings")]
     [SerializeField] private Transform controllerTransform;
-    [SerializeField] private OVRInput.Controller ovrController = OVRInput.Controller.RTouch;
-    [SerializeField] private OVRInput.Button targetLineActivationButton = OVRInput.Button.PrimaryHandTrigger;
-    [SerializeField] private OVRInput.Button placeFloorPointButton = OVRInput.Button.PrimaryIndexTrigger;
-    [SerializeField] private OVRInput.Button generateRoomButton = OVRInput.Button.One;
 
     [Header("Target LineRenderer Settings")]
     [SerializeField] private float maxTargetLineDistanceNoPointSelected = 10f;
@@ -62,6 +58,7 @@ public class RoomGenerator : MonoBehaviour
 
     private GameObject floorGameObject;
     private List<GameObject> wallGameObjects = new();
+    private GameObject wallGameObject;
     private GameObject ceilingGameObject;
 
     private bool isTargetValid = false;
@@ -118,26 +115,13 @@ public class RoomGenerator : MonoBehaviour
         {
             DeactivateTargetLine();
         }
+        // Controls note in case they're unassigned in the editor:
+            // OVRInput.GetDown(PrimaryIndexTrigger) -> HandlePlaceSelectPoint();
+            // OVRInput.GetUp(PrimaryIndexTrigger) -> DeselectPoint();
+            // OVRInput.GetDown(PrimaryHandTrigger) -> HandleToggleTargetLineInputVR(true);
+            // OVRInput.GetUp(PrimaryHandTrigger) -> HandleToggleTargetLineInputVR(false);
+            // OVRInput.GetDown(OVRInput.Button.One) -> GenerateRoom();
 
-        // TODO: Update VR Input to use new VR input system once we have that all good to go
-        if (isVR)
-        {
-            if (OVRInput.GetDown(placeFloorPointButton, ovrController))
-            {
-                HandlePlaceSelectPoint();
-            }
-            if (OVRInput.GetUp(placeFloorPointButton, ovrController))
-            {
-                if (selectedPointIndex >= 0)
-                {
-                    DeselectPoint();
-                }
-            }
-            if (OVRInput.GetDown(generateRoomButton, ovrController))
-            {
-                GenerateRoom();
-            }
-        }
         if (selectedPointIndex >= 0)
         {
             UpdateSelectedPointPosition();
@@ -176,6 +160,18 @@ public class RoomGenerator : MonoBehaviour
         if (context.canceled)
         {
             GenerateRoom();
+        }
+    }
+
+    public void HandleToggleTargetLineInputVR(bool gripPressed)
+    {
+        if (gripPressed)
+        {
+            isTargetLineVisible = true;
+        }
+        else if (!gripPressed)
+        {
+            isTargetLineVisible = false;
         }
     }
 
@@ -255,7 +251,7 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
-    private void HandlePlaceSelectPoint()
+    public void HandlePlaceSelectPoint()
     {
         selectedPointIndex = TrySelectClosestPoint();
 
@@ -290,7 +286,7 @@ public class RoomGenerator : MonoBehaviour
         return closestIndex;
     }
 
-    private void DeselectPoint()
+    public void DeselectPoint()
     {
         selectedPointIndex = -1;
         selectedSphere = null;
@@ -304,7 +300,7 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateRoom()
+    public void GenerateRoom()
     {
         if (floorPointReferences.Count >= 3)
         {
@@ -327,9 +323,17 @@ public class RoomGenerator : MonoBehaviour
                 ceilingVertices.Add(new Vector3(point.transform.position.x, wallHeight, point.transform.position.z));
             }
 
+            GameObject roomGameObjectsParent = new GameObject("RoomMeshes");
+
             ceilingGameObject = MeshGenerator.GenerateFlatMesh(ceilingVertices, ceilingMaterial, CEILING_MESH_NAME);
+            ceilingGameObject.transform.SetParent(roomGameObjectsParent.transform);
+
             floorGameObject = MeshGenerator.GenerateFlatMesh(floorVertices, floorMaterial, FLOOR_MESH_NAME);
-            wallGameObjects = MeshGenerator.GenerateWallMeshes(floorVertices, wallMaterial, wallHeight);
+            floorGameObject.transform.SetParent(roomGameObjectsParent.transform);
+
+            wallGameObject = MeshGenerator.GenerateWallMeshes(floorVertices, wallMaterial, wallHeight);
+            wallGameObject.transform.SetParent(roomGameObjectsParent.transform);
+
         }
     }
 
