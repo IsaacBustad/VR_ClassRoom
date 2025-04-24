@@ -18,26 +18,36 @@ public class ReadRoomsInPath
     // Methods
     static public List<string> FindRoomNames()
     {
-        List<string> names = new List<string>();
-        names = Directory.GetFiles(Application.persistentDataPath).ToList();
+        // collect found rooms
+        List<string> roomsFound = new List<string>();
 
-        foreach (string name in names)
+        // paths in directory
+        List<string> roomPaths = new List<string>();
+        roomPaths = Directory.GetFiles(Application.persistentDataPath).ToList();
+
+        foreach (string name in roomPaths)
         {
-            Debug.Log("This Room is = " + name);
+            //Debug.Log("This Room is = " + name);
 
             string[] pathComps = name.Split('/');
             foreach(string comp in pathComps)
             {
-                Debug.Log("Comp = " + comp);
+                //Debug.Log("Comp = " + comp);
             }
 
             string finComp = pathComps[pathComps.Length - 1].Split('\\')[1];
             string dotRemoved = finComp.Split('.')[0];
             string extentionsRemoved = dotRemoved.Substring(0, dotRemoved.Length - JSONPlacementMannager.Instance.ObjectPlacementPath.Length + 5);
-            Debug.Log("Fin Com = " + extentionsRemoved);
+            //Debug.Log("Fin Com = " + extentionsRemoved);
+            roomsFound.Add(extentionsRemoved);
         }
 
-        return names;
+        foreach (string r in roomsFound)
+        {
+            //Debug.Log("room = " + r);
+        }
+        
+        return roomsFound;
     }
 
 

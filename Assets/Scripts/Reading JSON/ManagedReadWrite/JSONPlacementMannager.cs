@@ -116,9 +116,9 @@ namespace BugFreeProductions.Tools
 
         public GenericPool Pool { get { return pool; } set { pool = value; } }
 
-        //public string RoomConfigPath { get { return roomConfigPath; } set {  roomConfigPath = value; } }
+        public string RoomConfigPath { get { return roomConfigPath; } set {  roomConfigPath = value; } }
 
-        public JSONRoomList RoomList { get { return JsonUtility.FromJson<JSONRoomList>(CustomGatewayJSON.Instance.ReadJsonFile("/" + roomNamePath)); } }
+        public List<string> RoomList { get { return ReadRoomsInPath.FindRoomNames(); } }
 
         public string ObjectPlacementPath { get { return objectPlacementPath; }  }
 
