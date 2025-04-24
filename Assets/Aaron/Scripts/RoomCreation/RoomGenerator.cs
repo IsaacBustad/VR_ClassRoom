@@ -19,7 +19,6 @@ public class RoomGenerator : MonoBehaviour
     private const string FLOOR_POINT_ITEM_ID = "Room";
     public List<PlacableFactoryItem> floorPointReferences = new List<PlacableFactoryItem>();
     private FactoryItem factoryItem = null;
-    private PlacableFactoryItem placeableFactoryItem = null;
     [SerializeField] protected AbstractFactory_SCO itemFactory = null;
 
     [Header("Controller Settings")]

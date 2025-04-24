@@ -9,10 +9,11 @@ using UnityEngine.UI;
 
 public class CatalogController : MonoBehaviour
 {
-    // TODO update this to the final folder names inside of Resources
-    // TODO switch back to const string, not const rn to make testing easier and string visible/editable in editor
     [SerializeField]
     private bool isVR = false;
+    [SerializeField]
+    private Transform vrCameraRigTransform;
+
     [SerializeField]
     private string ITEM_FOLDER = "ClassItems";
     [SerializeField]
@@ -117,17 +118,17 @@ public class CatalogController : MonoBehaviour
         {
             if (isVR)
             {
-                //Vector3 spawnPosition = playerTransform.position + playerTransform.forward * 2.5f;
-                //Quaternion spawnRotation = Quaternion.LookRotation(playerTransform.forward);
-                //menu.gameObject.transform.position = new Vector3(spawnPosition.x, 0.5f, spawnPosition.z);
-                //menu.gameObject.transform.rotation = spawnRotation;
+                Vector3 spawnPosition = vrCameraRigTransform.position + vrCameraRigTransform.forward * 2.5f;
+                Quaternion spawnRotation = Quaternion.LookRotation(vrCameraRigTransform.forward);
+                gameObject.transform.position = new Vector3(spawnPosition.x, 0.5f, spawnPosition.z);
+                gameObject.transform.rotation = spawnRotation;
 
-                //rightHand.SetActive(false);
+                VRInputMapManager.Instance.SwitchToCatalogMenuMode();
             }
             
             if(!isVR)
             {
-                InputMapManager.Instance.SwitchToCatalogMenuActionMap();
+                VRInputMapManager.Instance.SwitchToCatalogMenuMode();
                 UIUtils.EnableUILock();
             }
             canvasTransform.gameObject.SetActive(true);
@@ -136,7 +137,7 @@ public class CatalogController : MonoBehaviour
         {
             if (isVR)
             {
-                //rightHand.SetActive(true);
+                VRInputMapManager.Instance.OnCloseMenuUI();
             }
 
             if (!isVR)

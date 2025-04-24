@@ -56,7 +56,7 @@ public class VRInputMapManager : MonoBehaviour
         }
     }
 
-    public void OnCloseRadialMenuUI()
+    public void OnCloseMenuUI()
     {
         switch (previousMode)
         {
@@ -76,33 +76,37 @@ public class VRInputMapManager : MonoBehaviour
 
     public void SwitchToDefaultMode()
     {
+        currentMode = Mode.Default;
         placableItemGun.SetActive(false);
-        placableItemGun.SetActive(false);
+        roomGenerator.SetActive(false);
     }
 
     public void SwitchToRoomCreationMode()
     {
+        currentMode = Mode.RoomCreation;
         placableItemGun.SetActive(false);
         roomGenerator.SetActive(true);
     }
 
     public void SwitchToItemPlacementMode()
     {
+        currentMode = Mode.ItemPlacement;
         placableItemGun.SetActive(true);
-        placableItemGun.SetActive(false);
+        roomGenerator.SetActive(false);
     }
 
     public void SwitchToCatalogMenuMode()
     {
+        previousMode = currentMode;
+        currentMode = Mode.Default;
         placableItemGun.SetActive(false);
-        placableItemGun.SetActive(false);
+        roomGenerator.SetActive(false);
     }
 
     public enum Mode
     {
         Default,
         RoomCreation,
-        ItemPlacement,
-        CatalogMenu
+        ItemPlacement
     }
 }

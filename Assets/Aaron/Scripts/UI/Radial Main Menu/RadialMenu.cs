@@ -97,7 +97,7 @@ public class RadialMenu : MonoBehaviour
         {
             menuCanvas.gameObject.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
         }
-        else
+        else if (!isVR)
         {
             menuCanvas.gameObject.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         }
@@ -109,7 +109,7 @@ public class RadialMenu : MonoBehaviour
         {
             closeMenuOption.OnSelect.AddListener(() => VRInputMapManager.Instance.SwitchToDefaultMode());
         }
-        else
+        else if(!isVR)
         {
             closeMenuOption.OnSelect.AddListener(() => InputMapManager.Instance.SwitchToDefaultActionMap());
         }
@@ -202,6 +202,10 @@ public class RadialMenu : MonoBehaviour
             UIUtils.EnableUILock();
             InputMapManager.Instance.OnOpenRadialMenuUI();
         }
+        else if(isVR)
+        {
+            VRInputMapManager.Instance.OnOpenRadialMenuUI();
+        }
 
         menuCanvas.gameObject.SetActive(true);
 
@@ -218,6 +222,10 @@ public class RadialMenu : MonoBehaviour
         {
             UIUtils.DisableUILock();
             InputMapManager.Instance.OnCloseRadialMenuUI();
+        }
+        else if (isVR)
+        {
+            VRInputMapManager.Instance.OnCloseMenuUI();
         }
         menuCanvas.gameObject.SetActive(false);
     }
