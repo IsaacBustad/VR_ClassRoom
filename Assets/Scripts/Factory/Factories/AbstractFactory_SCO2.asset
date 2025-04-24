@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b37266916adeed4448ab2f570d58453b, type: 3}
-  m_Name: AbstractFactory_SCO
+  m_Name: AbstractFactory_SCO2
   m_EditorClassIdentifier: 
   genericFactory_SCOs:
-  - {fileID: 11400000, guid: bab67c8f1ccf174438395be5dfd41807, type: 2}
   - {fileID: 11400000, guid: 5f162102507db8e43858c66e64c64bd3, type: 2}
   - {fileID: 11400000, guid: da0fcbc68d7b4ab4e928248bf24982b8, type: 2}
   - {fileID: 11400000, guid: e86dab5bf51db574fa1b97dcaef2f4aa, type: 2}
