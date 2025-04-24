@@ -89,7 +89,7 @@ public class RoomGenerator : MonoBehaviour
         edgeLineRenderer = InitializeLineRenderer(edgeLineWidth, edgeLineColor, true, EDGE_LINE_RENDERER_NAME);
         movingPointLayerMask = ~(LayerMask.GetMask("Floor", "Walls"));
 
-        Invoke("LoadIntoRoom", 1f);
+        //LoadIntoRoom();
     }
 
     private void OnEnable()
@@ -102,6 +102,7 @@ public class RoomGenerator : MonoBehaviour
         {
             targetLineRenderer = InitializeLineRenderer(targetLineWidth, invalidTargetColor, false, null, targetLineRenderer);
         }
+        LoadIntoRoom();
     }
 
     private void Update()
@@ -459,13 +460,15 @@ public class RoomGenerator : MonoBehaviour
     private void CollectRoomPoints()
     {
         List<Poolable> poolables = JSONPlacementMannager.Instance.Pool.PoolList;
-        if(JSONPlacementMannager.Instance.Pool.PoolList == null)
+
+        Debug.LogError("Pre pool null check");
+        if (JSONPlacementMannager.Instance.Pool.PoolList == null)
         {
             Debug.LogError("Poolables list is null");
         }
         else
         {
-            Debug.Log("Poolables list count: " + poolables.Count);
+            Debug.LogError("Poolables list count: " + poolables.Count);
         }
 
             foreach (Poolable poolable in poolables)
@@ -481,10 +484,10 @@ public class RoomGenerator : MonoBehaviour
                     }
                 }
             }
-        Debug.Log("Total floor points collected: " + floorPointReferences.Count);
+        Debug.LogError("Total floor points collected: " + floorPointReferences.Count);
     }
 
-    private void LoadIntoRoom()
+    public void LoadIntoRoom()
     {
         CollectRoomPoints();
         GenerateRoom();

@@ -1302,7 +1302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4158969046781334587, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
       propertyPath: roomID
-      value: Chair
+      value: Room
       objectReference: {fileID: 0}
     - target: {fileID: 4158969046781334587, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
       propertyPath: m_Enabled
@@ -4427,10 +4427,6 @@ MonoBehaviour:
   floorPointReferences: []
   itemFactory: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
   controllerTransform: {fileID: 1841852560}
-  ovrController: 2
-  targetLineActivationButton: 16384
-  placeFloorPointButton: 8192
-  generateRoomButton: 1
   maxTargetLineDistanceNoPointSelected: 10
   maxTargetLineDistancePointSelected: 100
   targetLineWidth: 0.01

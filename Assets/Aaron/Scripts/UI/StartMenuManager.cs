@@ -2,6 +2,7 @@
 using BugFreeProductions.Tools;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,7 +50,7 @@ public class StartMenuManager : MonoBehaviour
             GameObject buttonGameObject = Instantiate(buttonPrefab, roomSelectionContent);
             buttonGameObject.name = "Room Option: [" + roomName + "] Button";
 
-            Text buttonTextComponent = buttonGameObject.GetComponentInChildren<Text>();
+            TMP_Text buttonTextComponent = buttonGameObject.GetComponentInChildren<TMP_Text>();
             if (buttonTextComponent != null)
             {
                 buttonTextComponent.text = roomName;
@@ -67,9 +68,9 @@ public class StartMenuManager : MonoBehaviour
     {
         if (JSONPlacementMannager.Instance != null && JSONPlacementMannager.Instance.RoomList != null)
         {
-            string[] roomNames = JSONPlacementMannager.Instance.RoomList.roomsLST;
+            List<string> roomNames = JSONPlacementMannager.Instance.RoomList;
 
-            if (roomNames != null && roomNames.Length > 0)
+            if (roomNames != null && roomNames.Count > 0)
             {
                 foreach (string roomName in roomNames)
                 {
