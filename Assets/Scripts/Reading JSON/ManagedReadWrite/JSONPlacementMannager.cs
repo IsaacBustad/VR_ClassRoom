@@ -38,8 +38,6 @@ namespace BugFreeProductions.Tools
         private string roomID = "Room";
         [SerializeField] private GenericPool pool = new GenericPool();
 
-        //
-
         // Methods
         private void OnEnable()
         {
@@ -54,7 +52,7 @@ namespace BugFreeProductions.Tools
             else
             {
                 instance = this;
-                //ReadRoomConfif();
+
                 ReadRoomsInPath.FindRoomNames();
             }
         }
@@ -76,14 +74,6 @@ namespace BugFreeProductions.Tools
             if (roomConfigPath != notRoom)
             {
                 jsonReader.SpawnObjects("/" + roomConfigPath + objectPlacementPath);
-            }
-            if(FindObjectOfType<RoomGenerator>() != null)
-            {
-                Debug.LogError("ROOM GENERATOR FOUND YEEHAW");
-            }
-            foreach(Poolable poolable in pool.PoolList)
-            {
-                Debug.LogError("poolable found");
             }
             FindObjectOfType<RoomGenerator>().LoadIntoRoom();
         }

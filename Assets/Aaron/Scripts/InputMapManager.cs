@@ -91,6 +91,7 @@ public class InputMapManager : MonoBehaviour
 
     public void SwitchToDefaultActionMap()
     {
+        previousActionMap = DEFAULT_INPUT_MAP;
         playerInput.SwitchCurrentActionMap(DEFAULT_INPUT_MAP);
         placableItemPlacer.enabled = false;
         placableItemRemover.enabled = false;
@@ -99,6 +100,7 @@ public class InputMapManager : MonoBehaviour
 
     public void SwitchToRoomCreationActionMap()
     {
+        previousActionMap = ROOM_CREATION_INPUT_MAP;
         playerInput.SwitchCurrentActionMap(ROOM_CREATION_INPUT_MAP);
         placableItemPlacer.enabled = false;
         placableItemRemover.enabled = false;
@@ -107,6 +109,7 @@ public class InputMapManager : MonoBehaviour
 
     public void SwitchToItemPlacementActionMap()
     {
+        previousActionMap = ITEM_PLACEMENT_INPUT_MAP;
         playerInput.SwitchCurrentActionMap(ITEM_PLACEMENT_INPUT_MAP);
         placableItemPlacer.enabled = true;
         placableItemRemover.enabled = true;
@@ -115,6 +118,7 @@ public class InputMapManager : MonoBehaviour
 
     public void SwitchToCatalogMenuActionMap()
     {
+        previousActionMap = CATALOG_MENU_INPUT_MAP;
         playerInput.SwitchCurrentActionMap(CATALOG_MENU_INPUT_MAP);
         placableItemPlacer.enabled = false;
         placableItemRemover.enabled = false;

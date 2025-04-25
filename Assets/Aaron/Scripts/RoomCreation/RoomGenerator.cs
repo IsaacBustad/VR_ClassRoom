@@ -55,8 +55,8 @@ public class RoomGenerator : MonoBehaviour
     public const string FLOOR_MESH_NAME = "Floor Mesh";
     public const string CEILING_MESH_NAME = "Ceiling Mesh";
 
+    private GameObject roomGameObjectsParent;
     private GameObject floorGameObject;
-    private List<GameObject> wallGameObjects = new();
     private GameObject wallGameObject;
     private GameObject ceilingGameObject;
 
@@ -293,7 +293,7 @@ public class RoomGenerator : MonoBehaviour
 
     private void RegenerateRoom()
     {
-        if (floorGameObject != null && wallGameObjects != null && floorPointReferences.Count >= 3)
+        if (floorGameObject != null && wallGameObject != null && ceilingGameObject != null && floorPointReferences.Count >= 3)
         {
             GenerateRoom();
         }
@@ -306,13 +306,9 @@ public class RoomGenerator : MonoBehaviour
             if (floorGameObject != null) { Destroy(floorGameObject); }
             if (ceilingGameObject != null) { Destroy(ceilingGameObject); }
 
-            if (wallGameObjects != null)
-            {
-                foreach (GameObject wall in wallGameObjects)
-                {
-                    if (wall != null) { Destroy(wall); }
-                }
-            }
+            if (wallGameObject != null) { Destroy(wallGameObject); }
+
+            if (roomGameObjectsParent != null) { Destroy(roomGameObjectsParent); }
 
             List<Vector3> floorVertices = new();
             List<Vector3> ceilingVertices = new();
@@ -322,7 +318,7 @@ public class RoomGenerator : MonoBehaviour
                 ceilingVertices.Add(new Vector3(point.transform.position.x, wallHeight, point.transform.position.z));
             }
 
-            GameObject roomGameObjectsParent = new GameObject("RoomMeshes");
+            roomGameObjectsParent = new GameObject("RoomMeshes");
 
             ceilingGameObject = MeshGenerator.GenerateFlatMesh(ceilingVertices, ceilingMaterial, CEILING_MESH_NAME);
             ceilingGameObject.transform.SetParent(roomGameObjectsParent.transform);
@@ -458,16 +454,13 @@ public class RoomGenerator : MonoBehaviour
 
     private void CollectRoomPoints()
     {
+        floorPointReferences.Clear();
         foreach (Poolable poolable in JSONPlacementMannager.Instance.Pool.PoolList)
         {
-            FactoryItem factoryItem = poolable.GetComponent<FactoryItem>();
-            if (factoryItem != null)
+            PlacableFactoryItem floorPoint = poolable.GetComponent<PlacableFactoryItem>();
+            if (floorPoint != null)
             {
-                PlacableFactoryItem floorPoint = factoryItem.GetComponent<PlacableFactoryItem>();
-                if (floorPoint != null)
-                {
-                    floorPointReferences.Add(floorPoint);
-                }
+                floorPointReferences.Add(floorPoint);
             }
         }
     }

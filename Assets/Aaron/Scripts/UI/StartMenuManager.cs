@@ -79,12 +79,12 @@ public class StartMenuManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Rooms not found, inner else");
+                Debug.LogError("Rooms not found.");
             }
         }
         else
         {
-            Debug.LogWarning("RoomList is null");
+            Debug.LogError("RoomList is null");
         }
     }
 }

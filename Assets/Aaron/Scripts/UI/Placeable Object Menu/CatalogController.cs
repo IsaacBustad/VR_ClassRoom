@@ -55,7 +55,6 @@ public class CatalogController : MonoBehaviour
     {
         categoryToggles.Clear();
 
-        // TODO change this to the final scriptableObject type when ready
         CategorySO[] categories = Resources.LoadAll<CategorySO>(CATEGORIES_FOLDER);
 
         foreach (CategorySO category in categories)
@@ -128,7 +127,7 @@ public class CatalogController : MonoBehaviour
             
             if(!isVR)
             {
-                VRInputMapManager.Instance.SwitchToCatalogMenuMode();
+                InputMapManager.Instance.SwitchToCatalogMenuActionMap();
                 UIUtils.EnableUILock();
             }
             canvasTransform.gameObject.SetActive(true);

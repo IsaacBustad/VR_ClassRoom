@@ -73,6 +73,7 @@ public static class MeshGenerator
 
             GameObject wallObject = new GameObject("Wall");
             wallObject.layer = LayerMask.NameToLayer("Walls");
+            wallObject.transform.SetParent(wallGameObjectParent.transform);
 
             MeshFilter meshFilter = wallObject.AddComponent<MeshFilter>();
             MeshCollider meshCollider = wallObject.AddComponent<MeshCollider>();
