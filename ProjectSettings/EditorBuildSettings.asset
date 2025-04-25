@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Aaron/AaronTest/Main First Person/FPSMenu.unity
+    guid: e68592250970a3646ac29f085045fa18
+  - enabled: 1
+    path: Assets/Aaron/AaronTest/Main First Person/FPS.unity
+    guid: b7567e607bc8b214da57d86948e2d34d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8951ebbe310276b4593fb42a0fbccd67, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2fcaf4f49971eb34da75edc5e5502318, type: 2}

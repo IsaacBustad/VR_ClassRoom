@@ -96,6 +96,7 @@ public class InputMapManager : MonoBehaviour
         placableItemPlacer.enabled = false;
         placableItemRemover.enabled = false;
         roomGenerator.enabled = false;
+        roomGenerator.HideFloorPoints();
     }
 
     public void SwitchToRoomCreationActionMap()
@@ -105,6 +106,7 @@ public class InputMapManager : MonoBehaviour
         placableItemPlacer.enabled = false;
         placableItemRemover.enabled = false;
         roomGenerator.enabled = true;
+        roomGenerator.ShowFloorPoints();
     }
 
     public void SwitchToItemPlacementActionMap()
@@ -114,6 +116,7 @@ public class InputMapManager : MonoBehaviour
         placableItemPlacer.enabled = true;
         placableItemRemover.enabled = true;
         roomGenerator.enabled = false;
+        roomGenerator.HideFloorPoints();
     }
 
     public void SwitchToCatalogMenuActionMap()
@@ -123,5 +126,6 @@ public class InputMapManager : MonoBehaviour
         placableItemPlacer.enabled = false;
         placableItemRemover.enabled = false;
         roomGenerator.enabled = false;
+        roomGenerator.HideFloorPoints();
     }
 }

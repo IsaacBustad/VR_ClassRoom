@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartMenuManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField] GameObject startButtonPanel;
     [SerializeField] GameObject createOrSelectRoomPanel;
     [SerializeField] GameObject roomSelectionPanel;
+    [SerializeField] GameObject createRoomPanel;
 
     [SerializeField] Transform roomSelectionContent;
     [SerializeField] GameObject buttonPrefab;
@@ -26,21 +28,28 @@ public class StartMenuManager : MonoBehaviour
         createOrSelectRoomPanel.SetActive(true);
     }
 
-    public void CreateRoomButtonPressed()
-    {
-        // switch into main scene with an empty room config
-    }
-
     public void SelectRoomButtonPressed()
     {
         createOrSelectRoomPanel.SetActive(false);
         roomSelectionPanel.SetActive(true);
     }
 
+    public void CreateRoomButtonPressed()
+    {
+        createOrSelectRoomPanel.SetActive(false);
+        createRoomPanel.SetActive(true);
+    }
+
+    public void CreateRoomWithName(string inputRoomName)
+    {
+        JSONPlacementMannager.Instance.RoomConfigPath = inputRoomName;
+        SceneManager.LoadScene(1);
+    }
+
     public void SelectAndLoadIntoRoom(string room)
     {
-        // StaticSceneManager.Instance.LoadScene
-        // switch into main scene with the selected room config
+        JSONPlacementMannager.Instance.RoomConfigPath = room;
+        SceneManager.LoadScene(1);
     }
 
     private void CreateRoomButton(string roomName)

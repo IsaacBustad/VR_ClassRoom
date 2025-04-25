@@ -183,7 +183,7 @@ public class RadialMenu : MonoBehaviour
     {
         radialMenuOption[selectedMenuOptionIndex].SetActive(true);
 
-        if (selectedMenuOptionIndex < radialMenuOption.Count && Menus[selectedMenuOptionIndex].MenuName != CLOSE)
+        if (selectedMenuOptionIndex < radialMenuOption.Count)
         {
             Menus[selectedMenuOptionIndex].OnSelect?.Invoke();
             DisableRadialMenu(false);

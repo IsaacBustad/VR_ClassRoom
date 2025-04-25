@@ -268,6 +268,21 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
+    public void HideFloorPoints()
+    {
+        foreach (PlacableFactoryItem floorPoint in floorPointReferences)
+        {
+            floorPoint.gameObject.SetActive(false);
+        }
+    }
+    public void ShowFloorPoints()
+    {
+        foreach (PlacableFactoryItem floorPoint in floorPointReferences)
+        {
+            floorPoint.gameObject.SetActive(true);
+        }
+    }
+
     private int TrySelectClosestPoint()
     {
         int closestIndex = -1;
