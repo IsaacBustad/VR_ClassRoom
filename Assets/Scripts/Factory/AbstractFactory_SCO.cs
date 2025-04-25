@@ -86,16 +86,13 @@ namespace BugFreeProductions.Tools
                 {
                     gf.CreateItem(ref aFI, aPlacement);
                 }
-                Debug.Log("Pre pool if check");
 
-                if (aFI != null && aFI.ID.Equals( JSONPlacementMannager.Instance.RoomID) == true)
+                /*if (aFI != null && aFI.ID == JSONPlacementMannager.Instance.RoomID)
                 {
                     JSONPlacementMannager.Instance.Pool = gf.Pool;
-                    Debug.LogError("POOL COUNT: " + JSONPlacementMannager.Instance.Pool.PoolList.Count);
-                }
+                }*/
 
             }
-
         }
 
         public virtual void CreateItem(ObjectPlacement aPlacement, int aLayer)

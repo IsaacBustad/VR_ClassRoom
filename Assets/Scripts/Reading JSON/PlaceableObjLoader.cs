@@ -18,7 +18,7 @@ namespace BugFreeProductions.Tools
         // Methods        
         protected virtual void OnEnable()
         {
-            SpawnObjects();
+            //SpawnObjects();
         }
 
         // Spawns the list of objects from a list

@@ -77,6 +77,10 @@ namespace BugFreeProductions.Tools
             {
                 fi.UseFactoryItem(aPlacement, pool);
                 aFI = fi;
+                if (fi.ID == JSONPlacementMannager.Instance.RoomID)
+                {
+                    JSONPlacementMannager.Instance.Pool = pool;
+                }
             }
         }
 

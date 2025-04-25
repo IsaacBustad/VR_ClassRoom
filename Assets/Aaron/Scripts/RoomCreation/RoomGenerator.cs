@@ -102,7 +102,6 @@ public class RoomGenerator : MonoBehaviour
         {
             targetLineRenderer = InitializeLineRenderer(targetLineWidth, invalidTargetColor, false, null, targetLineRenderer);
         }
-        LoadIntoRoom();
     }
 
     private void Update()
@@ -459,32 +458,18 @@ public class RoomGenerator : MonoBehaviour
 
     private void CollectRoomPoints()
     {
-        List<Poolable> poolables = JSONPlacementMannager.Instance.Pool.PoolList;
-
-        Debug.LogError("Pre pool null check");
-        if (JSONPlacementMannager.Instance.Pool.PoolList == null)
+        foreach (Poolable poolable in JSONPlacementMannager.Instance.Pool.PoolList)
         {
-            Debug.LogError("Poolables list is null");
-        }
-        else
-        {
-            Debug.LogError("Poolables list count: " + poolables.Count);
-        }
-
-            foreach (Poolable poolable in poolables)
+            FactoryItem factoryItem = poolable.GetComponent<FactoryItem>();
+            if (factoryItem != null)
             {
-                FactoryItem factoryItem = poolable.GetComponent<FactoryItem>();
-                if (factoryItem != null)
+                PlacableFactoryItem floorPoint = factoryItem.GetComponent<PlacableFactoryItem>();
+                if (floorPoint != null)
                 {
-                    PlacableFactoryItem floorPoint = factoryItem.GetComponent<PlacableFactoryItem>();
-                    if (floorPoint != null)
-                    {
-                        floorPointReferences.Add(floorPoint);
-                        Debug.Log("Found floor point: " + floorPoint.gameObject.name);
-                    }
+                    floorPointReferences.Add(floorPoint);
                 }
             }
-        Debug.LogError("Total floor points collected: " + floorPointReferences.Count);
+        }
     }
 
     public void LoadIntoRoom()
