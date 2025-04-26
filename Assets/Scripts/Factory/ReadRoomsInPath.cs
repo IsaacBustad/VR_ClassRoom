@@ -27,19 +27,20 @@ public class ReadRoomsInPath
 
         foreach (string name in roomPaths)
         {
-            //Debug.Log("This Room is = " + name);
+            string fileName = Path.GetFileName(name);
 
-            string[] pathComps = name.Split('/');
-            foreach(string comp in pathComps)
+            if (fileName.EndsWith(JSONPlacementMannager.Instance.ObjectPlacementPath))
             {
-                //Debug.Log("Comp = " + comp);
-            }
+                string roomName = fileName.Substring(0, fileName.Length - JSONPlacementMannager.Instance.ObjectPlacementPath.Length);
 
-            string finComp = pathComps[pathComps.Length - 1].Split('\\')[1];
-            string dotRemoved = finComp.Split('.')[0];
-            string extentionsRemoved = dotRemoved.Substring(0, dotRemoved.Length - JSONPlacementMannager.Instance.ObjectPlacementPath.Length + 5);
-            //Debug.Log("Fin Com = " + extentionsRemoved);
-            roomsFound.Add(extentionsRemoved);
+                roomName = roomName.Trim();
+
+                if (!string.IsNullOrEmpty(roomName))
+                {
+                    roomsFound.Add(roomName);
+                    //Debug.Log($"Found room: '{roomName}'");
+                }
+            }
         }
 
         foreach (string r in roomsFound)

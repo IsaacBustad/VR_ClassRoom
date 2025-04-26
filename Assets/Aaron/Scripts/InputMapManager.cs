@@ -1,8 +1,5 @@
 // Written by Aaron Williams
 using BugFreeProductions.Tools;
-using Oculus.Interaction.Editor.Generated;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

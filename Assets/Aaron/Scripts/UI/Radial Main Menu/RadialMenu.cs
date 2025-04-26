@@ -208,13 +208,15 @@ public class RadialMenu : MonoBehaviour
 
         menuCanvas.gameObject.SetActive(true);
 
-        Vector3 eulerAngles = handTransform.rotation.eulerAngles;
-        eulerAngles.x = 0;
-        eulerAngles.z = 0;
+        if (isVR)
+        {
+            Vector3 eulerAngles = handTransform.rotation.eulerAngles;
+            eulerAngles.x = 0;
+            eulerAngles.z = 0;
+            Vector3 spawnPosition = handTransform.position + (handTransform.forward * GetDistanceOffset());
 
-        Vector3 spawnPosition = handTransform.position + (handTransform.forward * GetDistanceOffset());
-
-        menuCanvas.SetPositionAndRotation(spawnPosition, Quaternion.Euler(eulerAngles));
+            menuCanvas.SetPositionAndRotation(spawnPosition, Quaternion.Euler(eulerAngles));
+        }
     }
 
     public void DisableRadialMenu(bool selectedNewMenu)

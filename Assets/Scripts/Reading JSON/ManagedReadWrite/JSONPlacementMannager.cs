@@ -76,7 +76,7 @@ namespace BugFreeProductions.Tools
                 jsonReader.SpawnObjects("/" + roomConfigPath + objectPlacementPath);
                 FindObjectOfType<RoomGenerator>().LoadIntoRoom();
                 FindObjectOfType<RoomGenerator>().HideFloorPoints();
-                FindObjectOfType <VRInputMapManager>().SwitchToDefaultMode(false);
+                //FindObjectOfType <VRInputMapManager>().SwitchToDefaultMode(false);
             }
             
         }

@@ -9,13 +9,14 @@ using UnityEngine.UI;
 
 public class StartMenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject startButtonPanel;
-    [SerializeField] GameObject createOrSelectRoomPanel;
-    [SerializeField] GameObject roomSelectionPanel;
-    [SerializeField] GameObject createRoomPanel;
+    [SerializeField] private GameObject startButtonPanel;
+    [SerializeField] private GameObject createOrSelectRoomPanel;
+    [SerializeField] private GameObject roomSelectionPanel;
+    [SerializeField] private GameObject createRoomPanel;
 
-    [SerializeField] Transform roomSelectionContent;
-    [SerializeField] GameObject buttonPrefab;
+    [SerializeField] private Transform roomSelectionContent;
+    [SerializeField] private GameObject buttonPrefab;
+    [SerializeField] private TMP_InputField textInput;
 
     private void Start()
     {
@@ -40,9 +41,10 @@ public class StartMenuManager : MonoBehaviour
         createRoomPanel.SetActive(true);
     }
 
-    public void CreateRoomWithName(string inputRoomName)
+    public void CreateRoomWithName()
     {
-        JSONPlacementMannager.Instance.RoomConfigPath = inputRoomName;
+        JSONPlacementMannager.Instance.RoomConfigPath = textInput.text;
+        Debug.Log("Creating room with name: " + textInput.text);
         SceneManager.LoadScene(1);
     }
 
@@ -88,12 +90,12 @@ public class StartMenuManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Rooms not found.");
+                Debug.Log("Rooms not found.");
             }
         }
         else
         {
-            Debug.LogError("RoomList is null");
+            Debug.Log("RoomList is null");
         }
     }
 }

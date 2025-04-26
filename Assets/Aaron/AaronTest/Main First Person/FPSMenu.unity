@@ -1282,8 +1282,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1599009008}
         m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
-        m_MethodName: CreateRoomWithName
-        m_Mode: 5
+        m_MethodName: SelectAndLoadIntoRoom
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1300,7 +1300,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnDeselect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1599009008}
+        m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
+        m_MethodName: CreateRoomWithName
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -1437,28 +1449,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1198026422522100694, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 720824018}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
---- !u!1 &720824017 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1198026422522100694, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
-  m_PrefabInstance: {fileID: 720824016}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &720824018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720824017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f9a8e2a54ee0c40ba4129887c02d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &743387932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,6 +2665,7 @@ MonoBehaviour:
   createRoomPanel: {fileID: 275494846}
   roomSelectionContent: {fileID: 1410867035}
   buttonPrefab: {fileID: 1091846214708582489, guid: 5afc0551edb0f574ea3723aa58181e2d, type: 3}
+  textInput: {fileID: 711320889}
 --- !u!1 &1719592548
 GameObject:
   m_ObjectHideFlags: 0
