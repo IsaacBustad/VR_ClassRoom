@@ -107,7 +107,7 @@ public class RadialMenu : MonoBehaviour
 
         if(isVR)
         {
-            closeMenuOption.OnSelect.AddListener(() => VRInputMapManager.Instance.SwitchToDefaultMode());
+            closeMenuOption.OnSelect.AddListener(() => VRInputMapManager.Instance.SwitchToDefaultMode(false));
         }
         else if(!isVR)
         {
@@ -208,11 +208,14 @@ public class RadialMenu : MonoBehaviour
 
         menuCanvas.gameObject.SetActive(true);
 
-        Vector3 eulerAngles = GetTransform().rotation.eulerAngles;
+        Transform transformAtMenuSpawn = transform;
+        Vector3 eulerAngles = transform.rotation.eulerAngles;
         eulerAngles.x = 0;
         eulerAngles.z = 0;
-        
-        menuCanvas.SetPositionAndRotation(GetTransform().position + (Vector3.forward * GetDistanceOffset()), Quaternion.Euler(eulerAngles));
+
+        Vector3 spawnPosition = transform.position + (transform.forward * GetDistanceOffset());
+
+        menuCanvas.SetPositionAndRotation(spawnPosition, Quaternion.Euler(eulerAngles));
     }
 
     public void DisableRadialMenu(bool selectedNewMenu)

@@ -52,7 +52,7 @@ namespace BugFreeProductions.Tools
             else
             {
                 instance = this;
-
+                DontDestroyOnLoad(this.gameObject);
                 ReadRoomsInPath.FindRoomNames();
             }
         }
@@ -74,8 +74,11 @@ namespace BugFreeProductions.Tools
             if (roomConfigPath != notRoom)
             {
                 jsonReader.SpawnObjects("/" + roomConfigPath + objectPlacementPath);
+                FindObjectOfType<RoomGenerator>().LoadIntoRoom();
+                FindObjectOfType<RoomGenerator>().HideFloorPoints();
+                FindObjectOfType <VRInputMapManager>().SwitchToDefaultMode(false);
             }
-            FindObjectOfType<RoomGenerator>().LoadIntoRoom();
+            
         }
 
         public void WriteRoomConfig()

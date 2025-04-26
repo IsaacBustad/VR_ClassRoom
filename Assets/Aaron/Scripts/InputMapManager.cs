@@ -42,6 +42,10 @@ public class InputMapManager : MonoBehaviour
             instance = this;
             SwitchToDefaultActionMap();
         }
+        if(roomGenerator == null)
+        {
+            roomGenerator = FindObjectOfType<RoomGenerator>();
+        }
     }
 
     public static InputMapManager Instance

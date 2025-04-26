@@ -29,7 +29,6 @@ public class VRInputMapManager : MonoBehaviour
         else
         {
             instance = this;
-            currentMode = Mode.Default;
         }
     }
 
@@ -47,12 +46,9 @@ public class VRInputMapManager : MonoBehaviour
 
     public void OnOpenRadialMenuUI()
     {
-        previousMode = currentMode;
-        currentMode = Mode.Default;
-
         if (previousMode != Mode.Default)
         {
-            SwitchToDefaultMode();
+            SwitchToDefaultMode(true);
         }
     }
 
@@ -67,46 +63,51 @@ public class VRInputMapManager : MonoBehaviour
                 SwitchToItemPlacementMode();
                 break;
             default:
-                SwitchToDefaultMode();
+                SwitchToDefaultMode(false);
                 break;
         }
 
-        previousMode = Mode.Default;
+        previousMode = Mode.NULL;
     }
 
-    public void SwitchToDefaultMode()
+    public void SwitchToDefaultMode(bool isForRadialMenu)
     {
-        currentMode = Mode.Default;
+        if (!isForRadialMenu) { previousMode = Mode.Default; }
         placableItemGun.SetActive(false);
         roomGenerator.SetActive(false);
+        roomGenerator.GetComponent<RoomGenerator>().HideFloorPoints();
     }
 
     public void SwitchToRoomCreationMode()
     {
-        currentMode = Mode.RoomCreation;
+        previousMode = Mode.RoomCreation;
         placableItemGun.SetActive(false);
         roomGenerator.SetActive(true);
+        roomGenerator.GetComponent<RoomGenerator>().ShowFloorPoints();
     }
 
     public void SwitchToItemPlacementMode()
     {
-        currentMode = Mode.ItemPlacement;
+        previousMode = Mode.ItemPlacement;
         placableItemGun.SetActive(true);
         roomGenerator.SetActive(false);
+        roomGenerator.GetComponent<RoomGenerator>().HideFloorPoints();
     }
 
     public void SwitchToCatalogMenuMode()
     {
-        previousMode = currentMode;
-        currentMode = Mode.Default;
-        placableItemGun.SetActive(false);
-        roomGenerator.SetActive(false);
+        if (previousMode != Mode.Default)
+        {
+            SwitchToDefaultMode(true);
+        }
     }
 
     public enum Mode
     {
         Default,
         RoomCreation,
-        ItemPlacement
+        ItemPlacement,
+        CatalogMenu,
+        NULL
     }
 }

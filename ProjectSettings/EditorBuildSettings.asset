@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Aaron/AaronTest/Main First Person/FPSMenu.unity
-    guid: e68592250970a3646ac29f085045fa18
+    path: Assets/Aaron/AaronTest/Main First Person/NewVRMenu.unity
+    guid: 2987bff81ab7d5649b729070cd8e1a53
   - enabled: 1
-    path: Assets/Aaron/AaronTest/Main First Person/FPS.unity
-    guid: b7567e607bc8b214da57d86948e2d34d
+    path: Assets/Aaron/AaronTest/Main First Person/VR.unity
+    guid: 6474687b4764176498d85f08b088c542
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8951ebbe310276b4593fb42a0fbccd67, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2fcaf4f49971eb34da75edc5e5502318, type: 2}

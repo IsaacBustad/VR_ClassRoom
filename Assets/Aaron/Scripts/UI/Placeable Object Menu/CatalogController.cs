@@ -32,6 +32,9 @@ public class CatalogController : MonoBehaviour
     [SerializeField]
     private PlacableItemPlacer itemPlacer;
 
+    [SerializeField]
+    private VR_PlacableItemPlacerGun itemPlacerGun;
+
     private const string toggleSuffix = " toggle";
 
     [SerializeField]
@@ -108,7 +111,14 @@ public class CatalogController : MonoBehaviour
 
     private void SelectObjectToPlace(GameObject catalogButton)
     {
-        itemPlacer.ItemID = catalogButton.GetComponent<CatalogItemData>().Id;
+        if(isVR)
+        {
+            itemPlacerGun.ItemID = catalogButton.GetComponent<CatalogItemData>().Id;
+        }
+        else
+        {
+            itemPlacer.ItemID = catalogButton.GetComponent<CatalogItemData>().Id;
+        }
     }
 
     public void ToggleMenu()

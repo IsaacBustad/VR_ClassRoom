@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using static OVRControllerTest.BoolMonitor;
 
 public class RoomGenerator : MonoBehaviour
 {
@@ -88,8 +89,6 @@ public class RoomGenerator : MonoBehaviour
 
         edgeLineRenderer = InitializeLineRenderer(edgeLineWidth, edgeLineColor, true, EDGE_LINE_RENDERER_NAME);
         movingPointLayerMask = ~(LayerMask.GetMask("Floor", "Walls"));
-
-        //LoadIntoRoom();
     }
 
     private void OnEnable()
