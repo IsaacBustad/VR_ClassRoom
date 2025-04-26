@@ -1,6 +1,7 @@
 // Written by Aaron Williams
 
 using BugFreeProductions.Tools;
+using Oculus.Interaction.Locomotion;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -52,6 +53,7 @@ public class RoomGenerator : MonoBehaviour
     private LineRenderer edgeLineRenderer;
     private Color currentTargetLineColor;
 
+    [SerializeField] private TeleportInteractable preRoomGenFloor;
 
     public const string FLOOR_MESH_NAME = "Floor Mesh";
     public const string CEILING_MESH_NAME = "Ceiling Mesh";
@@ -342,7 +344,7 @@ public class RoomGenerator : MonoBehaviour
 
             wallGameObject = MeshGenerator.GenerateWallMeshes(floorVertices, wallMaterial, wallHeight);
             wallGameObject.transform.SetParent(roomGameObjectsParent.transform);
-
+            preRoomGenFloor.enabled = false;
         }
     }
 

@@ -125,22 +125,22 @@ public class CatalogController : MonoBehaviour
     {
         if (!canvasTransform.gameObject.activeInHierarchy)
         {
-            if (isVR)
+            if (isVR && VRInputMapManager.Instance.IsInPlacerMode())
             {
                 Vector3 spawnPosition = vrCameraRigTransform.position + vrCameraRigTransform.forward * 2.5f;
-                Quaternion spawnRotation = Quaternion.LookRotation(vrCameraRigTransform.forward);
-                gameObject.transform.position = new Vector3(spawnPosition.x, 0.5f, spawnPosition.z);
+                Quaternion spawnRotation = Quaternion.LookRotation(vrCameraRigTransform.forward, Vector3.up);
+                gameObject.transform.position = new Vector3(spawnPosition.x, 1f, spawnPosition.z);
                 gameObject.transform.rotation = spawnRotation;
-
                 VRInputMapManager.Instance.SwitchToCatalogMenuMode();
+                canvasTransform.gameObject.SetActive(true);
             }
             
             if(!isVR)
             {
                 InputMapManager.Instance.SwitchToCatalogMenuActionMap();
                 UIUtils.EnableUILock();
+                canvasTransform.gameObject.SetActive(true);
             }
-            canvasTransform.gameObject.SetActive(true);
         }
         else
         {
@@ -157,5 +157,4 @@ public class CatalogController : MonoBehaviour
             canvasTransform.gameObject.SetActive(false);
         }
     }
-
 }

@@ -1,7 +1,11 @@
 // Written by Aaron Williams
 
+using Oculus.Interaction.DistanceReticles;
+using Oculus.Interaction.Locomotion;
+using Oculus.Interaction.Surfaces;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class MeshGenerator
@@ -54,9 +58,18 @@ public static class MeshGenerator
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
 
-        return flatObject;
+        if (name.Equals(RoomGenerator.FLOOR_MESH_NAME, StringComparison.OrdinalIgnoreCase))
+        {
+            TeleportInteractable teleportInteractable = flatObject.AddComponent<TeleportInteractable>();
+            ColliderSurface colliderSurface = flatObject.AddComponent<ColliderSurface>();
+            colliderSurface.InjectCollider(meshCollider);
+            teleportInteractable.InjectSurface(colliderSurface);
+            ReticleDataTeleport reticleDataTeleport = flatObject.AddComponent<ReticleDataTeleport>();
+            reticleDataTeleport.ReticleMode = ReticleDataTeleport.TeleportReticleMode.ValidTarget;
+            teleportInteractable.InjectOptionalData(reticleDataTeleport);
+        }
 
-       
+        return flatObject;
     }
 
     public static GameObject GenerateWallMeshes(List<Vector3> floorPoints, Material wallMaterial, float wallHeight)

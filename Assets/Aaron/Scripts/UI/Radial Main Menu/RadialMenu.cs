@@ -208,12 +208,11 @@ public class RadialMenu : MonoBehaviour
 
         menuCanvas.gameObject.SetActive(true);
 
-        Transform transformAtMenuSpawn = transform;
-        Vector3 eulerAngles = transform.rotation.eulerAngles;
+        Vector3 eulerAngles = handTransform.rotation.eulerAngles;
         eulerAngles.x = 0;
         eulerAngles.z = 0;
 
-        Vector3 spawnPosition = transform.position + (transform.forward * GetDistanceOffset());
+        Vector3 spawnPosition = handTransform.position + (handTransform.forward * GetDistanceOffset());
 
         menuCanvas.SetPositionAndRotation(spawnPosition, Quaternion.Euler(eulerAngles));
     }
@@ -238,7 +237,7 @@ public class RadialMenu : MonoBehaviour
     }
     private float GetDistanceOffset()
     {
-        return isVR ? kbmMenuDistanceOffset : menuDistanceOffset;
+        return isVR ? menuDistanceOffset : kbmMenuDistanceOffset;
     }
 }
 

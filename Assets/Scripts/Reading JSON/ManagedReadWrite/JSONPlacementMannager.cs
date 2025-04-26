@@ -82,7 +82,7 @@ namespace BugFreeProductions.Tools
         }
 
         public void WriteRoomConfig()
-        {            
+        {
             jsonWriter.WriteObjPlacementData("/" + roomConfigPath + roomPlacementPath, "/" + roomConfigPath + objectPlacementPath);
         }
         

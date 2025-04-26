@@ -66,8 +66,6 @@ public class VRInputMapManager : MonoBehaviour
                 SwitchToDefaultMode(false);
                 break;
         }
-
-        previousMode = Mode.NULL;
     }
 
     public void SwitchToDefaultMode(bool isForRadialMenu)
@@ -100,6 +98,10 @@ public class VRInputMapManager : MonoBehaviour
         {
             SwitchToDefaultMode(true);
         }
+    }
+    public bool IsInPlacerMode()
+    {
+        return previousMode == Mode.ItemPlacement;
     }
 
     public enum Mode

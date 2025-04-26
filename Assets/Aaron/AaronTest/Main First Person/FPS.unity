@@ -566,6 +566,7 @@ GameObject:
   - component: {fileID: 210345092}
   - component: {fileID: 210345091}
   - component: {fileID: 210345096}
+  - component: {fileID: 210345097}
   m_Layer: 0
   m_Name: WholeBod +  Input
   m_TagString: Untagged
@@ -812,10 +813,9 @@ MonoBehaviour:
     m_ActionName: Master_Player_Input1/MoveInput[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 286155562}
-        m_TargetAssemblyTypeName: BugFreeProductions.Tools.JSONPlacementMannager,
-          Assembly-CSharp
-        m_MethodName: WriteRoomConfig
+      - m_Target: {fileID: 210345097}
+        m_TargetAssemblyTypeName: TempSaverWorkAround, Assembly-CSharp
+        m_MethodName: SaveRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -929,10 +929,9 @@ MonoBehaviour:
     m_ActionName: Default State Input1/MoveInput[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 286155562}
-        m_TargetAssemblyTypeName: BugFreeProductions.Tools.JSONPlacementMannager,
-          Assembly-CSharp
-        m_MethodName: WriteRoomConfig
+      - m_Target: {fileID: 210345097}
+        m_TargetAssemblyTypeName: TempSaverWorkAround, Assembly-CSharp
+        m_MethodName: SaveRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1058,10 +1057,9 @@ MonoBehaviour:
     m_ActionName: Room Creation Input1/MoveInput[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 286155562}
-        m_TargetAssemblyTypeName: BugFreeProductions.Tools.JSONPlacementMannager,
-          Assembly-CSharp
-        m_MethodName: WriteRoomConfig
+      - m_Target: {fileID: 210345097}
+        m_TargetAssemblyTypeName: TempSaverWorkAround, Assembly-CSharp
+        m_MethodName: SaveRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1277,15 +1275,16 @@ MonoBehaviour:
   roomGenerator: {fileID: 1841852563}
   placableItemPlacer: {fileID: 1841852561}
   placableItemRemover: {fileID: 1841852564}
---- !u!114 &286155562 stripped
+--- !u!114 &210345097
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4158969046781334587, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
-  m_PrefabInstance: {fileID: 378866012}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 210345089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4161c4c850b17314895dda4b483b2953, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a44b68518e488a478827dbd27feb71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &378866012
@@ -1355,8 +1354,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1198026422522100694, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 378866014}
   m_SourcePrefab: {fileID: 100100000, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
+--- !u!1 &378866013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1198026422522100694, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
+  m_PrefabInstance: {fileID: 378866012}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &378866014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378866013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a44b68518e488a478827dbd27feb71f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &413520319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4450,6 +4469,7 @@ MonoBehaviour:
   wallMaterial: {fileID: 2100000, guid: 63777614ba704cf448433c715da14ac4, type: 2}
   ceilingMaterial: {fileID: 2100000, guid: fa4eb5242cc840c44a6b97c085b53641, type: 2}
   targetLineRenderer: {fileID: 1841852562}
+  preRoomGenFloor: {fileID: 0}
 --- !u!114 &1841852564
 MonoBehaviour:
   m_ObjectHideFlags: 0

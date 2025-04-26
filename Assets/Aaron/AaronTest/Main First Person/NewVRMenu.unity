@@ -1244,6 +1244,7 @@ MonoBehaviour:
   wallMaterial: {fileID: 2100000, guid: 63777614ba704cf448433c715da14ac4, type: 2}
   ceilingMaterial: {fileID: 2100000, guid: fa4eb5242cc840c44a6b97c085b53641, type: 2}
   targetLineRenderer: {fileID: 0}
+  preRoomGenFloor: {fileID: 0}
 --- !u!1 &612298452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,6 +2549,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1198026422522100694, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1524733557}
+    - targetCorrespondingSourceObject: {fileID: 1198026422522100694, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1524733558}
   m_SourcePrefab: {fileID: 100100000, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
 --- !u!1 &1524733556 stripped
 GameObject:
@@ -2564,6 +2568,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2f9a8e2a54ee0c40ba4129887c02d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1524733558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524733556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d376240d064f4484e81824d51391caf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickActions:
+  - Title: Start
+    Button: 256
+    ButtonMode: 0
+    InputActionReference: {fileID: 0}
+    Callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1524733559}
+          m_TargetAssemblyTypeName: BugFreeProductions.Tools.JSONPlacementMannager,
+            Assembly-CSharp
+          m_MethodName: WriteRoomConfig
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1524733559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4158969046781334587, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
+  m_PrefabInstance: {fileID: 1524733555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524733556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4161c4c850b17314895dda4b483b2953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1526229476
