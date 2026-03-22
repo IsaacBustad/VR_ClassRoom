@@ -73,8 +73,16 @@ namespace BugFreeProductions.Tools
         public virtual void ContinuePlayback(double aDeltaTime)
         {
             // ToDo: use loaded mementos to replay recording
+            playbackTime += aDeltaTime;
 
             // ToDo: create a new memento player for ids not previously processed
+            // var newMementos = playbackMementos.SkipWhile(m => mementoPlayerByInt.ContainsKey(m.ID)).Take(maxBatchSize);
+            // foreach (var memento in newMementos)
+            // {
+            //     var mementoPlayer = new MementoPlayer(m);
+            //     mementoPlayers.Add(mementoPlayer);
+            //     mementoPlayerByInt[m.ID] = mementoPlayer;
+            // }
             
             
             
@@ -110,7 +118,7 @@ namespace BugFreeProductions.Tools
             playbackMementos = new List<ItemMemento>();
         }
 
-        public virtual void ModifyPlayback(PlaybackModifier aPlaybackModifier)
+        public virtual bool ModifyPlayback(PlaybackModifier aPlaybackModifier)
         {
             switch (aPlaybackModifier)
             {
@@ -131,7 +139,12 @@ namespace BugFreeProductions.Tools
                     FastForwardPlayback();
                     break;
 
+                default:
+                   return false;
+
             }
+
+            return true;
                 
         }
 

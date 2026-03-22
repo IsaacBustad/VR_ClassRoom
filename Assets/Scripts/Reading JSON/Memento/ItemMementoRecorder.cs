@@ -55,6 +55,14 @@ namespace BugFreeProductions.Tools
             
             // set the memento's unique identifier by requesting one from the manager
             itemMemento.memID = MementoSessionRecorder.Instance.GetMementoID(this);
+            if (MementoSessionRecorder.Instance != null)
+            {
+                itemMemento.memID = MementoSessionRecorder.Instance.GetMementoID(this);
+            }
+            else
+            {
+                Debug.LogError("MementoSessionRecorder is not initialized.");
+            }
             this.instanceID = itemMemento.memID;
 
             // add to manager
