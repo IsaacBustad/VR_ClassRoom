@@ -104,6 +104,7 @@ namespace BugFreeProductions.Tools
         // make Singelten on enable
         private void OnEnable()
         {
+            SetDefaults();
             SceneManager.sceneLoaded += OnSceneLoaded;
             if (instance != null)
             {
@@ -131,15 +132,7 @@ namespace BugFreeProductions.Tools
 
         #endregion // Methods
 
-        #region Constructors
-        // make Singelten
-        private ItemMementoManager()
-        {
-            // set defaults
-            SetDefaults();
-        } 
         
-        #endregion
 
 
         #region Accessors
@@ -175,6 +168,14 @@ namespace BugFreeProductions.Tools
             }
         }
         
+        // Access te abstract factory for spawning new objects
+        public virtual AbstractFactory_SCO AbstractFactory_SCO
+        {
+            get
+            {
+                return abf_SCO;
+            }
+        }
         
         #endregion
     }

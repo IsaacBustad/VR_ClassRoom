@@ -17,8 +17,20 @@ public class MementoPlayer : MonoBehaviour, Subscriber
 
     #region Methods
 
+    #region Unity Methods
+    protected virtual void OnEnable()
+    {
+        Subscribe();
+    }
+    protected virtual void OnDestroy()
+    {
+        Unsubscribe();
+    }
+    #endregion Unity Methods
+
     public virtual void PlayMemento(ItemMemento aIM)
     {
+        memID = aIM.memID;
         transform.position = new Vector3(aIM.tpX, aIM.tpY, aIM.tpZ);
         transform.rotation = Quaternion.Euler(aIM.trX, aIM.trY, aIM.trZ);
     }
@@ -39,7 +51,7 @@ public class MementoPlayer : MonoBehaviour, Subscriber
     // method to unsubscribe from SubscriptionService
     public void Unsubscribe()
     {
-        
+        MementoSessionReplay.Instance.RemoveSubscriber(this);
     }
 
     #endregion // Subscriber Methods
@@ -53,6 +65,7 @@ public class MementoPlayer : MonoBehaviour, Subscriber
         {
             return memID;
         }
+        
     }
     #endregion // Accessors
 

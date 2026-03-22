@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using BugFreeProductions.Tools;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 
 namespace BugFreeProductions.Tools
@@ -47,6 +48,13 @@ namespace BugFreeProductions.Tools
         // current playback time
         protected double playbackTime = 0.00;
 
+        // current playback index
+        protected int playbackIDX = 0;
+
+        PlaybackModifier playbackModifier = PlaybackModifier.resume;
+
+        
+
         #endregion // Vars
 
         #region Methods
@@ -67,6 +75,7 @@ namespace BugFreeProductions.Tools
             }
 
             isPlaying = true;
+            playbackIDX = 0;
         }
 
         // continues playback of the recording
@@ -75,21 +84,25 @@ namespace BugFreeProductions.Tools
             // ToDo: use loaded mementos to replay recording
             playbackTime += aDeltaTime;
 
-            // ToDo: create a new memento player for ids not previously processed
-            // var newMementos = playbackMementos.SkipWhile(m => mementoPlayerByInt.ContainsKey(m.ID)).Take(maxBatchSize);
-            // foreach (var memento in newMementos)
-            // {
-            //     var mementoPlayer = new MementoPlayer(m);
-            //     mementoPlayers.Add(mementoPlayer);
-            //     mementoPlayerByInt[m.ID] = mementoPlayer;
-            // }
-            
-            
-            
 
             // ToDo: limit the number of mementos processed in a frame to max batch size
+            // Resolved Via Recording 
+            // // recording rate means that more than the max frames will not be able to replayed
 
-            // ToDo: Use Linq reuse existing memento players
+            if (ModifyPlayback() == false)
+            {
+                // index increment after playback
+                
+                while(playbackIDX < playbackMementos.Count-1 && playbackMementos[playbackIDX].memID <= playbackTime)
+                {
+                    ReplayMemento(playbackMementos[playbackIDX]);
+
+                }
+
+
+
+
+            }
 
             
         }
@@ -97,12 +110,33 @@ namespace BugFreeProductions.Tools
         protected virtual void ReplayMemento(ItemMemento aIM)
         {
             // select a single Player from Memento Players if the ID is Present
-            MementoPlayer aIMP = mementoPlayers.Where(mp => mp.MemID == aIM.memID).Single();
+            //MementoPlayer aIMP = mementoPlayers.Where(mp => mp.MemID == aIM.memID).Single();
+            MementoPlayer aIMP = mementoPlayers.FirstOrDefault(m => m.MemID == aIM.memID);
 
             if (aIMP != null)
             {
                 aIMP.PlayMemento(aIM);
             }
+
+            else
+            {
+                FactoryItem aFI = null;
+
+
+                //aIMP = 
+                ItemMementoManager.Instance.AbstractFactory_SCO.CreateItem(ref aFI, aIM);
+
+                // attempt to get the MementoPlayer component from instantiated factory item
+                aIMP = aFI.GetComponent<MementoPlayer>();
+
+                // make sure there is at least the default MementoPlayer
+                if (aIMP == null)
+                {
+                    aIMP = aFI.AddComponent<MementoPlayer>();
+                }
+                aIMP.PlayMemento(aIM);
+            }
+            playbackIDX ++;
 
         }
 
@@ -118,33 +152,43 @@ namespace BugFreeProductions.Tools
             playbackMementos = new List<ItemMemento>();
         }
 
-        public virtual bool ModifyPlayback(PlaybackModifier aPlaybackModifier)
+        public virtual bool ModifyPlayback()
         {
-            switch (aPlaybackModifier)
+            // holds if the playback is currently being modified
+            bool playbackModified = false;
+
+            switch (playbackModifier)
             {
 
                 case PlaybackModifier.pause:
                     PausePlayback();
+                    playbackModified = true;
                     break;
 
                 case PlaybackModifier.resume:
                     ResumePlayback();
+                    playbackModified = false;
                     break;
 
                 case PlaybackModifier.rewind:
                     RewindPlayback();
+                    playbackModified = true;
                     break;
 
                 case PlaybackModifier.fastForward:
                     FastForwardPlayback();
+                    playbackModified = true;
+                    break;
+                
+                default:
+                    playbackModified = true;
                     break;
 
-                default:
-                   return false;
+                
 
             }
 
-            return true;
+            return playbackModified;
                 
         }
 
