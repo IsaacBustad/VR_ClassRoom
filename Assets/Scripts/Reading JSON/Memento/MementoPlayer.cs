@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using BugFreeProductions.Tools;
 using UnityEngine;
 
-
+// this would be on the Item 
+// [ToDo] think about how
 public class MementoPlayer : MonoBehaviour, Subscriber
 {
     #region Vars
