@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 // ToDo: create list of all pooled items stored here or in ObjectPlacementManager
@@ -21,6 +22,10 @@ namespace BugFreeProductions.Tools
         protected KeyCode startRecordingKey = KeyCode.J;
         protected KeyCode stopRecordingKey = KeyCode.K;
         protected KeyCode printMementosKey = KeyCode.L;
+
+
+        protected KeyCode startReplayKey = KeyCode.N;
+        protected KeyCode endReplayKey = KeyCode.M;
         #endregion
 
         #region Test Path
@@ -73,6 +78,9 @@ namespace BugFreeProductions.Tools
                 Debug.Log("Started Recording Session.");
             }
 
+            // for testing the ending of a recording session and writes to
+            // Linux Flatpack: /home/user/.var/app/com.unity.UnityHub/config/unity3d/BugFreeProductions
+            // Windows: 
             if (Input.GetKeyDown(stopRecordingKey))
             {
                 // stop recording
@@ -90,8 +98,16 @@ namespace BugFreeProductions.Tools
                     Debug.Log(itemCount + ": Memento ID: " + memento.id + " at position: " + memento.tpX + " , " + memento.tpY + " , " + memento.tpZ);
                 }
             }
+
+            // Test case to call replay
+            // Should replay saved mementos 
+            if (Input.GetKeyDown(startReplayKey))
+            {
+                
+            }            
+
         }
-        #endregion // Test Methods
+        #endregion Test Methods
 
         #region Unity Methods
         protected virtual void Update()
@@ -121,7 +137,7 @@ namespace BugFreeProductions.Tools
             }
         }
 
-        #endregion // Unity Methods
+        #endregion Unity Methods
 
 
         // onScene change
@@ -130,7 +146,7 @@ namespace BugFreeProductions.Tools
             // do nothing for now
         }
 
-        #endregion // Methods
+        #endregion Methods
 
         
 
@@ -177,6 +193,6 @@ namespace BugFreeProductions.Tools
             }
         }
         
-        #endregion
+        #endregion Accessors
     }
 }

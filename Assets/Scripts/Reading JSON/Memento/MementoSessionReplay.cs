@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using BugFreeProductions.Tools;
 using UnityEngine;
 using System.Linq;
-using Unity.VisualScripting;
 
 
 namespace BugFreeProductions.Tools
@@ -84,9 +83,6 @@ namespace BugFreeProductions.Tools
             // ToDo: use loaded mementos to replay recording
             playbackTime += aDeltaTime;
 
-
-            // ToDo: limit the number of mementos processed in a frame to max batch size
-            // Resolved Via Recording 
             // // recording rate means that more than the max frames will not be able to replayed
 
             if (ModifyPlayback() == false)
@@ -99,11 +95,7 @@ namespace BugFreeProductions.Tools
 
                 }
 
-
-
-
             }
-
             
         }
 
@@ -132,7 +124,7 @@ namespace BugFreeProductions.Tools
                 // make sure there is at least the default MementoPlayer
                 if (aIMP == null)
                 {
-                    aIMP = aFI.AddComponent<MementoPlayer>();
+                    aIMP = aFI.gameObject.AddComponent<MementoPlayer>();
                 }
                 aIMP.PlayMemento(aIM);
             }
