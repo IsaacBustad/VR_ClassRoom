@@ -95,7 +95,7 @@ namespace BugFreeProductions.Tools
                 foreach (ItemMemento memento in sessionRecorder.Mementos)
                 {
                     itemCount++;
-                    Debug.Log(itemCount + ": Memento ID: " + memento.id + " at position: " + memento.tpX + " , " + memento.tpY + " , " + memento.tpZ);
+                    Debug.Log(itemCount + ": Memento ID: " + memento.id + "Memento Instance ID:" + memento.instanceID + " at position: " + memento.tpX + " , " + memento.tpY + " , " + memento.tpZ);
                 }
             }
 

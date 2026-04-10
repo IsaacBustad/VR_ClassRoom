@@ -32,6 +32,7 @@ public class MementoPlayer : MonoBehaviour, Subscriber
     public virtual void PlayMemento(ItemMemento aIM)
     {
         memID = aIM.memID;
+        Debug.Log("Called pre-me");
         transform.position = new Vector3(aIM.tpX, aIM.tpY, aIM.tpZ);
         transform.rotation = Quaternion.Euler(aIM.trX, aIM.trY, aIM.trZ);
     }

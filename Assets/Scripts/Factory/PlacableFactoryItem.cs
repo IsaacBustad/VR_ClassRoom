@@ -71,14 +71,14 @@ namespace BugFreeProductions.Tools
                 nObjPlace.id = id;
 
                 Vector3 nObjPos = body.BodyPosition;
-                Debug.Log(gameObject.name + " my Saved transform = " + " " + nObjPos);
+                //Debug.Log(gameObject.name + " my Saved transform = " + " " + nObjPos);
 
                 nObjPlace.tpX = nObjPos.x;
                 nObjPlace.tpY = nObjPos.y;
                 nObjPlace.tpZ = nObjPos.z;
 
                 Vector3 nObjRot = body.BodyRotation;
-                Debug.Log(gameObject.name + " my Saved rotation = " + " " + nObjRot);
+                //Debug.Log(gameObject.name + " my Saved rotation = " + " " + nObjRot);
 
                 nObjPlace.trX = nObjRot.x;
                 nObjPlace.trY = nObjRot.y;

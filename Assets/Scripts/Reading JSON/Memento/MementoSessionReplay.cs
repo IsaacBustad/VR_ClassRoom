@@ -104,6 +104,7 @@ namespace BugFreeProductions.Tools
             // select a single Player from Memento Players if the ID is Present
             //MementoPlayer aIMP = mementoPlayers.Where(mp => mp.MemID == aIM.memID).Single();
             MementoPlayer aIMP = mementoPlayers.FirstOrDefault(m => m.MemID == aIM.memID);
+            Debug.Log("Called pre-me");
 
             if (aIMP != null)
             {

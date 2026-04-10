@@ -54,16 +54,22 @@ namespace BugFreeProductions.Tools
             ItemMemento itemMemento = new ItemMemento(objP);
             
             // set the memento's unique identifier by requesting one from the manager
-            itemMemento.memID = MementoSessionRecorder.Instance.GetMementoID(this);
-            if (MementoSessionRecorder.Instance != null)
-            {
-                itemMemento.memID = MementoSessionRecorder.Instance.GetMementoID(this);
-            }
-            else
-            {
-                Debug.LogError("MementoSessionRecorder is not initialized.");
-            }
-            this.instanceID = itemMemento.memID;
+            itemMemento.memID = instanceID;
+            Debug.Log("Memento was assigned = " + instanceID);
+
+            // if ()
+            // {
+            //     // Set the instance id of this reusable recording object
+            //     instanceID = MementoSessionRecorder.Instance.GetMementoID(this);
+            //     itemMemento.memID = MementoSessionRecorder.Instance.GetMementoID(this);
+            // }
+
+            // else
+            // {
+            //     Debug.LogError("MementoSessionRecorder is not initialized.");
+            // }
+
+            // this.instanceID = itemMemento.memID;
 
             // add to manager
             MementoSessionRecorder.Instance.AddMemento(itemMemento);
@@ -97,6 +103,11 @@ namespace BugFreeProductions.Tools
             get
             {
                 return instanceID;
+            }
+
+            set
+            {
+                instanceID = value;
             }
         }
 

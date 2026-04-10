@@ -59,6 +59,8 @@ namespace BugFreeProductions.Tools
         // start a recording session
         public virtual void StartRecordingSession()
         {
+            // clear class wide vars for recording
+            nextMementoID = 0;
             mementos.Clear();
 
             // set recording flag
@@ -99,28 +101,41 @@ namespace BugFreeProductions.Tools
 
         // ToDo: Use Linq reuse existing memento players
         // ToDo: Remove Dictionary usage
-        public virtual int GetMementoID(ItemMementoRecorder aIMR)
-        {
-            int retID = nextMementoID;
+        // public virtual int GetMementoID(ItemMementoRecorder aIMR)
+        // {
+        //     // hold the ID
+        //     int retID = nextMementoID;
 
-            if(mementoItemsByMementoID.ContainsKey(aIMR.InstanceID) == true)
-            {
-                // setting the returned id to Instance ID if ID exist in Dictionary
-                retID = aIMR.InstanceID;
-            }
+        //     // Loop untill you find an available instanceID
 
-            else
-            {
+
+        //     // check if id is default
+        //     if (aIMR.InstanceID == -1)
+        //     {
+        //         // add if not found in dictionary
+        //         mementoItemsByMementoID.Add(nextMementoID, aIMR);
+        //         nextMementoID ++;
+        //         retID = nextMementoID;
+        //     }
+
+        //     else if(mementoItemsByMementoID.ContainsKey(aIMR.InstanceID) == true)
+        //     {
+        //         // setting the returned id to Instance ID if ID exist in Dictionary
+        //         retID = aIMR.InstanceID;
+        //     }
+
+        //     else
+        //     {
                 
-                nextMementoID++;
-                retID = nextMementoID;
+        //         nextMementoID++;
+        //         retID = nextMementoID;
 
-                // add if not found in dictionary
-                mementoItemsByMementoID.Add(retID, aIMR);
-            }
+        //         // add if not found in dictionary
+        //         mementoItemsByMementoID.Add(retID, aIMR);
+        //     }
             
-            return retID;
-        }
+        //     return retID;
+        // }
         
         #endregion // Recording Methods
 
@@ -131,6 +146,10 @@ namespace BugFreeProductions.Tools
             if (aSub is ItemMementoRecorder aIMR)
             {
                 itemMementoRecorders.Add(aIMR);
+                aIMR.InstanceID = nextMementoID;
+                Debug.Log("assigned id = " + nextMementoID);
+                nextMementoID ++;
+                Debug.Log("next id = " + nextMementoID);
             }
         }
 
@@ -183,9 +202,9 @@ namespace BugFreeProductions.Tools
             }
         }
 
-        #endregion // Session Recording Methods
+        #endregion  Session Recording Methods
 
-        #endregion // Methods
+        #endregion  Methods
 
         #region Constructors
         // make Singelten
@@ -193,7 +212,7 @@ namespace BugFreeProductions.Tools
         {
             
         }
-        #endregion // Constructors
+        #endregion  Constructors
 
         #region Accessors
         // access to mementos recorded
@@ -215,6 +234,6 @@ namespace BugFreeProductions.Tools
             }
         }
 
-        #endregion // Accessors
+        #endregion  Accessors
     }
 }
