@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace BugFreeProductions.Tools
 {
-public class MementoReadWrite : MonoBehaviour
+public class MementoReadWrite 
     {
         #region Vars
         // single instance
