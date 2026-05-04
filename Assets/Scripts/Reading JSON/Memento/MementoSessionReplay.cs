@@ -89,7 +89,7 @@ namespace BugFreeProductions.Tools
             {
                 // index increment after playback
                 
-                while(playbackIDX < playbackMementos.Count-1 && playbackMementos[playbackIDX].memID <= playbackTime)
+                while(playbackIDX < playbackMementos.Count && playbackMementos[playbackIDX].timestamp <= playbackTime)
                 {
                     ReplayMemento(playbackMementos[playbackIDX]);
 

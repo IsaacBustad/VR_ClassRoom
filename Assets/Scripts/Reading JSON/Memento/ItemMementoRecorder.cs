@@ -26,6 +26,7 @@ namespace BugFreeProductions.Tools
         #region Unity Event Methods
         protected virtual void OnEnable()
         {
+            Debug.Log($"Copilot ItemMementoRecorder.OnEnable: subscribing recorder, current instanceID={instanceID}");
             // subscribe on enable to ensure object mementos are collected
             Subscribe();
 
@@ -34,6 +35,7 @@ namespace BugFreeProductions.Tools
         protected virtual void OnDestroy()
         {
             // Record a memento stating the object was destroyed
+            Debug.Log($"Copilot ItemMementoRecorder.OnDestroy: recorder instanceID={instanceID}");
             RecordMemento(true);
 
             // remove from the subscription before destruction
@@ -53,9 +55,10 @@ namespace BugFreeProductions.Tools
             // create the memento
             ItemMemento itemMemento = new ItemMemento(objP);
             
-            // set the memento's unique identifier by requesting one from the manager
+            // set the memento's unique identifier for both playback and serialized instance tracking
             itemMemento.memID = instanceID;
-            Debug.Log("Memento was assigned = " + instanceID);
+            itemMemento.instanceID = instanceID;
+            Debug.Log($"Copilot ItemMementoRecorder.RecordMemento: recorder instanceID={instanceID}, itemMemento.memID={itemMemento.memID}, itemMemento.instanceID={itemMemento.instanceID}");
 
             // if ()
             // {
