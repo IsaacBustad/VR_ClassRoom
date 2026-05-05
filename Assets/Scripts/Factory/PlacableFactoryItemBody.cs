@@ -84,6 +84,21 @@ namespace BugFreeProductions.Tools
             FinalizeSafeArea();
         }
 
+        // finalize item for replay playback - similar structure to FinalizeBody but usable for replayed items
+        public virtual void FinalizeForReplay()
+        {
+            if (rb == null)
+            {
+                CollectVars();
+            }
+
+            rb.freezeRotation = false;
+            rb.useGravity = false;
+
+            FinalizeBodyColiders();
+            FinalizeSafeArea();
+        }
+
         // final setup for body coliders
         protected virtual void FinalizeBodyColiders()
         {

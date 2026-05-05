@@ -20,20 +20,20 @@ namespace BugFreeProductions.Tools
     }
 
 
-    public class MementoSessionReplay : Subscription 
+    public class MementoSessionReplay : MonoBehaviour, Subscription 
     {
         #region Vars
         // instance for singelton
         protected static MementoSessionReplay instance = null;
-
-        // dictionary of unique items in mementos remove if not used
-        protected Dictionary<int,MementoPlayer> mementoPlayerByInt = new Dictionary<int, MementoPlayer>();
 
         // list of mementos in recorded file
         protected List<ItemMemento> playbackMementos = new List<ItemMemento>();
 
         // list of MementoPlayers
         protected List<MementoPlayer> mementoPlayers = new List<MementoPlayer>();
+
+        // list to track objects created by replay for cleanup
+        protected List<GameObject> replayCreatedObjects = new List<GameObject>();
 
         // bool to tell to play
         protected bool isPlaying = false;
@@ -52,20 +52,64 @@ namespace BugFreeProductions.Tools
 
         PlaybackModifier playbackModifier = PlaybackModifier.resume;
 
+        // replay keys
+        protected KeyCode startReplayKey = KeyCode.N;
+        protected KeyCode endReplayKey = KeyCode.M;
+        protected KeyCode clearReplayObjectsKey = KeyCode.C;
+
         
 
         #endregion // Vars
 
         #region Methods
 
+        #region Unity Methods
+        protected virtual void Update()
+        {
+            // Check for replay key presses
+            CheckReplayKeys();
+
+            if (isPlaying == true)
+            {
+                ContinuePlayback(Time.deltaTime);
+            }
+        }
+
+        protected virtual void CheckReplayKeys()
+        {
+            if (Input.GetKeyDown(startReplayKey))
+            {
+                if (!isPlaying)
+                {
+                    BeginPlayback("RecordTest");
+                    Debug.Log("MementoSessionReplay: Started replay.");
+                }
+            }
+
+            if (Input.GetKeyDown(endReplayKey))
+            {
+                if (isPlaying)
+                {
+                    EndPlayback();
+                    Debug.Log("MementoSessionReplay: Stopped replay.");
+                }
+            }
+
+            if (Input.GetKeyDown(clearReplayObjectsKey))
+            {
+                ClearReplayObjects();
+                Debug.Log("MementoSessionReplay: Cleared replay objects.");
+            }
+        }
+
+        #endregion
+
         #region Replay Methods
         // begin playback of recording
         public virtual void BeginPlayback(string recordingPath)
-        {   // path for testing to be removed later
-            string recordingTestPath = "/" + "RecordTest" + ".json";
-
+        {   
             // begin by loading the recording into memory
-            LoadRecording(recordingTestPath);
+            LoadRecording("/" + recordingPath + ".json");
 
             // set starting time
             if (playbackMementos.Count > 0)
@@ -92,9 +136,15 @@ namespace BugFreeProductions.Tools
                 while(playbackIDX < playbackMementos.Count && playbackMementos[playbackIDX].timestamp <= playbackTime)
                 {
                     ReplayMemento(playbackMementos[playbackIDX]);
-
+                    playbackIDX++;
                 }
 
+                // auto-stop when reaching end of mementos
+                if (playbackIDX >= playbackMementos.Count && playbackMementos.Count > 0)
+                {
+                    EndPlayback();
+                    Debug.Log("MementoSessionReplay: Reached end of mementos, stopping playback.");
+                }
             }
             
         }
@@ -109,6 +159,10 @@ namespace BugFreeProductions.Tools
             if (aIMP != null)
             {
                 aIMP.PlayMemento(aIM);
+                if (aIM.isDestroyed)
+                {
+                    aIMP.gameObject.SetActive(false);
+                }
             }
 
             else
@@ -119,6 +173,9 @@ namespace BugFreeProductions.Tools
                 //aIMP = 
                 ItemMementoManager.Instance.AbstractFactory_SCO.CreateItem(ref aFI, aIM);
 
+                // track newly created object for cleanup
+                replayCreatedObjects.Add(aFI.gameObject);
+
                 // attempt to get the MementoPlayer component from instantiated factory item
                 aIMP = aFI.GetComponent<MementoPlayer>();
 
@@ -128,9 +185,24 @@ namespace BugFreeProductions.Tools
                     aIMP = aFI.gameObject.AddComponent<MementoPlayer>();
                 }
                 aIMP.PlayMemento(aIM);
-            }
-            playbackIDX ++;
 
+                if (!mementoPlayers.Contains(aIMP))
+                {
+                    mementoPlayers.Add(aIMP);
+                }
+
+                // finalize the newly created item
+                PlacableFactoryItemBody placableBody = aFI.GetComponent<PlacableFactoryItemBody>();
+                if (placableBody != null)
+                {
+                    placableBody.FinalizeForReplay();
+                }
+
+                if (aIM.isDestroyed)
+                {
+                    aIMP.gameObject.SetActive(false);
+                }
+            }
         }
 
         
@@ -141,8 +213,25 @@ namespace BugFreeProductions.Tools
             // state we are no longer playing recording back
             isPlaying = false;
 
+            // reset playback state
+            playbackTime = 0.0;
+            playbackIDX = 0;
+
             // empty the recording from memory
             playbackMementos = new List<ItemMemento>();
+        }
+
+        // clear all objects created by replay from the scene
+        protected virtual void ClearReplayObjects()
+        {
+            foreach (GameObject obj in replayCreatedObjects)
+            {
+                if (obj != null)
+                {
+                    Destroy(obj);
+                }
+            }
+            replayCreatedObjects.Clear();
         }
 
         public virtual bool ModifyPlayback()
@@ -229,7 +318,10 @@ namespace BugFreeProductions.Tools
         // remove a subscriber from the Subscription
         public void RemoveSubscriber(Subscriber aSub)
         {
-            
+            if (aSub is MementoPlayer aMP)
+            {
+                mementoPlayers.Remove(aMP);
+            }
         }
 
         // notify
@@ -247,18 +339,18 @@ namespace BugFreeProductions.Tools
             
         }
 
-        #endregion // Constructors
+        #endregion
 
         #region Accessors
         public static MementoSessionReplay Instance
         {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
-                    instance = new MementoSessionReplay();
+                    instance = new GameObject("MementoSessionReplay").AddComponent<MementoSessionReplay>();
+                    DontDestroyOnLoad(instance.gameObject);
                 }
-
                 return instance;
             }
         }

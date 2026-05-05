@@ -101,10 +101,11 @@ namespace BugFreeProductions.Tools
 
             // Test case to call replay
             // Should replay saved mementos 
-            if (Input.GetKeyDown(startReplayKey))
-            {
-                
-            }            
+            // Moved to MementoSessionReplay
+            // if (Input.GetKeyDown(startReplayKey))
+            // {
+            //     MementoSessionReplay.Instance.BeginPlayback("test");
+            // }            
 
         }
         #endregion Test Methods
