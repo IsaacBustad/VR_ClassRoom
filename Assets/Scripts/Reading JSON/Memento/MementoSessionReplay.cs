@@ -11,15 +11,6 @@ using System.Linq;
 
 namespace BugFreeProductions.Tools
 {
-    public enum PlaybackModifier
-    {
-        fastForward,
-        rewind,
-        pause,
-        resume
-    }
-
-
     public class MementoSessionReplay : MonoBehaviour, Subscription 
     {
         #region Vars
@@ -50,8 +41,6 @@ namespace BugFreeProductions.Tools
         // current playback index
         protected int playbackIDX = 0;
 
-        PlaybackModifier playbackModifier = PlaybackModifier.resume;
-
         // replay keys
         protected KeyCode startReplayKey = KeyCode.N;
         protected KeyCode endReplayKey = KeyCode.M;
@@ -69,7 +58,7 @@ namespace BugFreeProductions.Tools
             // Check for replay key presses
             CheckReplayKeys();
 
-            if (isPlaying == true)
+            if (isPlaying == true && !isPaused)
             {
                 ContinuePlayback(Time.deltaTime);
             }
@@ -99,6 +88,30 @@ namespace BugFreeProductions.Tools
             {
                 ClearReplayObjects();
                 Debug.Log("MementoSessionReplay: Cleared replay objects.");
+            }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                ResumePlayback();
+                Debug.Log("MementoSessionReplay: Resume playback.");
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                TogglePausePlayback();
+                Debug.Log($"MementoSessionReplay: Playback {(isPaused ? "paused" : "resumed")}.");
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                RewindPlayback();
+                Debug.Log("MementoSessionReplay: Rewind playback.");
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                FastForwardPlayback();
+                Debug.Log("MementoSessionReplay: Fast-forward playback.");
             }
         }
 
@@ -228,72 +241,87 @@ namespace BugFreeProductions.Tools
             {
                 if (obj != null)
                 {
+                    MementoPlayer player = obj.GetComponent<MementoPlayer>();
+                    if (player != null)
+                    {
+                        mementoPlayers.Remove(player);
+                    }
+
                     Destroy(obj);
                 }
             }
             replayCreatedObjects.Clear();
+
+            mementoPlayers.RemoveAll(mp => mp == null || mp.gameObject == null);
         }
 
         public virtual bool ModifyPlayback()
         {
-            // holds if the playback is currently being modified
-            bool playbackModified = false;
-
-            switch (playbackModifier)
-            {
-
-                case PlaybackModifier.pause:
-                    PausePlayback();
-                    playbackModified = true;
-                    break;
-
-                case PlaybackModifier.resume:
-                    ResumePlayback();
-                    playbackModified = false;
-                    break;
-
-                case PlaybackModifier.rewind:
-                    RewindPlayback();
-                    playbackModified = true;
-                    break;
-
-                case PlaybackModifier.fastForward:
-                    FastForwardPlayback();
-                    playbackModified = true;
-                    break;
-                
-                default:
-                    playbackModified = true;
-                    break;
-
-                
-
-            }
-
-            return playbackModified;
-                
+            return isPaused;
         }
 
         protected virtual void ResumePlayback()
         {
-            
+            isPaused = false;
+        }
+
+        protected virtual void TogglePausePlayback()
+        {
+            isPaused = !isPaused;
         }
 
         protected virtual void RewindPlayback()
         {
-            
+            if (playbackMementos.Count == 0)
+            {
+                return;
+            }
+
+            double rewindAmount = 1.0;
+            double targetTime = playbackTime - rewindAmount;
+            if (targetTime < playbackMementos[0].timestamp)
+            {
+                targetTime = playbackMementos[0].timestamp;
+            }
+
+            ResetPlaybackToTime(targetTime);
         }
 
         protected virtual void FastForwardPlayback()
         {
-            
+            if (playbackMementos.Count == 0)
+            {
+                return;
+            }
+
+            double fastForwardAmount = 1.0;
+            double targetTime = playbackTime + fastForwardAmount;
+            if (targetTime > playbackMementos[playbackMementos.Count - 1].timestamp)
+            {
+                targetTime = playbackMementos[playbackMementos.Count - 1].timestamp;
+            }
+
+            ResetPlaybackToTime(targetTime);
+        }
+
+        protected virtual void ResetPlaybackToTime(double targetTime)
+        {
+            playbackTime = targetTime;
+            playbackIDX = 0;
+
+            ClearReplayObjects();
+
+            while (playbackIDX < playbackMementos.Count && playbackMementos[playbackIDX].timestamp <= playbackTime)
+            {
+                ReplayMemento(playbackMementos[playbackIDX]);
+                playbackIDX++;
+            }
         }
 
         // pause playback of a recording
         protected virtual void PausePlayback()
         {
-            // toggle on and off pause bool
-            isPaused = !isPaused;
+            isPaused = true;
         } 
 
         // load the recording into memento list

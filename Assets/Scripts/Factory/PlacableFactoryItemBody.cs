@@ -94,9 +94,23 @@ namespace BugFreeProductions.Tools
 
             rb.freezeRotation = false;
             rb.useGravity = false;
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
 
-            FinalizeBodyColiders();
+            DisableReplayColliders();
             FinalizeSafeArea();
+        }
+
+        protected virtual void DisableReplayColliders()
+        {
+            Collider[] allColliders = GetComponentsInChildren<Collider>(true);
+            foreach (Collider col in allColliders)
+            {
+                if (col != null)
+                {
+                    col.enabled = false;
+                }
+            }
         }
 
         // final setup for body coliders
