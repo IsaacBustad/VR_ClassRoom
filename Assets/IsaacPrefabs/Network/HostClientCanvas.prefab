@@ -845,10 +845,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c33c63fb2bdff743ac0b950a915bfc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionPanel: {fileID: 8196400869561572992}
-  ipInputField: {fileID: 13267798394609720}
-  defaultIP: 127.0.0.1
-  port: 7777
+  displayIpText: {fileID: 0}
+  inputField: {fileID: 13267798394609720}
+  manualIpTarget: 10.0.0.6
 --- !u!1 &7697560091616253229
 GameObject:
   m_ObjectHideFlags: 0

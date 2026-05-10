@@ -219,6 +219,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 292542906112925554, guid: 8f77456dd8adb6648a3ed564bbcc1837, type: 3}
+      propertyPath: ConnectionData.ServerListenAddress
+      value: 0.0.0.0
+      objectReference: {fileID: 0}
     - target: {fileID: 572332684038308380, guid: 8f77456dd8adb6648a3ed564bbcc1837, type: 3}
       propertyPath: NetworkConfig.PlayerPrefab
       value: 
@@ -993,10 +997,6 @@ PrefabInstance:
       value: HostClientCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 7682594934670787273, guid: cc7e30460d4b60c41a52cc199f0eaf23, type: 3}
-      propertyPath: inputField
-      value: 
-      objectReference: {fileID: 8451002444029588961}
-    - target: {fileID: 7682594934670787273, guid: cc7e30460d4b60c41a52cc199f0eaf23, type: 3}
       propertyPath: displayIpText
       value: 
       objectReference: {fileID: 1891611666}
@@ -1011,17 +1011,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1516165945}
   m_SourcePrefab: {fileID: 100100000, guid: cc7e30460d4b60c41a52cc199f0eaf23, type: 3}
---- !u!114 &8451002444029588961 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 13267798394609720, guid: cc7e30460d4b60c41a52cc199f0eaf23, type: 3}
-  m_PrefabInstance: {fileID: 8451002444029588960}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &8451002444029588962 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 41781069106702264, guid: cc7e30460d4b60c41a52cc199f0eaf23, type: 3}
