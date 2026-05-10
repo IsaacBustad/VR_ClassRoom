@@ -15,6 +15,8 @@ public class NetworkBootstrap : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TMP_Text displayIpText;      // Shows YOUR IP to read to others
     [SerializeField] private TMP_InputField inputField;   // Where you type the Host's IP
+    [SerializeField] private string manualIpTarget;     // manualy targets a set ip
+
 
     void Start()
     {
@@ -39,7 +41,15 @@ public class NetworkBootstrap : MonoBehaviour
         var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         string targetIP = inputField.text;
 
-        if (!string.IsNullOrEmpty(targetIP))
+        if(manualIpTarget != null)
+        {
+            // Update the transport with the address typed into the UI
+            transport.SetConnectionData(manualIpTarget, 7777);
+            NetworkManager.Singleton.StartClient();
+            Debug.Log($"Attempting to connect to Host at: {targetIP}");
+        }
+
+        else if (!string.IsNullOrEmpty(targetIP))
         {
             // Update the transport with the address typed into the UI
             transport.SetConnectionData(targetIP, 7777);
