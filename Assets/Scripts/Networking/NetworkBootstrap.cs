@@ -3,55 +3,67 @@
 
 // Gemeni Assisted
 
+using UnityEngine;
+using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using UnityEngine;
-using TMPro; // Use TextMeshPro for the IP input
+using System.Net;
+using System.Net.Sockets;
 
 public class NetworkBootstrap : MonoBehaviour
 {
-    [Header("UI References")]
-    [SerializeField] private GameObject connectionPanel;
-    [SerializeField] private TMP_InputField ipInputField;
+    [Header("UI Elements")]
+    [SerializeField] private TMP_Text displayIpText;      // Shows YOUR IP to read to others
+    [SerializeField] private TMP_InputField inputField;   // Where you type the Host's IP
 
-    [Header("Settings")]
-    [SerializeField] private string defaultIP = "127.0.0.1";
-    [SerializeField] private ushort port = 7777;
-
-    private UnityTransport transport;
-
-    private void Start()
+    void Start()
     {
-        transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        // Automatically find and display this machine's IP
+        string myAddress = GetLocalIPv4();
+        displayIpText.text = $"My IP: {myAddress}";
         
-        // Pre-fill the input field with a default
-        if (ipInputField != null)
-            ipInputField.text = defaultIP;
+        Debug.Log($"Network Bootstrap Initialized. Local IP: {myAddress}");
     }
 
+    // Call this from a UI Button on the Host machine (Desktop)
     public void StartHost()
     {
-        // Hosting usually binds to all local interfaces
+        // The Host doesn't need to change its transport address (default 0.0.0.0 is fine)
         NetworkManager.Singleton.StartHost();
-        HideUI();
+        Debug.Log("Hosting started.");
     }
 
+    // Call this from a UI Button on the Client machine (Laptop)
     public void StartClient()
     {
-        string targetIP = ipInputField != null ? ipInputField.text : defaultIP;
-        
-        // Configure the transport with the UI's IP address
-        transport.SetConnectionData(targetIP, port);
-        
-        NetworkManager.Singleton.StartClient();
-        HideUI();
+        var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        string targetIP = inputField.text;
+
+        if (!string.IsNullOrEmpty(targetIP))
+        {
+            // Update the transport with the address typed into the UI
+            transport.SetConnectionData(targetIP, 7777);
+            NetworkManager.Singleton.StartClient();
+            Debug.Log($"Attempting to connect to Host at: {targetIP}");
+        }
+        else
+        {
+            displayIpText.text = "ERROR: Enter an IP first!";
+        }
     }
 
-    private void HideUI()
+    // Helper method to grab the IPv4 address
+    private string GetLocalIPv4()
     {
-        if (connectionPanel != null)
+        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList)
         {
-            connectionPanel.SetActive(false);
+            // Ensure we grab the standard IPv4 internal network address
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
         }
+        return "127.0.0.1"; // Fallback to localhost
     }
 }
