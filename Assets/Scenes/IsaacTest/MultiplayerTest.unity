@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &116503692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 292542906112925554, guid: 8f77456dd8adb6648a3ed564bbcc1837, type: 3}
+  m_PrefabInstance: {fileID: 1398897813}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &646260565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,6 +1096,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HostClientCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7682594934670787273, guid: cc7e30460d4b60c41a52cc199f0eaf23, type: 3}
+      propertyPath: transport
+      value: 
+      objectReference: {fileID: 116503692}
     - target: {fileID: 7682594934670787273, guid: cc7e30460d4b60c41a52cc199f0eaf23, type: 3}
       propertyPath: displayIpText
       value: 

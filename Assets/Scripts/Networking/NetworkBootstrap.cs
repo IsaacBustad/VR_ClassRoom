@@ -9,6 +9,7 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using System.Net;
 using System.Net.Sockets;
+using Unity.VisualScripting;
 
 public class NetworkBootstrap : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class NetworkBootstrap : MonoBehaviour
     [SerializeField] private TMP_InputField inputField;   // Where you type the Host's IP
     [SerializeField] private string manualIpTarget;     // manualy targets a set ip
 
+
+    [Header("")]
+    [SerializeField] private UnityTransport transport;
 
     void Start()
     {
@@ -38,7 +42,7 @@ public class NetworkBootstrap : MonoBehaviour
     // Call this from a UI Button on the Client machine (Laptop)
     public void StartClient()
     {
-        var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        
         string targetIP = inputField.text;
 
         if(manualIpTarget != null)
