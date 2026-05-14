@@ -75,7 +75,7 @@ namespace BugFreeProductions.Tools
             nObjPlace.trZ = nObjRot.z;
             
             // set unique identifier
-            //nObjPlace.instanceID = instanceID;
+            nObjPlace.instanceID = instanceID;
 
             return nObjPlace;
         }

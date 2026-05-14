@@ -61,7 +61,7 @@ namespace BugFreeProductions.Tools
                                                          aOP.trX, aOP.trY, aOP.trZ,
                                                          aOP.id) 
         {
-            
+            this.instanceID = aOP.instanceID;
         }
 
 

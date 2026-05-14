@@ -11,7 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Aaron/AaronTest/Main First Person/VR.unity
     guid: 6474687b4764176498d85f08b088c542
+  - enabled: 1
+    path: Assets/Scenes/IsaacTest/MultiplayerTest.unity
+    guid: add5ef7097e82e04a84a3e20ffd91bde
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8951ebbe310276b4593fb42a0fbccd67, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 34cd2ca1c29ed7a4fbe54c1090a841ca, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2fcaf4f49971eb34da75edc5e5502318, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: fd35ca9691c9cc8448f2c76a7ed2f257, type: 2}

@@ -73,9 +73,9 @@ namespace BugFreeProductions.Tools
         {
             if (Input.GetKeyDown(startRecordingKey))
             {
-                Debug.Log("Started Recording Session.");
+                Debug.Log("Copilot ItemMementoManager: Started Recording Session.");
                 sessionRecorder.StartRecordingSession();
-                Debug.Log("Started Recording Session.");
+                Debug.Log("Copilot ItemMementoManager: Started Recording Session.");
             }
 
             // for testing the ending of a recording session and writes to
@@ -85,7 +85,7 @@ namespace BugFreeProductions.Tools
             {
                 // stop recording
                 sessionRecorder.StopRecordingSession();
-                Debug.Log("Stopped Recording Session with " + sessionRecorder.Mementos.Count + " Mementos recorded.");
+                Debug.Log($"Copilot ItemMementoManager: Stopped Recording Session with {sessionRecorder.Mementos.Count} Mementos recorded.");
             }
 
             if (Input.GetKeyDown(printMementosKey))
@@ -95,16 +95,17 @@ namespace BugFreeProductions.Tools
                 foreach (ItemMemento memento in sessionRecorder.Mementos)
                 {
                     itemCount++;
-                    Debug.Log(itemCount + ": Memento ID: " + memento.id + "Memento Instance ID:" + memento.instanceID + " at position: " + memento.tpX + " , " + memento.tpY + " , " + memento.tpZ);
+                    Debug.Log($"Copilot ItemMementoManager: {itemCount}: Memento ID={memento.id} memID={memento.memID} instanceID={memento.instanceID} pos=({memento.tpX}, {memento.tpY}, {memento.tpZ})");
                 }
             }
 
             // Test case to call replay
             // Should replay saved mementos 
-            if (Input.GetKeyDown(startReplayKey))
-            {
-                
-            }            
+            // Moved to MementoSessionReplay
+            // if (Input.GetKeyDown(startReplayKey))
+            // {
+            //     MementoSessionReplay.Instance.BeginPlayback("test");
+            // }            
 
         }
         #endregion Test Methods

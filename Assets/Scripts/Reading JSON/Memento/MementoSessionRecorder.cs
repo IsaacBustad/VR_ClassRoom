@@ -147,9 +147,9 @@ namespace BugFreeProductions.Tools
             {
                 itemMementoRecorders.Add(aIMR);
                 aIMR.InstanceID = nextMementoID;
-                Debug.Log("assigned id = " + nextMementoID);
-                nextMementoID ++;
-                Debug.Log("next id = " + nextMementoID);
+                Debug.Log($"Copilot MementoSessionRecorder.AddSubscriber: assigned recorder InstanceID={nextMementoID} to {aIMR.gameObject.name}");
+                nextMementoID++;
+                Debug.Log($"Copilot MementoSessionRecorder.AddSubscriber: next available ID={nextMementoID}");
             }
         }
 
