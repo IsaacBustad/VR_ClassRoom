@@ -21,7 +21,7 @@ namespace BugFreeProductions.Tools
 
         // Methods
         #region Setup and Finalize placement
-        protected virtual void OnEnable()
+        public virtual void OnEnable()
         {
            CollectVars();
         }

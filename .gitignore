@@ -83,8 +83,3 @@ crashlytics-build.properties
 Assets/Resources/OculusRuntimeSettings.asset
 Assets/Resources/OculusRuntimeSettings.asset
 Assets/Resources/OculusRuntimeSettings.asset
-ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
-Assets/XR/Settings/OpenXR Package Settings.asset
-Assets/Resources/OculusRuntimeSettings.asset.meta
-Assets/Resources/OculusRuntimeSettings.asset
-Assets/Oculus/OculusProjectConfig.asset
