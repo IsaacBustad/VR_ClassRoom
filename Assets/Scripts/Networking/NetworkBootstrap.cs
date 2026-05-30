@@ -9,7 +9,6 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using System.Net;
 using System.Net.Sockets;
-using Unity.VisualScripting;
 
 public class NetworkBootstrap : MonoBehaviour
 {
@@ -42,7 +41,7 @@ public class NetworkBootstrap : MonoBehaviour
     // Call this from a UI Button on the Client machine (Laptop)
     public void StartClient()
     {
-        
+
         string targetIP = inputField.text;
 
         if(manualIpTarget != null)

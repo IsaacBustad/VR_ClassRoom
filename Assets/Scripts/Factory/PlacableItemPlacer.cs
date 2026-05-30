@@ -24,9 +24,9 @@ namespace BugFreeProductions.Tools
         protected PlacableFactoryItem placableFactoryItem = null;
 
         // for additional rotation
-        PlayerInputBridge playerInputBridge = null;
+        protected PlayerInputBridge playerInputBridge = null;
 
-        
+
 
         // Methods
         protected virtual void OnEnable()
@@ -64,7 +64,7 @@ namespace BugFreeProductions.Tools
                 lineRenderer.enabled = true;
                 isPlacing = true;
 
-                
+
             }
             else if (aCon.canceled == true)
             {
@@ -72,13 +72,13 @@ namespace BugFreeProductions.Tools
                 //PlaceItem();
                 isPlacing = false;
                 lineRenderer.enabled = false;
-                
+
 
                 // assigned null for re use
                 factoryItem = null;
                 placableFactoryItem = null;
             }
-            
+
         }
 
 
@@ -101,7 +101,7 @@ namespace BugFreeProductions.Tools
             // Set ID
             nPlacement.id = itemID;
 
-            // set transfom information
+            // set transform information
             Vector3 aPos = posRotHelperTF.position;
 
             nPlacement.tpX = aPos.x;
@@ -135,7 +135,7 @@ namespace BugFreeProductions.Tools
                 posRotHelperTF.rotation = transform.rotation;
 
                 DrawPlacementLine();
-                
+
                 // if we have not created an object to place create here
                 // validates that we are pointing at a valid position
                 if (factoryItem == null)
@@ -146,10 +146,10 @@ namespace BugFreeProductions.Tools
 
 
                 // change body position
-                
+
                 placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position,transform.position,playerInputBridge.AdditionalRotation);
             }
-            
+
         }
 
         // Draw the line of the placement ray
