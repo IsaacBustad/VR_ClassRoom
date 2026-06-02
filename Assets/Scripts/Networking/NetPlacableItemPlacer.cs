@@ -4,12 +4,190 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BugFreeProductions.Tools
 {
     public class NetPlacableObjectPlacer : PlacableItemPlacer
     {
-        
+        #region Vars
+        [SerializeField] protected NetworkBehaviour nb = null;
+        protected bool usersCanPlace = false;
+        #endregion Vars
+
+        // protected virtual void Start()
+        // {
+        //     // NetworkBehaviour nb = gameObject.AddComponent< NetworkBehaviour>();
+        //     // bool ab = nb.isServer;
+        // }
+
+         // Methods
+        protected override void OnEnable()
+        {
+            // get ensure network behavoiur exist
+            if (nb == null)
+            {
+                nb = gameObject.AddComponent< NetworkBehaviour>();   
+            }
+            
+            // execute base
+            // followed by .base code for reference
+            base.OnEnable();
+            //CollectVars();
+        }
+
+        protected override void FixedUpdate()
+        {
+            if(nb.isServer || usersCanPlace)
+            {
+                base.FixedUpdate();
+            }
+
+            // if (isPlacing == true)
+            // {
+            //     CastAndCheckforPlacement();
+            // }
+        }
+
+        protected override void CollectVars()
+        {
+            base.CollectVars();
+            // make sure we have a helper            
+            // posRotHelperTF = new GameObject("posRotHelper").transform;
+
+                        
+            // lineRenderer = GetComponent<LineRenderer>();
+            // lineRenderer.startWidth = 0.2f;
+            // lineRenderer.endWidth = 0.2f;
+            // lineRenderer.enabled = false;
+            // lineRenderer.startColor = Color.green;
+            // lineRenderer.endColor = Color.green;
+        }
+
+        // input testing
+        public override void UsePlacer(InputAction.CallbackContext aCon)
+        {
+            if (nb.isServer || usersCanPlace)
+            {
+                base.UsePlacer(aCon);
+            }
+
+
+
+            // if (aCon.started == true)
+            // {
+            //     lineRenderer.enabled = true;
+            //     isPlacing = true;
+
+                
+            // }
+            // else if (aCon.canceled == true)
+            // {
+            //     PlaceItem();
+            //     //PlaceItem();
+            //     isPlacing = false;
+            //     lineRenderer.enabled = false;
+                
+
+            //     // assigned null for re use
+            //     factoryItem = null;
+            //     placableFactoryItem = null;
+            // }
+            
+        }
+
+
+        // functionality to use placer
+        protected override void PlaceItem()
+        {
+            if (nb.isServer || usersCanPlace)
+            {
+                base.PlaceItem();
+            }
+
+            // if ( placableFactoryItem != null)
+            // {
+            //     placableFactoryItem.FinalizePlacement();
+            // }
+        }
+
+        // Set up placement data via custom calculation
+        protected override ObjectPlacement CalcObjectPlacementData()
+        {
+            if (nb.isServer || usersCanPlace)
+            {
+                base.CalcObjectPlacementData();
+            }
+
+            // // declare returning var
+            // ObjectPlacement nPlacement = new ObjectPlacement();
+
+
+            // // Set ID
+            // nPlacement.id = itemID;
+
+            // // set transform information
+            // Vector3 aPos = posRotHelperTF.position;
+
+            // nPlacement.tpX = aPos.x;
+            // nPlacement.tpY = aPos.y;
+            // nPlacement.tpZ = aPos.z;
+
+
+            // // set rotation Data
+            // Vector3 aRot = transform.eulerAngles;
+
+            // nPlacement.trX = aRot.x;
+            // nPlacement.trY = aRot.y;
+            // nPlacement.trZ = aRot.z;
+
+            // // return calculated placement data
+            // return nPlacement;
+        }
+
+
+        // Use Raycast and other checks to find where to place object
+        protected virtual void CastAndCheckforPlacement()
+        {
+            // store raycast hit
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, transform.forward, out hit, maxPlaceDist, 31, QueryTriggerInteraction.Ignore))
+            {
+
+
+                posRotHelperTF.position = hit.point;
+                posRotHelperTF.rotation = transform.rotation;
+
+                DrawPlacementLine();
+                
+                // if we have not created an object to place create here
+                // validates that we are pointing at a valid position
+                if (factoryItem == null)
+                {
+                    itemFactory.CreateItem(ref factoryItem, CalcObjectPlacementData());
+                    placableFactoryItem = factoryItem.GetComponent<PlacableFactoryItem>();
+                }
+
+
+                // change body position
+                
+                placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position,transform.position,playerInputBridge.AdditionalRotation);
+            }
+            
+        }
+
+        // Draw the line of the placement ray
+        protected virtual void DrawPlacementLine()
+        {
+            //lineRenderer.enabled = true;
+
+            // create array of line points
+            Vector3[] posArray = new Vector3[] {transform.position,posRotHelperTF.position};
+
+            lineRenderer.SetPositions(posArray);
+        }
     }
 }

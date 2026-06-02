@@ -24,7 +24,7 @@ namespace BugFreeProductions.Tools
         protected PlacableFactoryItem placableFactoryItem = null;
 
         // for additional rotation
-        PlayerInputBridge playerInputBridge = null;
+        protected PlayerInputBridge playerInputBridge = null;
 
         
 
