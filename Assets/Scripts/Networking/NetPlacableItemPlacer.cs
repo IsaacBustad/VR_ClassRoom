@@ -10,10 +10,10 @@ using UnityEngine.InputSystem;
 
 namespace BugFreeProductions.Tools
 {
-    public class NetPlacableObjectPlacer : PlacableItemPlacer
+    public class NetPlacableObjectPlacer : VR_PlacableItemPlacerGun
     {
         #region Vars
-        [SerializeField] protected NetworkBehaviour nb = null;
+        [SerializeField] protected NetworkIdentity ni = null;
         protected bool usersCanPlace = false;
         #endregion Vars
 
@@ -27,11 +27,11 @@ namespace BugFreeProductions.Tools
         protected override void OnEnable()
         {
             // get ensure network behavoiur exist
-            if (nb == null)
+            if (ni == null)
             {
-                nb = gameObject.AddComponent< NetworkBehaviour>();   
+                ni = gameObject.GetComponentInParent<NetworkIdentity>();
             }
-            
+
             // execute base
             // followed by .base code for reference
             base.OnEnable();
@@ -40,7 +40,7 @@ namespace BugFreeProductions.Tools
 
         protected override void FixedUpdate()
         {
-            if(nb.isServer || usersCanPlace)
+            if(ni.isServer || usersCanPlace)
             {
                 base.FixedUpdate();
             }
@@ -57,7 +57,7 @@ namespace BugFreeProductions.Tools
             // make sure we have a helper            
             // posRotHelperTF = new GameObject("posRotHelper").transform;
 
-                        
+
             // lineRenderer = GetComponent<LineRenderer>();
             // lineRenderer.startWidth = 0.2f;
             // lineRenderer.endWidth = 0.2f;
@@ -67,9 +67,9 @@ namespace BugFreeProductions.Tools
         }
 
         // input testing
-        public override void UsePlacer(InputAction.CallbackContext aCon)
+        public override void UsePlacer(bool aCon)
         {
-            if (nb.isServer || usersCanPlace)
+            if (ni.isServer || usersCanPlace)
             {
                 base.UsePlacer(aCon);
             }
@@ -81,7 +81,7 @@ namespace BugFreeProductions.Tools
             //     lineRenderer.enabled = true;
             //     isPlacing = true;
 
-                
+
             // }
             // else if (aCon.canceled == true)
             // {
@@ -89,20 +89,20 @@ namespace BugFreeProductions.Tools
             //     //PlaceItem();
             //     isPlacing = false;
             //     lineRenderer.enabled = false;
-                
+
 
             //     // assigned null for re use
             //     factoryItem = null;
             //     placableFactoryItem = null;
             // }
-            
+
         }
 
 
         // functionality to use placer
         protected override void PlaceItem()
         {
-            if (nb.isServer || usersCanPlace)
+            if (ni.isServer || usersCanPlace)
             {
                 base.PlaceItem();
             }
@@ -116,10 +116,14 @@ namespace BugFreeProductions.Tools
         // Set up placement data via custom calculation
         protected override ObjectPlacement CalcObjectPlacementData()
         {
-            if (nb.isServer || usersCanPlace)
-            {
-                base.CalcObjectPlacementData();
-            }
+            // if (nb.isServer || usersCanPlace)
+            // {
+            //     base.CalcObjectPlacementData();
+            // }
+
+            // monitor this line for errors
+            // may be fine to use since this is only called by the object itself
+            return base.CalcObjectPlacementData();
 
             // // declare returning var
             // ObjectPlacement nPlacement = new ObjectPlacement();
@@ -149,45 +153,47 @@ namespace BugFreeProductions.Tools
 
 
         // Use Raycast and other checks to find where to place object
-        protected virtual void CastAndCheckforPlacement()
+        protected override void CastAndCheckforPlacement()
         {
-            // store raycast hit
-            RaycastHit hit;
+            base.CastAndCheckforPlacement();
+            // // store raycast hit
+            // RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, maxPlaceDist, 31, QueryTriggerInteraction.Ignore))
-            {
-
-
-                posRotHelperTF.position = hit.point;
-                posRotHelperTF.rotation = transform.rotation;
-
-                DrawPlacementLine();
-                
-                // if we have not created an object to place create here
-                // validates that we are pointing at a valid position
-                if (factoryItem == null)
-                {
-                    itemFactory.CreateItem(ref factoryItem, CalcObjectPlacementData());
-                    placableFactoryItem = factoryItem.GetComponent<PlacableFactoryItem>();
-                }
+            // if (Physics.Raycast(transform.position, transform.forward, out hit, maxPlaceDist, 31, QueryTriggerInteraction.Ignore))
+            // {
 
 
-                // change body position
-                
-                placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position,transform.position,playerInputBridge.AdditionalRotation);
-            }
-            
+            //     posRotHelperTF.position = hit.point;
+            //     posRotHelperTF.rotation = transform.rotation;
+
+            //     DrawPlacementLine();
+
+            //     // if we have not created an object to place create here
+            //     // validates that we are pointing at a valid position
+            //     if (factoryItem == null)
+            //     {
+            //         itemFactory.CreateItem(ref factoryItem, CalcObjectPlacementData());
+            //         placableFactoryItem = factoryItem.GetComponent<PlacableFactoryItem>();
+            //     }
+
+
+            //     // change body position
+
+            //     placableFactoryItem.PositionAndRotateBody(posRotHelperTF.position,transform.position,playerInputBridge.AdditionalRotation);
+            // }
+
         }
 
         // Draw the line of the placement ray
-        protected virtual void DrawPlacementLine()
+        protected override void DrawPlacementLine()
         {
-            //lineRenderer.enabled = true;
+            base.DrawPlacementLine();
+            // //lineRenderer.enabled = true;
 
-            // create array of line points
-            Vector3[] posArray = new Vector3[] {transform.position,posRotHelperTF.position};
+            // // create array of line points
+            // Vector3[] posArray = new Vector3[] {transform.position,posRotHelperTF.position};
 
-            lineRenderer.SetPositions(posArray);
+            // lineRenderer.SetPositions(posArray);
         }
     }
 }

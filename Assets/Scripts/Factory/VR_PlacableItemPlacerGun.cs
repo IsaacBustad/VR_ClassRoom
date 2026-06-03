@@ -51,7 +51,7 @@ namespace BugFreeProductions.Tools
                 CastAndCheckforPlacement();
             }
             ClearAdditionalRot();
-            
+
 
         }
 
@@ -83,7 +83,7 @@ namespace BugFreeProductions.Tools
         }
 
         // input converted to bool callback to allow mapper mapping
-        public void UsePlacer(bool aCon)
+        public virtual void UsePlacer(bool aCon)
         {
             if (gameObject.activeSelf == true)
             {
@@ -107,13 +107,13 @@ namespace BugFreeProductions.Tools
                     placableFactoryItem = null;
                 }
             }
-            
+
 
         }
 
 
         // functionality to use placer
-        protected void PlaceItem()
+        protected virtual void PlaceItem()
         {
             if (placableFactoryItem != null)
             {
