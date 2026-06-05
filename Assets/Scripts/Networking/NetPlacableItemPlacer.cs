@@ -15,6 +15,9 @@ namespace BugFreeProductions.Tools
         #region Vars
         [SerializeField] protected NetworkIdentity ni = null;
         protected bool usersCanPlace = false;
+
+        // ref for the networked item spawner
+        protected NetPlacableItemSpawner netItemSpawner = null;
         #endregion Vars
 
         // protected virtual void Start()
@@ -23,7 +26,7 @@ namespace BugFreeProductions.Tools
         //     // bool ab = nb.isServer;
         // }
 
-         // Methods
+        // Methods
         protected override void OnEnable()
         {
             // get ensure network behavoiur exist
@@ -53,6 +56,9 @@ namespace BugFreeProductions.Tools
 
         protected override void CollectVars()
         {
+            // get the NetPlacableItemSpawner reference
+            netItemSpawner = GetComponent<NetPlacableItemSpawner>();
+
             base.CollectVars();
             // make sure we have a helper            
             // posRotHelperTF = new GameObject("posRotHelper").transform;
@@ -102,9 +108,21 @@ namespace BugFreeProductions.Tools
         // functionality to use placer
         protected override void PlaceItem()
         {
-            if (ni.isServer || usersCanPlace)
+            if (ni.isServer)
             {
                 base.PlaceItem();
+
+                NetworkServer.Spawn(placableFactoryItem.gameObject);
+
+            }
+
+            // for players to place items
+            else if (usersCanPlace)
+            {
+                if (netItemSpawner != null)
+                {
+                    netItemSpawner.RequestNetworkItemSpawn(placableFactoryItem.ObjectPlacement().ToNetPlacementData());
+                }
             }
 
             // if ( placableFactoryItem != null)
@@ -194,6 +212,12 @@ namespace BugFreeProductions.Tools
             // Vector3[] posArray = new Vector3[] {transform.position,posRotHelperTF.position};
 
             // lineRenderer.SetPositions(posArray);
+        }
+
+        // spawn Item on network
+        protected void CMDSpawnNetItem()
+        {
+            NetworkServer.Spawn(placableFactoryItem.gameObject);
         }
     }
 }

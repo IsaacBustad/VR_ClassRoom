@@ -31,7 +31,7 @@ namespace BugFreeProductions.Tools
         public int instanceID = 0;
         #endregion
 
-        #region constructors
+        #region Constructors
         public ObjectPlacement() { }
         
         // full constructor for FactoryItem
@@ -39,7 +39,7 @@ namespace BugFreeProductions.Tools
         // replace existing code to simplify
         public ObjectPlacement(float aTpX, float aTpY, float aTpZ, 
                                float aTrX, float aTrY, float aTrZ, 
-                               string aID) 
+                               string aID)
         {
             // set position
             this.tpX = aTpX;
@@ -64,8 +64,24 @@ namespace BugFreeProductions.Tools
             this.instanceID = aOP.instanceID;
         }
 
+        // convert NetPlacementData to ObjectPlacement
+        // chain to full constructor
+        public ObjectPlacement(NetPlacementData aNPD) : this(aNPD.position.x, aNPD.position.y, aNPD.position.z,
+                                                            aNPD.rotation.x, aNPD.rotation.y, aNPD.rotation.z,
+                                                            aNPD.itemID)
+        {
+            // addition future actions
+        }
 
-        #endregion
+        #endregion Constructors
+
+        #region Methods
+        public virtual NetPlacementData ToNetPlacementData()
+        {
+            NetPlacementData npd = new NetPlacementData(this);
+            return npd;
+        }
+        #endregion Methods
 
 
     }
