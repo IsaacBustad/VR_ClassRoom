@@ -10,14 +10,30 @@
 
 ## Step 2: Spawn Objects on the Network
 
-- [ ] Host should be able to place networked objects using PlacableItemPlacer 
-- [ ] Creat new NetPlacableItems
+- [x] Host should be able to place networked objects using PlacableItemPlacer 
+- [ ] Hllow host to permit user to place items in the room
+- [ ] Client should be able to place items using PlacableItemPlacer 
+  - [ ] User the NetworkPermissionsMannager to enable user to place items
+  - [ ] Spawan the item using the command on the spawn bridge
+- [x] Creat new NetPlacableItems
 
 ## Step 3: Item Remover Conversion
 
 - [ ] Create a NetPlacableItemRemover
   - [ ] Inherit  PlacableItemRemover to NetPlacableItemRemover
+- [ ] Allow host to remove network items
+- [ ] Allow host to toggel guest permission to remove items
+- [ ] Allow guest to remove items
+  - [ ] Guest can only remove items when permitted
+  - [ ] Guest can remove networked Items from the scene
 
 ## Step 4: Memento
 
 - [ ] Create Networked Memento system
+- [ ] Add permission for recording
+- [ ] Add Permission for replay
+- [ ] Allow host to record the networked room
+- [ ] Allow client to record the the networked room
+- [ ] Optional allow networked replay 
+  - [ ] Allow host to replay
+  - [ ] Allow guest to replay

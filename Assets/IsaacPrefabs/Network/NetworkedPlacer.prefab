@@ -205,8 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7169d605af6c3ba43b7147279d305ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: Chair
-  itemFactory: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
+  itemID: BlackChair_1
+  itemFactory: {fileID: 11400000, guid: 6c8e106cde277874e8878010bd60b4ff, type: 2}
   maxPlaceDist: 5
   rotSense: 31.8
 --- !u!114 &447262554062522621
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: Chair
-  itemFactory: {fileID: 11400000, guid: b26e52742f66d0d45b424cbcad6f9387, type: 2}
+  itemFactory: {fileID: 11400000, guid: 6c8e106cde277874e8878010bd60b4ff, type: 2}
   maxPlaceDist: 5
   rotSense: 1
-  nb: {fileID: 0}
+  ni: {fileID: 0}
