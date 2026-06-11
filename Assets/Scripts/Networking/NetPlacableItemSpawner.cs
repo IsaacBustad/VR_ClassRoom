@@ -20,6 +20,11 @@ namespace BugFreeProductions.Tools
             // call the network spawn command
             CmdSpawnNetworkItem(netPlacementData);
         }
+        public virtual void RequestNetworkItemDeSpawn(uint aNI)
+        {
+            // call the network spawn command
+            CmdRequestNetworkItemDeSpawn(aNI);
+        }
 
         [Command] protected virtual void CmdSpawnNetworkItem(NetPlacementData netPlacementData)
         {
@@ -43,6 +48,17 @@ namespace BugFreeProductions.Tools
                 Debug.Log("Abstract Factory reference is not assigned");
             }
             //NetworkServer.Spawn();
+        }
+
+        [Command] protected virtual void CmdRequestNetworkItemDeSpawn(uint aNI)
+        {
+            if (NetworkServer.spawned.TryGetValue(aNI, out NetworkIdentity identity))
+            {
+                GameObject obj = identity.gameObject;
+                // Handle your server-side logic here
+
+                NetworkServer.Destroy(obj);
+            }
         }
         #endregion Methods
     }

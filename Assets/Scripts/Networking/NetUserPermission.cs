@@ -12,11 +12,12 @@ namespace BugFreeProductions.Tools
     public class NetUserPermission : NetworkBehaviour
     {
         #region Vars
-        protected NetUserPermission instance = null;
+        protected static NetUserPermission instance = null;
 
         #region Synced and Network Vars
         // network and synced variables
-        [SyncVar] protected bool guestCanPlace = false;
+        [SyncVar] protected bool guestCanEdit = false;
+        [SyncVar] protected bool guestCanRecord = false;
 
         #endregion Synced and Network Vars
         #endregion Vars
@@ -27,6 +28,11 @@ namespace BugFreeProductions.Tools
             if (instance == null)
             {
                 instance = this;
+            }
+
+            else
+            {
+                Destroy(gameObject);
             }
 
 
@@ -41,23 +47,53 @@ namespace BugFreeProductions.Tools
         public virtual void ToggleGuestCanPlace()
         {
             // check if is owned by the local object
-            if (isOwned)
+            if (isOwned && isServer)
             {
+                guestCanEdit = !guestCanEdit;
                 // request the permission be toggeled via command
-                CmdToggleGuestCanPlace();
+                //CmdToggleGuestCanEdit();
             }
 
 
         }
 
         // command to request server toggle permission 
-        [Command] protected virtual void CmdToggleGuestCanPlace()
+        // [Command] protected virtual void CmdToggleGuestCanEdit()
+        // {
+        //     if (isServer)
+        //     {
+        //         guestCanEdit = !guestCanEdit;
+        //     }
+        // }
+        #endregion Methods
+
+        #region Accessors
+        
+
+        public static NetUserPermission Instance
         {
-            if (isServer)
+            get
             {
-                guestCanPlace = !guestCanPlace;
+                return instance;
             }
         }
-        #endregion Methods
+
+        public static bool GuestCanEdit
+        {
+            get
+            {
+                return instance.guestCanEdit;
+            }
+
+        }
+
+        public static bool GuestCanRecord
+        {
+            get
+            {
+                return instance.guestCanRecord;
+            }
+        }
+        #endregion Accessors
     }
 }

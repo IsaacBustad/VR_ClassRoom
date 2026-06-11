@@ -20,7 +20,8 @@ namespace BugFreeProductions.Tools
 
         protected VR_PlacableItemPlacerGun pipg = null;
         protected VR_PlacableItemRemoverGun pirg = null;
-        #endregion
+
+        #endregion Vars
 
         #region Methods
         protected virtual void OnEnable()
