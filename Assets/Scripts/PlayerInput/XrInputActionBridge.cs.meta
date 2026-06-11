@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 88f8629e71494e749bfdda2cfe016736
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rightIndexTriggerAction: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - rightMiddleTriggerAction: {fileID: -7621925406209348655, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - leftIndexTriggerAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - leftMiddleTriggerAction: {fileID: -8148491892877670638, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

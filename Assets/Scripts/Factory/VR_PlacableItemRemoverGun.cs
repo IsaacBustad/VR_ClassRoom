@@ -82,6 +82,7 @@ namespace BugFreeProductions.Tools
 
         public virtual void UseRemover(bool aCon)
         {
+            Debug.Log("Call Use remover");
             if(gameObject.activeSelf == true)
             {
                 if (aCon == true)

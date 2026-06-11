@@ -4403,6 +4403,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5805358067795240514}
+  - component: {fileID: 1009953695215735869}
+  - component: {fileID: 4366262901599237406}
   - component: {fileID: 8065993943678141220}
   m_Layer: 0
   m_Name: '[BuildingBlock] Camera Rig'
@@ -4428,6 +4430,39 @@ Transform:
   - {fileID: 7751384884673607720}
   m_Father: {fileID: 1247940271670152084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1009953695215735869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891677912194657198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b023183069df224080314a560e6e1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
+  instanceId: 0ada377a-d8c6-4f39-a4ec-96ca8d40cbbd
+  version: 1
+  installationRoutineCheckpoint:
+    _installationRoutineId: 
+    _installationVariants: []
+--- !u!114 &4366262901599237406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891677912194657198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9f338034892c44ebb62d97894772f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usePerEyeCameras: 0
+  useFixedUpdateForTracking: 0
+  disableEyeAnchorCameras: 0
 --- !u!114 &8065993943678141220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10327,7 +10362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b47e36715521d4e8a30d2c5b6e83e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ovrCameraRig: {fileID: 0}
+  _ovrCameraRig: {fileID: 4366262901599237406}
   _requireOvrHands: 1
 --- !u!114 &2153286386759978809
 MonoBehaviour:
@@ -12818,7 +12853,7 @@ GameObject:
   - component: {fileID: 6980271150585032711}
   - component: {fileID: 1876408455756743380}
   m_Layer: 0
-  m_Name: NetworkPlayer 1
+  m_Name: NetworkPlayerTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12856,7 +12891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 2600315550
+  _assetId: 3972756965
   serverOnly: 0
   visibility: 0
   hasSpawned: 0

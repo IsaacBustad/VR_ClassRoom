@@ -75,6 +75,7 @@ namespace BugFreeProductions.Tools
         // input testing
         public override void UsePlacer(bool aCon)
         {
+            Debug.Log("Use Placer");
             if (ni.isServer || usersCanPlace)
             {
                 base.UsePlacer(aCon);
@@ -112,7 +113,10 @@ namespace BugFreeProductions.Tools
             {
                 base.PlaceItem();
 
-                NetworkServer.Spawn(placableFactoryItem.gameObject);
+                if (placableFactoryItem != null)
+                {
+                    NetworkServer.Spawn(placableFactoryItem.gameObject);
+                }
 
             }
 

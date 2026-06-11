@@ -2,9 +2,9 @@
 // 3/14/2025
 
 
-using BugFreeProductions.Tools;
 using System.Collections;
 using System.Collections.Generic;
+using BugFreeProductions.Tools;
 using UnityEngine;
 
 
@@ -24,7 +24,7 @@ namespace BugFreeProductions.Tools
 
 
         // temp vars for placement
-        protected FactoryItem factoryItem = null;
+        [SerializeField] protected FactoryItem factoryItem = null;
         protected PlacableFactoryItem placableFactoryItem = null;
 
 
@@ -85,6 +85,7 @@ namespace BugFreeProductions.Tools
         // input converted to bool callback to allow mapper mapping
         public virtual void UsePlacer(bool aCon)
         {
+            Debug.Log("Use the placer");
             if (gameObject.activeSelf == true)
             {
                 if (aCon == true)
@@ -96,7 +97,9 @@ namespace BugFreeProductions.Tools
                 }
                 else if (aCon == false)
                 {
+                    Debug.Log("pre place");
                     PlaceItem();
+                    Debug.Log("post place");
                     //PlaceItem();
                     isPlacing = false;
                     lineRenderer.enabled = false;
@@ -170,6 +173,7 @@ namespace BugFreeProductions.Tools
                 // validates that we are pointing at a valid position
                 if (factoryItem == null)
                 {
+                    Debug.Log("Item created");
                     itemFactory.CreateItem(ref factoryItem, CalcObjectPlacementData());
                     placableFactoryItem = factoryItem.GetComponent<PlacableFactoryItem>();
                 }
