@@ -1,6 +1,6 @@
 # VR Classroom To do and Dev Log
 
-## Step 1: Placer conversion
+## Placer conversion
 
 - [x] inherit from PlacableItemPlacer to NetPlacableItemPlacer
 - [x] Edit a copy of the placer gun
@@ -11,23 +11,39 @@
 ## Step 2: Spawn Objects on the Network
 
 - [x] Host should be able to place networked objects using PlacableItemPlacer 
-- [ ] Hllow host to permit user to place items in the room
+- [ ] Allow host to permit user to place items in the room
 - [ ] Client should be able to place items using PlacableItemPlacer 
   - [ ] User the NetworkPermissionsMannager to enable user to place items
   - [ ] Spawan the item using the command on the spawn bridge
 - [x] Creat new NetPlacableItems
+- [ ] Disable placer on Guest Can Edit Turned off
+- [ ] Enable placer on Guest Can Edit Turned on
 
 ## Step 3: Item Remover Conversion
 
-- [ ] Create a NetPlacableItemRemover
-  - [ ] Inherit  PlacableItemRemover to NetPlacableItemRemover
-- [ ] Allow host to remove network items
+- [x] Create a NetPlacableItemRemover
+  - [x] Inherit  PlacableItemRemover to NetPlacableItemRemover
+- [x] Allow host to remove network items
 - [ ] Allow host to toggel guest permission to remove items
 - [ ] Allow guest to remove items
   - [ ] Guest can only remove items when permitted
   - [ ] Guest can remove networked Items from the scene
+- [ ] Disable Remover on Guest Can Edit Turned off
+- [ ] Enable Remover on Guest Can Edit Turned on
 
-## Step 4: Memento
+## Step 4: Canvas For Selection
+
+- [ ] Allow the host to permit or deney guest to place items
+- [ ] Allow the host to permit or deney guest to place items
+- [ ] Allow host and guest to select what Item to place 
+- [ ] Allow host and guest to record a session
+
+## Step 5: Grab and Interact with Items in XR
+
+- [ ] Allow the host and guest to interact with the placed items
+- [ ] Make sure that transforms and states are updated
+
+## Step 5: Memento
 
 - [ ] Create Networked Memento system
 - [ ] Add permission for recording
@@ -37,3 +53,15 @@
 - [ ] Optional allow networked replay 
   - [ ] Allow host to replay
   - [ ] Allow guest to replay
+
+## Optional features
+
+- [ ] Rebuild local room building functions
+  - [ ] Local Placer Update
+  - [ ] Local Player Construction
+
+## On Location Development Tasks
+
+- [ ] UI compleate
+- [ ] Grab and interact with objects
+- [ ] Begin Memento Conversion
