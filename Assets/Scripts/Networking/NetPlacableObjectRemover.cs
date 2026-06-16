@@ -88,7 +88,7 @@ namespace BugFreeProductions.Tools
 
         public override void UseRemover(bool aCon)
         {
-            if (ni.isServer || NetUserPermission.GuestCanEdit)
+            if (ni.isServer || NetGuestPermissionManager.GuestCanEdit)
             {
                 base.UseRemover(aCon);
             }

@@ -1,6 +1,7 @@
 // Created By   :   Isaac Bustad
 // Created      :   6/8/2026
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
@@ -9,20 +10,33 @@ using UnityEngine;
 
 namespace BugFreeProductions.Tools
 {
-    public class NetUserPermission : NetworkBehaviour
+    public class NetGuestPermissionManager : NetworkBehaviour
     {
         #region Vars
-        protected static NetUserPermission instance = null;
+        protected static NetGuestPermissionManager instance = null;
+
+        // actions that need to be run on variable updates
+        public event Action<NetGuestPermissionManager> OnPermissionsChanged;
 
         #region Synced and Network Vars
         // network and synced variables
-        [SyncVar] protected bool guestCanEdit = false;
-        [SyncVar] protected bool guestCanRecord = false;
+        [SyncVar(hook = nameof(OnPermissionDataChanged))] NetGuestPermission netGuestPermission = new NetGuestPermission();
+        
 
         #endregion Synced and Network Vars
         #endregion Vars
 
         #region Methods
+        // Write the matching hook method
+        private void OnPermissionDataChanged(NetGuestPermission oldData, NetGuestPermission newData)
+        {
+            // Optional: Protect against unnecessary execution if the data didn't actually change
+            // (Note: Structs compare all fields automatically when using Equals or == if implemented)
+            if (oldData.Equals(newData)) return;
+
+            // Broadcast the update to your local UI subscribers
+            OnPermissionsChanged?.Invoke(this);
+        }
         protected virtual void OnEnable()
         {
             if (instance == null)
@@ -39,7 +53,7 @@ namespace BugFreeProductions.Tools
         }
         public override void OnStartClient()
         {
-
+            OnPermissionsChanged?.Invoke(instance);
         }
 
         // Only the owner should be able to request 
@@ -49,7 +63,9 @@ namespace BugFreeProductions.Tools
             // check if is owned by the local object
             if (isOwned && isServer)
             {
-                guestCanEdit = !guestCanEdit;
+                NetGuestPermission nNetGuestPermission = netGuestPermission;
+
+                nNetGuestPermission.guestCanEdit = !nNetGuestPermission.guestCanEdit;
                 // request the permission be toggeled via command
                 //CmdToggleGuestCanEdit();
             }
@@ -70,7 +86,7 @@ namespace BugFreeProductions.Tools
         #region Accessors
         
 
-        public static NetUserPermission Instance
+        public static NetGuestPermissionManager Instance
         {
             get
             {
@@ -82,7 +98,7 @@ namespace BugFreeProductions.Tools
         {
             get
             {
-                return instance.guestCanEdit;
+                return instance.netGuestPermission.guestCanEdit;
             }
 
         }
@@ -91,9 +107,11 @@ namespace BugFreeProductions.Tools
         {
             get
             {
-                return instance.guestCanRecord;
+                return instance.netGuestPermission.guestCanRecord;
             }
         }
         #endregion Accessors
     }
+
+
 }
