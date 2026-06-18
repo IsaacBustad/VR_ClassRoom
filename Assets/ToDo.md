@@ -16,8 +16,8 @@
   - [ ] User the NetworkPermissionsMannager to enable user to place items
   - [ ] Spawan the item using the command on the spawn bridge
 - [x] Creat new NetPlacableItems
-- [ ] Disable placer on Guest Can Edit Turned off
-- [ ] Enable placer on Guest Can Edit Turned on
+- [x] Disable placer on Guest Can Edit Turned off
+- [x] Enable placer on Guest Can Edit Turned on
 
 ## Step 3: Item Remover Conversion
 
@@ -33,14 +33,14 @@
 
 ## Step 4: Canvas For Selection
 
-- [ ] Allow the host to permit or deney guest to place items
-- [ ] Allow the host to permit or deney guest to place items
+- [x] Allow the host to permit or deney guest to place items
+- [x] Allow the host to permit or deney guest to place items
 - [ ] Allow host and guest to select what Item to place 
-- [ ] Allow host and guest to record a session
+- [x] Allow host and guest to record a session
 
 ## Step 5: Grab and Interact with Items in XR
 
-- [ ] Allow the host and guest to interact with the placed items
+- [x] Allow the host and guest to interact with the placed items
 - [ ] Make sure that transforms and states are updated
 
 ## Step 5: Memento
@@ -63,5 +63,5 @@
 ## On Location Development Tasks
 
 - [ ] UI compleate
-- [ ] Grab and interact with objects
+- [x] Grab and interact with objects
 - [ ] Begin Memento Conversion

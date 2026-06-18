@@ -16,26 +16,27 @@ namespace BugFreeProductions.Tools
         protected static NetGuestPermissionManager instance = null;
 
         // actions that need to be run on variable updates
-        public event Action<NetGuestPermissionManager> OnPermissionsChanged;
+        public event Action<NetGuestPermission> OnPermissionsChanged;
 
         #region Synced and Network Vars
         // network and synced variables
         [SyncVar(hook = nameof(OnPermissionDataChanged))] NetGuestPermission netGuestPermission = new NetGuestPermission();
-        
+
 
         #endregion Synced and Network Vars
         #endregion Vars
 
         #region Methods
         // Write the matching hook method
-        private void OnPermissionDataChanged(NetGuestPermission oldData, NetGuestPermission newData)
+        protected virtual void OnPermissionDataChanged(NetGuestPermission oldData, NetGuestPermission newData)
         {
             // Optional: Protect against unnecessary execution if the data didn't actually change
             // (Note: Structs compare all fields automatically when using Equals or == if implemented)
             if (oldData.Equals(newData)) return;
 
             // Broadcast the update to your local UI subscribers
-            OnPermissionsChanged?.Invoke(this);
+            OnPermissionsChanged?.Invoke(netGuestPermission);
+            Debug.Log("Data = bool can edit : " + netGuestPermission.guestCanEdit);
         }
         protected virtual void OnEnable()
         {
@@ -44,29 +45,48 @@ namespace BugFreeProductions.Tools
                 instance = this;
             }
 
-            else
-            {
-                Destroy(gameObject);
-            }
+            // else
+            // {
+            //     Destroy(gameObject);
+            // }
 
 
         }
         public override void OnStartClient()
         {
-            OnPermissionsChanged?.Invoke(instance);
+            OnPermissionsChanged?.Invoke(netGuestPermission);
         }
 
         // Only the owner should be able to request 
         // the guest placing permission changing
-        public virtual void ToggleGuestCanPlace()
+        public virtual void ToggleGuestCanEdit()
         {
-            // check if is owned by the local object
-            if (isOwned && isServer)
+            // check if is owned by the local object 
+            if (isServer)
             {
                 NetGuestPermission nNetGuestPermission = netGuestPermission;
 
                 nNetGuestPermission.guestCanEdit = !nNetGuestPermission.guestCanEdit;
-                // request the permission be toggeled via command
+
+                netGuestPermission = nNetGuestPermission;
+                // request the permission be toggled via command
+                //CmdToggleGuestCanEdit();
+            }
+
+
+        }
+
+        public virtual void ToggleGuestCanRecord()
+        {
+            // check if is owned by the local object 
+            if (isServer)
+            {
+                NetGuestPermission nNetGuestPermission = netGuestPermission;
+
+                nNetGuestPermission.guestCanRecord = !nNetGuestPermission.guestCanRecord;
+
+                netGuestPermission = nNetGuestPermission;
+                // request the permission be toggled via command
                 //CmdToggleGuestCanEdit();
             }
 
@@ -84,7 +104,7 @@ namespace BugFreeProductions.Tools
         #endregion Methods
 
         #region Accessors
-        
+
 
         public static NetGuestPermissionManager Instance
         {

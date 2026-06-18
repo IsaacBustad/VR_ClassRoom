@@ -14,7 +14,7 @@ namespace BugFreeProductions.Tools
     {
         #region Vars
         [SerializeField] protected NetworkIdentity ni = null;
-        protected bool usersCanPlace = false;
+        
 
         // ref for the networked item spawner
         protected NetPlacableItemSpawner netItemSpawner = null;
@@ -43,7 +43,7 @@ namespace BugFreeProductions.Tools
 
         protected override void FixedUpdate()
         {
-            if(ni.isServer || usersCanPlace)
+            if(ni.isServer || NetGuestPermissionManager.GuestCanEdit)
             {
                 base.FixedUpdate();
             }
@@ -76,7 +76,7 @@ namespace BugFreeProductions.Tools
         public override void UsePlacer(bool aCon)
         {
             Debug.Log("Use Placer");
-            if (ni.isServer || usersCanPlace)
+            if (ni.isServer || NetGuestPermissionManager.GuestCanEdit)
             {
                 base.UsePlacer(aCon);
             }
@@ -121,7 +121,7 @@ namespace BugFreeProductions.Tools
             }
 
             // for players to place items
-            else if (usersCanPlace)
+            else if (NetGuestPermissionManager.GuestCanEdit)
             {
                 if (netItemSpawner != null)
                 {
@@ -221,10 +221,6 @@ namespace BugFreeProductions.Tools
             // lineRenderer.SetPositions(posArray);
         }
 
-        // spawn Item on network
-        protected void CMDSpawnNetItem()
-        {
-            NetworkServer.Spawn(placableFactoryItem.gameObject);
-        }
+        
     }
 }

@@ -44,11 +44,11 @@ namespace BugFreeProductions.Tools
         // reference to Abstract Factory
         [SerializeField] private AbstractFactory_SCO abf_SCO = null;
 
-        
 
-        
-        
-        
+
+
+
+
         // hold path
         protected string recordPath = "/record/test";
 
@@ -69,7 +69,7 @@ namespace BugFreeProductions.Tools
 
         #region Test Methods
         // for testing start/stop recording
-        protected void TestByKey()
+        protected virtual void TestByKey()
         {
             if (Input.GetKeyDown(startRecordingKey))
             {
@@ -119,7 +119,7 @@ namespace BugFreeProductions.Tools
         }
 
         // make Singelten on enable
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             SetDefaults();
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -149,7 +149,7 @@ namespace BugFreeProductions.Tools
 
         #endregion Methods
 
-        
+
 
 
         #region Accessors
@@ -167,7 +167,7 @@ namespace BugFreeProductions.Tools
         }
 
         // Access for all pooled items
-        public List<Poolable> PooledItems
+        public virtual List<Poolable> PooledItems
         {
             get
             {
@@ -177,14 +177,14 @@ namespace BugFreeProductions.Tools
         }
 
         // Access for test record path
-        public string TestRecordPath
+        public virtual string TestRecordPath
         {
             get
             {
                 return testRecordPath;
             }
         }
-        
+
         // Access te abstract factory for spawning new objects
         public virtual AbstractFactory_SCO AbstractFactory_SCO
         {
@@ -193,7 +193,7 @@ namespace BugFreeProductions.Tools
                 return abf_SCO;
             }
         }
-        
+
         #endregion Accessors
     }
 }

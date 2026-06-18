@@ -3,9 +3,9 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 
 namespace BugFreeProductions.Tools
@@ -15,17 +15,15 @@ namespace BugFreeProductions.Tools
     {
         #region Vars
         // needed to check and toggel permissions for guest
-        protected NetGuestPermissionManager netUserPermission = null;
+        //protected NetGuestPermissionManager netUserPermission = null;
 
         // objects that should be enabled for the host
-        [SerializeField] protected List<GameObject> hostUI = new List<GameObject>();
+        [SerializeField] protected List<GameObject> itemsInUI = new List<GameObject>();
 
         // dedicated host UI slots
         [SerializeField] protected GameObject guestCanEditBtn = null;
         [SerializeField] protected GameObject guestCanRecordBtn = null;
 
-        // objects that should be enabled on guest
-        [SerializeField] List<GameObject> guestUI = new List<GameObject>();
 
         // positive and negative colors
         [SerializeField] protected Color positiveColor = Color.green;
@@ -38,25 +36,36 @@ namespace BugFreeProductions.Tools
         #region Methods
         protected virtual void OnEnable()
         {
-            CollectVars();
-            Setup();
+            //CollectVars();
+            //Setup();
+            NetGuestPermissionManager.Instance.OnPermissionsChanged += OnPermissionDataChanged;
         }
 
         protected virtual void CollectVars()
         {
-            // collect the NetUserPermission for refference
-            netUserPermission = NetGuestPermissionManager.Instance;
-            
+            // collect the NetUserPermission for reference
+            //netUserPermission = NetGuestPermissionManager.Instance;
+
         }
 
         public virtual void ToggleGuestCanRecord()
         {
-            
+            NetGuestPermissionManager.Instance.ToggleGuestCanRecord();
+            Debug.Log("Edit Record Called");
         }
 
         public virtual void ToggleGuestCanEdit()
         {
-            
+            NetGuestPermissionManager.Instance.ToggleGuestCanEdit();
+            Debug.Log("Edit Called");
+        }
+
+        protected virtual void OnPermissionDataChanged(NetGuestPermission netGuestPermission)
+        {
+            Setup();
+            SetupColor(guestCanEditBtn,netGuestPermission.guestCanEdit);
+            SetupColor(guestCanRecordBtn,netGuestPermission.guestCanRecord);
+
         }
 
         protected virtual void Setup()
@@ -66,14 +75,14 @@ namespace BugFreeProductions.Tools
 
             // if true turn on the ui items for host
             // if false turn off ui items for the host
-            foreach (GameObject uiItem in hostUI)
+            foreach (GameObject uiItem in itemsInUI)
             {
-                // make objects visable
+                // make objects visible
                 uiItem.SetActive(true);
 
-                uiItem.GetComponent<Button>().enabled = !isServer;
+                uiItem.GetComponent<Button>().enabled = isServer;
                 //uiItem.SetActive(!isServer);
-                SetupColor(uiItem);
+                //SetupColor(uiItem);
             }
 
             // if true turn off the ui items for guest
@@ -84,10 +93,10 @@ namespace BugFreeProductions.Tools
             //     SetupColor(uiItem);
             // }
 
-            SetupColor(guestCanEditBtn,!netUserPermission.isServer);
 
 
-           
+
+
         }
 
         protected virtual void SetupColor(GameObject uiItem)
@@ -97,12 +106,12 @@ namespace BugFreeProductions.Tools
 
             // set the button text color
             uiItem.GetComponentInChildren<TextMeshProUGUI>().color = textColor;
-            
+
         }
 
         protected virtual void SetupColor(GameObject uiItem, bool permitted)
         {
-            if(permitted == true)
+            if(permitted)
             {
                 // set the button color
                 uiItem.GetComponent<Image>().color = positiveColor;
@@ -119,10 +128,10 @@ namespace BugFreeProductions.Tools
                 // set the button text color
                 uiItem.GetComponentInChildren<TextMeshProUGUI>().color = textColor;
             }
-           
-            
+
+
         }
-        
+
 
         #endregion Methods
     }

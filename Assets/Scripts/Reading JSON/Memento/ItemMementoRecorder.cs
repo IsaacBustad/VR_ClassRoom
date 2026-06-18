@@ -13,7 +13,7 @@ namespace BugFreeProductions.Tools
     // records a memento of a game object
     public class ItemMementoRecorder : MonoBehaviour , Subscriber
     {
-        
+
         #region Vars
         // instance ID to be used for recording specific item
         protected int instanceID = -1;
@@ -45,20 +45,20 @@ namespace BugFreeProductions.Tools
         #endregion // Unity Event Methods
 
         public virtual void RecordMemento(bool isDestroyed)
-        {            
+        {
             // ref to FactoryItem
             FactoryItem factoryItem = GetComponent<FactoryItem>();
 
             // get a ObjectPlacement to base the memento on
             ObjectPlacement objP = factoryItem.ObjectPlacement();
-                       
+
             // create the memento
             ItemMemento itemMemento = new ItemMemento(objP);
-            
+
             // set the memento's unique identifier for both playback and serialized instance tracking
             itemMemento.memID = instanceID;
             itemMemento.instanceID = instanceID;
-            Debug.Log($"Copilot ItemMementoRecorder.RecordMemento: recorder instanceID={instanceID}, itemMemento.memID={itemMemento.memID}, itemMemento.instanceID={itemMemento.instanceID}");
+            //Debug.Log($"Copilot ItemMementoRecorder.RecordMemento: recorder instanceID={instanceID}, itemMemento.memID={itemMemento.memID}, itemMemento.instanceID={itemMemento.instanceID}");
 
             // if ()
             // {
@@ -76,7 +76,7 @@ namespace BugFreeProductions.Tools
 
             // add to manager
             MementoSessionRecorder.Instance.AddMemento(itemMemento);
-            
+
             // set a mementos is destroyed value
             itemMemento.IsDestroyed = isDestroyed;
         }
@@ -84,7 +84,7 @@ namespace BugFreeProductions.Tools
         #region Subscriber Methods
         public void OnNotify()
         {
-            
+
         }
         public void Subscribe()
         {
