@@ -43,6 +43,11 @@
 - [x] Allow the host and guest to interact with the placed items
 - [ ] Make sure that transforms and states are updated
 
+## CatalogController Adaptation
+
+- [ ] Add it to the current menue
+- [ ] Create new prefabs for the networked items menue
+
 ## Step 5: Memento
 
 - [ ] Create Networked Memento system

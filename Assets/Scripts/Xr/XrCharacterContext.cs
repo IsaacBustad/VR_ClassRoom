@@ -14,6 +14,11 @@ namespace BugFreeProductions.Tools
         [SerializeField] private XRBaseControllerInteractor leftHandGrabInteractor;
         [SerializeField] private XRBaseControllerInteractor rightHandGrabInteractor;
 
+        protected XrCharacterState curCharacterState;
+        //protected XrCharacterState buildCharacterState = new;
+        protected XrCharacterState editCharacterState;
+        protected XrCharacterState interactCharacterState;
+
         private bool _isBuildMode = false;
 
         #endregion Vars
@@ -41,6 +46,16 @@ namespace BugFreeProductions.Tools
                 rightHandGrabInteractor.enabled = true;
             }
         }
+
+        public virtual void BuildMode()
+        {
+            
+        }
         #endregion Methods
+
+
+        #region Accessors
+
+        #endregion Accessors
     }
 }

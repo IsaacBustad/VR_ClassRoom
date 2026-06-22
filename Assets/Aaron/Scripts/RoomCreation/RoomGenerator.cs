@@ -1,14 +1,17 @@
 // Written by Aaron Williams
 
-using BugFreeProductions.Tools;
-using Oculus.Interaction.Locomotion;
+// Edited by    :   Isaac Bustad    :   Remove Occulus dependancy 
+
+//using Oculus.Interaction.Locomotion;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using BugFreeProductions.Tools;
+//using Oculus.Interaction.Locomotion;
+//using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
-using static OVRControllerTest.BoolMonitor;
+//using UnityEngine.Rendering;
+//using static OVRControllerTest.BoolMonitor;
 
 public class RoomGenerator : MonoBehaviour
 {
@@ -53,7 +56,7 @@ public class RoomGenerator : MonoBehaviour
     private LineRenderer edgeLineRenderer;
     private Color currentTargetLineColor;
 
-    [SerializeField] private TeleportInteractable preRoomGenFloor;
+    //[SerializeField] private TeleportInteractable preRoomGenFloor;
 
     public const string FLOOR_MESH_NAME = "Floor Mesh";
     public const string CEILING_MESH_NAME = "Ceiling Mesh";
@@ -344,7 +347,7 @@ public class RoomGenerator : MonoBehaviour
 
             wallGameObject = MeshGenerator.GenerateWallMeshes(floorVertices, wallMaterial, wallHeight);
             wallGameObject.transform.SetParent(roomGameObjectsParent.transform);
-            preRoomGenFloor.enabled = false;
+            //preRoomGenFloor.enabled = false;
         }
     }
 
