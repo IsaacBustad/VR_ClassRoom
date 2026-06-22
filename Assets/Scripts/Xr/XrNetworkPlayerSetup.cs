@@ -101,7 +101,7 @@ namespace BugFreeProductions.Tools
             if (localAudioListener != null) localAudioListener.enabled = isLocal;
 
             // CRITICAL: CharacterController must remain ENABLED on remote proxies to let NetworkTransform sync their positions!
-            if (characterController != null) characterController.enabled = true; 
+            if (characterController != null) characterController.enabled = isLocal; 
             
             if (moveProvider != null)        moveProvider.enabled = isLocal;
             if (turnProvider != null)        turnProvider.enabled = isLocal;
