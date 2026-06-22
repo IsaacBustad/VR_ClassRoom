@@ -1272,6 +1272,7 @@ GameObject:
   - component: {fileID: 199164480333091012}
   - component: {fileID: 1741236820760595904}
   - component: {fileID: 3249378409877374564}
+  - component: {fileID: 1486005694177277405}
   m_Layer: 0
   m_Name: XR Origin Networked (XR Rig)
   m_TagString: Untagged
@@ -1427,6 +1428,8 @@ MonoBehaviour:
   rightMiddleTriggerAction: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   leftIndexTriggerAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   leftMiddleTriggerAction: {fileID: -8148491892877670638, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  pipg: {fileID: 5268011335664318553}
+  pirg: {fileID: 8964656824321481452}
 --- !u!114 &1741236820760595904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,6 +1462,20 @@ MonoBehaviour:
   toDisableLst:
   - {fileID: 6418722504461298389}
   - {fileID: 148074036523536315}
+--- !u!114 &1486005694177277405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586312168207693330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
 --- !u!1 &4862595216335221201
 GameObject:
   m_ObjectHideFlags: 0

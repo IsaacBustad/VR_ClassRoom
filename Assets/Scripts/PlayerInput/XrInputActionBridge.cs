@@ -13,13 +13,17 @@ namespace BugFreeProductions.Tools
     public class XrInputActionBridge : MonoBehaviour
     {
         #region Vars
+        [Header("Input Action References")]
         [SerializeField] protected InputActionReference rightIndexTriggerAction = null;
         [SerializeField] protected InputActionReference rightMiddleTriggerAction = null;
         [SerializeField] protected InputActionReference leftIndexTriggerAction = null;
         [SerializeField] protected InputActionReference leftMiddleTriggerAction = null;
 
-        protected VR_PlacableItemPlacerGun pipg = null;
-        protected VR_PlacableItemRemoverGun pirg = null;
+        [Header("Player Action References")]
+        [SerializeField] protected VR_PlacableItemPlacerGun pipg = null;
+        [SerializeField] protected VR_PlacableItemRemoverGun pirg = null;
+
+        
 
         #endregion Vars
 
@@ -67,8 +71,16 @@ namespace BugFreeProductions.Tools
             }
 
             // additional temporary references
-            pipg = GetComponentInChildren<VR_PlacableItemPlacerGun>();
-            pirg = GetComponentInChildren<VR_PlacableItemRemoverGun>();
+            if(pipg != null)
+            {
+                pipg = GetComponentInChildren<VR_PlacableItemPlacerGun>();
+            }
+            
+            if(pirg != null)
+            {
+                pirg = GetComponentInChildren<VR_PlacableItemRemoverGun>();
+            }
+            
         }
 
         protected virtual void OnDisable()

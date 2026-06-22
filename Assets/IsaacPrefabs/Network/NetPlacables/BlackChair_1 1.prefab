@@ -42,7 +42,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3269074817065981551}
-  - component: {fileID: 8697142804425760618}
   - component: {fileID: 5450771590007832862}
   - component: {fileID: 857242620011642341}
   - component: {fileID: 5099876502608371226}
@@ -52,6 +51,7 @@ GameObject:
   - component: {fileID: 6796440150987480909}
   - component: {fileID: -7152588489597834616}
   - component: {fileID: 9133079369645718342}
+  - component: {fileID: 6850692525850506892}
   m_Layer: 0
   m_Name: BlackChair_1 1
   m_TagString: Untagged
@@ -75,19 +75,6 @@ Transform:
   - {fileID: 871792642117907424}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8697142804425760618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4747423611790198303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45f3552dc7405524ea9e57d6bbf62535, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: BlackChair_1
 --- !u!54 &5450771590007832862
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -405,6 +392,19 @@ MonoBehaviour:
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &6850692525850506892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747423611790198303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99773e1e5c85f2c4e84eb7fd7aa8bcc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: BlackChair_1
 --- !u!1 &8274270403207298709
 GameObject:
   m_ObjectHideFlags: 0
