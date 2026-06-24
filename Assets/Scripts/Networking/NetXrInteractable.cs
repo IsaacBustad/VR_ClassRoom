@@ -52,7 +52,7 @@ namespace BugFreeProductions.Tools
         #region Authority
         protected virtual void RequestAuthority()
         {
-            // 1. If we are the server/host, we don't send commands. We just take it.
+            //If we are the server/host, we don't send commands. We just take it.
             if (isServer)
             {
                 if (netIdentity.connectionToClient != null)
@@ -64,7 +64,7 @@ namespace BugFreeProductions.Tools
             // 2. Pure clients use the command pipeline, but only if they don't already own it
             else if (isClient && !isOwned)
             {
-                CMDRequestAuthority();
+                CmdRequestAuthority();
             }
         }
 
@@ -74,7 +74,7 @@ namespace BugFreeProductions.Tools
 
             if (isClient)
             {
-                CMDRemoveAuthority();
+                CmdRemoveAuthority();
             }
             // // If we are the Host/Server, we don't route through commands to drop things.
             // if (isServer) return;
@@ -87,13 +87,13 @@ namespace BugFreeProductions.Tools
         }
         
         [Command(requiresAuthority = false)]        
-        protected virtual void CMDRequestAuthority()
+        protected virtual void CmdRequestAuthority()
         {
-            // 1. Get explicit references to make the code highly readable
+            // Get explicit references to make the code highly readable
             NetworkConnectionToClient currentOwner = netIdentity.connectionToClient;
             NetworkConnectionToClient requester = connectionToClient;
 
-            // 2. Case A: The object is currently unowned (sitting on the floor)
+            // Case A: The object is currently unowned (sitting on the floor)
             if (currentOwner == null)
             {
                 netIdentity.AssignClientAuthority(requester);
@@ -101,7 +101,7 @@ namespace BugFreeProductions.Tools
                 
             }
 
-            // 3. Case B: Someone else already owns it (Hand-to-hand pass / Stealing)
+            // Case B: Someone else already owns it (Hand-to-hand pass / Stealing)
             else if (currentOwner != requester)
             {
                 netIdentity.RemoveClientAuthority();
@@ -118,7 +118,7 @@ namespace BugFreeProductions.Tools
         }
 
         [Command]
-        protected virtual void CMDRemoveAuthority()
+        protected virtual void CmdRemoveAuthority()
         {
             NetworkConnectionToClient currentOwner = netIdentity.connectionToClient;
             NetworkConnectionToClient requester = connectionToClient;
