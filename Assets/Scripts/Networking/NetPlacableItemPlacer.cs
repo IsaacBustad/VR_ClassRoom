@@ -76,9 +76,16 @@ namespace BugFreeProductions.Tools
         public override void UsePlacer(bool aCon)
         {
             Debug.Log("Use Placer");
-            if (ni.isServer || NetGuestPermissionManager.GuestCanEdit)
+            if (ni.isServer)
             {
                 base.UsePlacer(aCon);
+                return;
+            }
+
+            if (ni.isClient && NetGuestPermissionManager.GuestCanEdit)
+            {
+                base.UsePlacer(aCon);
+                return;
             }
 
 
@@ -117,16 +124,17 @@ namespace BugFreeProductions.Tools
                 {
                     NetworkServer.Spawn(placableFactoryItem.gameObject);
                 }
-
+                return;
             }
 
             // for players to place items
-            else if (NetGuestPermissionManager.GuestCanEdit)
+            if (NetGuestPermissionManager.GuestCanEdit)
             {
                 if (netItemSpawner != null)
                 {
                     netItemSpawner.RequestNetworkItemSpawn(placableFactoryItem.ObjectPlacement().ToNetPlacementData());
                 }
+                return;
             }
 
             // if ( placableFactoryItem != null)

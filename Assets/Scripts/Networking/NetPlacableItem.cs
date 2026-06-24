@@ -15,6 +15,8 @@ namespace BugFreeProductions.Tools
     {
         #region Vars
         protected NetworkIdentity ni = null;
+        protected NetPlacableItemSpawnable netSpawnable = null;
+        
         #endregion Vars
 
         #region Methods
@@ -23,7 +25,15 @@ namespace BugFreeProductions.Tools
             if (ni.isServer)
             {
                 NetworkServer.Destroy(gameObject);
+                return;
             }
+
+            if (ni.isClient && NetGuestPermissionManager.GuestCanEdit)
+            {
+                
+                return;
+            }
+            
         }
 
         protected override void CollectVars()
