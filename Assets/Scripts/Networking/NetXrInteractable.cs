@@ -1,13 +1,11 @@
 // Created By   :   Isaac Bustad
 // Created      :   6/22/2026
 
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.XR.Interaction.Toolkit;
-
 
 namespace BugFreeProductions.Tools
 {    
@@ -17,8 +15,46 @@ namespace BugFreeProductions.Tools
         protected XRGrabInteractable grabInteractable = null;
         #endregion Vars
 
-
         #region Methods
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+            Debug.Log($"[Mirror] Client started for object: {netId}");
+        }
+
+        protected virtual void OnEnable()
+        {
+            Setup();
+        }
+
+        protected virtual void Setup()
+        {
+            grabInteractable = GetComponent<XRGrabInteractable>();
+            
+            // CRITICAL STEP: Prevent XRI from trying to track the object across the network
+            // until Mirror says we officially have the authority to move it.
+            if (grabInteractable != null && !isOwned)
+            {
+                grabInteractable.trackPosition = false;
+                grabInteractable.trackRotation = false;
+            }
+        }
+
+        public virtual void OnGrab()
+        {
+            RequestAuthority();
+        }
+
+        public virtual void OnRelease()
+        {
+            RemoveAuthority();
+        }
+
+        #endregion
+
+        #region Mirror Authority Hooks
+
         // This fires automatically the exact frame Mirror registers that 
         // this client successfully obtained network ownership.
         public override void OnStartAuthority()
@@ -47,48 +83,24 @@ namespace BugFreeProductions.Tools
                 grabInteractable.trackRotation = false;
             }
         }
-        public override void OnStartClient()
-        {
-            base.OnStartClient();
-            Debug.Log($"[Mirror] Client started for chair: {netId}");
-        }
-        protected virtual void OnEnable()
-        {
-            Setup();
-        }
-
-        #region Setup
-        protected virtual void Setup()
-        {
-            grabInteractable = GetComponent<XRGrabInteractable>();
-        }
-
-        public virtual void OnGrab()
-        {
-            RequestAuthority();
-        }
-
-        public virtual void OnRelease()
-        {
-            RemoveAuthority();
-        }
 
         #endregion
 
+        #region Authority Routing
 
-        #region Authority
         protected virtual void RequestAuthority()
         {
-            //If we are the server/host, we don't send commands. We just take it.
+            if (isServerOnly) return; 
+
             if (isServer)
             {
                 if (netIdentity.connectionToClient != null)
                 {
                     netIdentity.RemoveClientAuthority();
                 }
+                netIdentity.AssignClientAuthority(NetworkServer.localConnection);
+                Debug.Log($"[NetXrInteractable] Host grabbed object. Assigned local authority.");
             }
-
-            // 2. Pure clients use the command pipeline, but only if they don't already own it
             else if (isClient && !isOwned)
             {
                 CmdRequestAuthority();
@@ -99,78 +111,49 @@ namespace BugFreeProductions.Tools
         {
             if (isServer) return;
 
-            if (isClient)
+            if (isClient && isOwned)
             {
                 CmdRemoveAuthority();
             }
-            // // If we are the Host/Server, we don't route through commands to drop things.
-            // if (isServer) return;
-
-            // // Only ask to remove authority if our local client instance actually owns it right now
-            // if (isClient && isOwned)
-            // {
-            //     CMDRemoveAuthority();
-            // }
         }
         
         [Command(requiresAuthority = false)]        
-        protected virtual void CmdRequestAuthority()
+        protected virtual void CmdRequestAuthority(NetworkConnectionToClient sender = null)
         {
-            // Get explicit references to make the code highly readable
             NetworkConnectionToClient currentOwner = netIdentity.connectionToClient;
-            NetworkConnectionToClient requester = connectionToClient;
+            NetworkConnectionToClient requester = sender; // Use the auto-injected sender parameter
 
-            // Case A: The object is currently unowned (sitting on the floor)
             if (currentOwner == null)
             {
                 netIdentity.AssignClientAuthority(requester);
                 Debug.Log($"[NetXrInteractable] Assigned unowned object {gameObject.name} to connection: {requester}");
-                
             }
-
-            // Case B: Someone else already owns it (Hand-to-hand pass / Stealing)
             else if (currentOwner != requester)
             {
                 netIdentity.RemoveClientAuthority();
                 netIdentity.AssignClientAuthority(requester);
                 Debug.Log($"[NetXrInteractable] Stole authority of {gameObject.name} from connection {currentOwner} and gave to: {requester}");
-                
             }
-            
-            // 4. Case C: The requester already owns it (Double-grab safety check)
-            // No action needed, just exit cleanly
-            Debug.Log($"[NetXrInteractable] Server received command from connection: {connectionToClient}");
-            
-            
         }
 
         [Command]
-        protected virtual void CmdRemoveAuthority()
+        protected virtual void CmdRemoveAuthority(NetworkConnectionToClient sender = null)
         {
             NetworkConnectionToClient currentOwner = netIdentity.connectionToClient;
-            NetworkConnectionToClient requester = connectionToClient;
+            NetworkConnectionToClient requester = sender;
 
-            // 1. If it's already server-owned on the floor, do nothing.
             if (currentOwner == null) return;
 
-            // 2. The Server-Side Truth Check:
-            // If the person asking to drop it is NOT the person the server recognizes as the true owner,
-            // ignore the request completely. Client A's mid-air steal remains safe!
             if (currentOwner != requester)
             {
-                Debug.LogWarning($"[NetXrInteractable] Rejected delayed drop command from client {requester}. " +
-                                $"Object {gameObject.name} is now owned by {currentOwner}.");
+                Debug.LogWarning($"[NetXrInteractable] Rejected delayed drop command from client {requester}.");
                 return;
             }
 
-            // 3. Otherwise, they are verified as the current owner. Cleanly release it.
             netIdentity.RemoveClientAuthority();
             Debug.Log($"[NetXrInteractable] Reclaimed authority over {gameObject.name} from client {requester}.");
         }
 
         #endregion Authority 
-
-        #endregion Methods
     }
-    
 }
