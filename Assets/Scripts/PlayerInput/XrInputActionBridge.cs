@@ -70,16 +70,16 @@ namespace BugFreeProductions.Tools
                 leftMiddleTriggerAction.action.canceled += OnLeftMiddleRelease;
             }
 
-            // additional temporary references
-            if(pipg != null)
-            {
-                pipg = GetComponentInChildren<VR_PlacableItemPlacerGun>();
-            }
+            // // additional temporary references
+            // if(pipg != null)
+            // {
+            //     pipg = GetComponentInChildren<VR_PlacableItemPlacerGun>();
+            // }
             
-            if(pirg != null)
-            {
-                pirg = GetComponentInChildren<VR_PlacableItemRemoverGun>();
-            }
+            // if(pirg != null)
+            // {
+            //     pirg = GetComponentInChildren<VR_PlacableItemRemoverGun>();
+            // }
             
         }
 

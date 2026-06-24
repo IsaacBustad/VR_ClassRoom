@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: -7152588489597834616}
   - component: {fileID: 9133079369645718342}
   - component: {fileID: 6850692525850506892}
+  - component: {fileID: 6850498796170470487}
   m_Layer: 0
   m_Name: BlackChair_1 1
   m_TagString: Untagged
@@ -405,6 +406,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: BlackChair_1
+--- !u!114 &6850498796170470487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747423611790198303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9be49f884b44b54dbfbd8b7dbc49268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &8274270403207298709
 GameObject:
   m_ObjectHideFlags: 0

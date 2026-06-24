@@ -28,11 +28,11 @@ namespace BugFreeProductions.Tools
 
             if (leftXrInteractor == null) return;
             leftXrInteractor.selectEntered.AddListener(OnGrab);
-            leftXrInteractor.selectExited.AddListener(OnDrop);
+            leftXrInteractor.selectExited.AddListener(OnRelease);
 
             if (rightXrInteractor == null) return;
             rightXrInteractor.selectEntered.AddListener(OnGrab);
-            rightXrInteractor.selectExited.AddListener(OnDrop);
+            rightXrInteractor.selectExited.AddListener(OnRelease);
         }
 
         
@@ -40,15 +40,16 @@ namespace BugFreeProductions.Tools
         protected  void OnGrab(SelectEnterEventArgs args)
         {
             GameObject grabbed = args.interactableObject.transform.gameObject;
-            
-            //grabbed.GetComponent<Networked>
+            Debug.Log($"Grabbed: {grabbed.name}");
+            grabbed.GetComponent<NetXrInteractable>().OnGrab();
         }
 
-        private void OnDrop(SelectExitEventArgs args)
+        private void OnRelease(SelectExitEventArgs args)
         {
             GameObject dropped = args.interactableObject.transform.gameObject;
             Debug.Log($"Dropped: {dropped.name}");
             // Handle network release logic here
+            dropped.GetComponent<NetXrInteractable>().OnRelease();
         }
         #endregion Methods
     }

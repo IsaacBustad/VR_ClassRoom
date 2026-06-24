@@ -6,8 +6,11 @@ using UnityEngine;
 namespace BugFreeProductions.Tools
 {
 
-    public class BuildXrCharacterState : MonoBehaviour
+    public class BuildXrCharacterState : XrCharacterState
     {
-        
+        public BuildXrCharacterState(XrCharacterContext aXRCC) : base(aXRCC)
+        {
+            
+        }
     }
 }

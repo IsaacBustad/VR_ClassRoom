@@ -1273,6 +1273,7 @@ GameObject:
   - component: {fileID: 1741236820760595904}
   - component: {fileID: 3249378409877374564}
   - component: {fileID: 1486005694177277405}
+  - component: {fileID: 82268242329813779}
   m_Layer: 0
   m_Name: XR Origin Networked (XR Rig)
   m_TagString: Untagged
@@ -1476,6 +1477,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
+--- !u!114 &82268242329813779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586312168207693330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a90d3adf2563c4d8b573586ab243c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftXrInteractor: {fileID: 2454328269455305308}
+  rightXrInteractor: {fileID: 764476886800901403}
+  xRInteractionManager: {fileID: 1486005694177277405}
 --- !u!1 &4862595216335221201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,6 +2160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3022201588995127183}
+  - component: {fileID: 7786012163847319576}
   m_Layer: 0
   m_Name: Networked Avatar
   m_TagString: Untagged
@@ -2169,6 +2186,21 @@ Transform:
   - {fileID: 4871720848521692320}
   m_Father: {fileID: 128002731166167834}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7786012163847319576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185785145849111949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a90d3adf2563c4d8b573586ab243c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftXrInteractor: {fileID: 2454328269455305308}
+  rightXrInteractor: {fileID: 764476886800901403}
+  xRInteractionManager: {fileID: 1486005694177277405}
 --- !u!1 &7323825517397281863
 GameObject:
   m_ObjectHideFlags: 0

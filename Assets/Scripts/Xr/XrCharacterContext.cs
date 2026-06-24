@@ -11,11 +11,16 @@ namespace BugFreeProductions.Tools
     {
         #region Vars
         [Header("Hand Interactors")]
-        [SerializeField] private XRBaseControllerInteractor leftHandGrabInteractor;
-        [SerializeField] private XRBaseControllerInteractor rightHandGrabInteractor;
+        [SerializeField] protected XRBaseControllerInteractor leftHandGrabInteractor;
+        [SerializeField] protected XRBaseControllerInteractor rightHandGrabInteractor;
 
+        [Header("Component to disable in states")]
+        [SerializeField] protected XRInteractionManager xrInteractionManager;
+        [SerializeField] protected GameObject itemPlacer;
+
+        // states for context use
         protected XrCharacterState curCharacterState;
-        //protected XrCharacterState buildCharacterState = new;
+        protected XrCharacterState buildCharacterState;
         protected XrCharacterState editCharacterState;
         protected XrCharacterState interactCharacterState;
 
@@ -55,6 +60,63 @@ namespace BugFreeProductions.Tools
 
 
         #region Accessors
+        public XrCharacterState CurCharacterState
+        {
+            get
+            {
+                return curCharacterState;
+            }
+
+            set
+            {
+                curCharacterState = value;
+            }
+        }
+
+        #region State Accessors
+        public XrCharacterState BuildCharacterState
+        {
+            get
+            {
+                return buildCharacterState;
+            }
+        }
+
+        public XrCharacterState EditCharacterState
+        {
+            get
+            {
+                return editCharacterState;
+            }
+        }
+
+        public XrCharacterState InteractCharacterState
+        {
+            get
+            {
+                return interactCharacterState;
+            }
+        }
+
+        #endregion State Accessors
+
+        #region Component Accessors
+        public XRInteractionManager XRInteractionManager
+        {
+            get
+            {
+                return xrInteractionManager;
+            }
+        }
+
+        public GameObject ItemPlacer
+        {
+            get
+            {
+                return itemPlacer;
+            }
+        }
+        #endregion Component Accessors
 
         #endregion Accessors
     }
