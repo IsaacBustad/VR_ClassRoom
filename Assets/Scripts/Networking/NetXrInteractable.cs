@@ -19,6 +19,12 @@ namespace BugFreeProductions.Tools
 
 
         #region Methods
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+            Debug.Log($"[Mirror] Client started for chair: {netId}");
+        }
         protected virtual void OnEnable()
         {
             Setup();
