@@ -19,7 +19,34 @@ namespace BugFreeProductions.Tools
 
 
         #region Methods
+        // This fires automatically the exact frame Mirror registers that 
+        // this client successfully obtained network ownership.
+        public override void OnStartAuthority()
+        {
+            base.OnStartAuthority();
+            Debug.Log($"[NetXrInteractable] Authority secured for NetID: {netId}. Activating XRI tracking.");
 
+            // Turn XRI tracking back on so the object smoothly follows your hand
+            if (grabInteractable != null)
+            {
+                grabInteractable.trackPosition = true;
+                grabInteractable.trackRotation = true;
+            }
+        }
+
+        // This fires automatically when ownership is stripped or dropped.
+        public override void OnStopAuthority()
+        {
+            base.OnStopAuthority();
+            Debug.Log($"[NetXrInteractable] Authority lost for NetID: {netId}. Deactivating XRI tracking.");
+
+            // Turn off tracking so remote physics/transforms don't fight local interactions
+            if (grabInteractable != null)
+            {
+                grabInteractable.trackPosition = false;
+                grabInteractable.trackRotation = false;
+            }
+        }
         public override void OnStartClient()
         {
             base.OnStartClient();
