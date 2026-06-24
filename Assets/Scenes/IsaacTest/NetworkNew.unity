@@ -325,6 +325,10 @@ PrefabInstance:
       value: Netcode Mannager
       objectReference: {fileID: 0}
     - target: {fileID: 8994087672040747519, guid: 8f77456dd8adb6648a3ed564bbcc1837, type: 3}
+      propertyPath: onlineScene
+      value: Assets/Scenes/IsaacTest/NetworkNew.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994087672040747519, guid: 8f77456dd8adb6648a3ed564bbcc1837, type: 3}
       propertyPath: playerPrefab
       value: 
       objectReference: {fileID: 6101036858622425069, guid: 836001478f199eb41899a3a98280b412, type: 3}
