@@ -1463,6 +1463,10 @@ MonoBehaviour:
   toDisableLst:
   - {fileID: 6418722504461298389}
   - {fileID: 148074036523536315}
+  localOnlyComponents:
+  - {fileID: 1486005694177277405}
+  - {fileID: 4802878651561398050}
+  - {fileID: 6448387584452481938}
 --- !u!114 &1486005694177277405
 MonoBehaviour:
   m_ObjectHideFlags: 0
