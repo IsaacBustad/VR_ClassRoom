@@ -15,23 +15,23 @@ public class DisableOnNetwork : NetworkBehaviour
     {
         base.OnStartClient();
 
-        NetDisable();
+        NetEnable();
     }
 
-    protected virtual void NetDisable()
+    protected virtual void NetEnable()
     {
-        if(!isOwned)
+        if(isOwned)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
 
             foreach(GameObject go in toDisableLst)
             {
-                go.SetActive(false);
+                go.SetActive(true);
             }
 
             foreach(MonoBehaviour comp in localOnlyComponents)
             {
-                comp.enabled = false;
+                comp.enabled = true;
             }
         }
         
