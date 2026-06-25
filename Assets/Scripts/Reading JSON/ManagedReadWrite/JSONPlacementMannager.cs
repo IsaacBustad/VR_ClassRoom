@@ -15,7 +15,7 @@ namespace BugFreeProductions.Tools
 {
     public class JSONPlacementMannager : MonoBehaviour, Subscription
     {
-        // Vars
+        #region  Vars
         // Singelten instance
         private static JSONPlacementMannager instance = null;
 
@@ -42,7 +42,14 @@ namespace BugFreeProductions.Tools
         // Room object ID and Pool
         private string roomID = "Room";
         [SerializeField] private GenericPool pool = new GenericPool();
+        
+        #region New Observer System
+        [SerializeField] protected List<Subscriber> subscribers = new List<Subscriber>();
 
+        #endregion New Observer System
+        
+        
+        #endregion Vars
         // Methods
         private void OnEnable()
         {
@@ -98,7 +105,7 @@ namespace BugFreeProductions.Tools
         // add a subscriber to the Subsctition
         public void AddSubscriber(Subscriber aSub)
         {
-            
+            subscribers.Add(aSub); 
 
             
         }
@@ -106,7 +113,7 @@ namespace BugFreeProductions.Tools
         // remove a subscriber from the Subscription
         public void RemoveSubscriber(Subscriber aSub)
         {
-            
+            subscribers.Remove(aSub); 
         }
 
         // notify all subscribers
@@ -159,6 +166,10 @@ namespace BugFreeProductions.Tools
                 return factoryItems;
             }
         }
+
+        #region NewSubscription Accessors
+        
+        #endregion NewSubscription Accessors
         
 
     }

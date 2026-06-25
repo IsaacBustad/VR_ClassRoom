@@ -171,7 +171,7 @@ namespace BugFreeProductions.Tools
             
         }
 
-        #endregion // Subscription Methods
+        #endregion  Subscription Methods
 
         #region Session Recording Methods
         // record mementos during a session over time

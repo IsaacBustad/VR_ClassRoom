@@ -33,6 +33,7 @@ namespace BugFreeProductions.Tools
             //     netSpawnable.RemoveItem();
             //     return;
             // }
+            Unsubscribe();
             NetworkServer.Destroy(gameObject);
             
         }
@@ -50,6 +51,8 @@ namespace BugFreeProductions.Tools
             // // collect bodyScript
             // body = GetComponent<PlacableFactoryItemBody>();
         }
+
+         
 
         
         #endregion Methods

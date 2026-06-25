@@ -4,12 +4,14 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Meta.XR.ImmersiveDebugger.UserInterface;
+using Mirror.BouncyCastle.Asn1.Cmp;
 using UnityEngine;
 
 
 namespace BugFreeProductions.Tools
 {
-    public class PlacableFactoryItem : FactoryItem
+    public class PlacableFactoryItem : FactoryItem, Subscriber
     {
         #region Vars
         protected PlacableFactoryItemBody body;
@@ -23,7 +25,13 @@ namespace BugFreeProductions.Tools
         #region Setup and Finalize placement
         public virtual void OnEnable()
         {
-           CollectVars();
+           Setup();
+        }
+
+        protected virtual void Setup()
+        {
+            Subscribe();
+            CollectVars();
         }
 
         protected virtual void CollectVars()
@@ -44,7 +52,29 @@ namespace BugFreeProductions.Tools
                 body.FinalizeBody();
             }
         }
-        #endregion
+        #endregion Setup and Finalize Placement
+
+        #region Add Subscription service
+        // method to recieve update from subscrition
+        public void OnNotify()
+        {
+
+        }
+
+        // method to subscribe to SubscriptionService
+        public void Subscribe()
+        {
+            JSONPlacementMannager.Instance.AddSubscriber(this);
+            Debug.Log(gameObject.name + " Subscribed");
+        }
+
+        // method to unsubscribe from SubscriptionService
+        public void Unsubscribe()
+        {
+            JSONPlacementMannager.Instance.RemoveSubscriber(this);
+            Debug.Log(gameObject.name + " UnSubscribed");
+        }
+        #endregion Add Subscription service
 
 
         #region Align Object to Point and Rotation
@@ -92,6 +122,7 @@ namespace BugFreeProductions.Tools
 
         public virtual void RemoveItem()
         {
+            Unsubscribe();
             Destroy(gameObject);
         }
         // Accessors
