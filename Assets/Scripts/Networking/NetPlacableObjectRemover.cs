@@ -112,7 +112,7 @@ namespace BugFreeProductions.Tools
 
         protected override void RemoveObject()
         {
-            if (ni.isServer)
+            if (ni.isServer || NetGuestPermissionManager.GuestCanEdit)
             {
                 placableItemHighlighter.GetComponent<NetPlacableItem>().RemoveItem();
 
@@ -120,7 +120,7 @@ namespace BugFreeProductions.Tools
 
             else
             {
-                npis.RequestNetworkItemDeSpawn(ni.netId);
+                //npis.RequestNetworkItemDeSpawn(ni.netId);
             }
             // if (placableItemHighlighter != null)
             // {

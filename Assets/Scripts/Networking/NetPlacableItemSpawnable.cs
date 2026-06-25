@@ -23,5 +23,11 @@ namespace BugFreeProductions.Tools
                 netPlacableItem.FinalizePlacement();
             }
         }
+
+        [Command]
+        public virtual void CmdRemoveItem()
+        {
+            NetworkServer.Destroy(gameObject);
+        }
     }
 }

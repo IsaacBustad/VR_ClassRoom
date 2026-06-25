@@ -30,7 +30,7 @@ namespace BugFreeProductions.Tools
 
             if (ni.isClient && NetGuestPermissionManager.GuestCanEdit)
             {
-                
+                netSpawnable.CmdRemoveItem();
                 return;
             }
             
@@ -47,6 +47,8 @@ namespace BugFreeProductions.Tools
             // // collect bodyScript
             // body = GetComponent<PlacableFactoryItemBody>();
         }
+
+        
         #endregion Methods
     }
 }
