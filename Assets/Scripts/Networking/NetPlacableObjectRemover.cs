@@ -120,7 +120,7 @@ namespace BugFreeProductions.Tools
 
             if (npis.isClient && NetGuestPermissionManager.GuestCanEdit)
             {
-                CmdRemoveItem(placableItemHighlighter.GetComponent<PlacableFactoryItem>());
+                npis.RequestNetworkItemDeSpawn(placableItemHighlighter.GetComponent<NetPlacableItemSpawnable>().netId);
                 return;
             }
             
@@ -131,11 +131,7 @@ namespace BugFreeProductions.Tools
 
         }
 
-        [Command]
-        protected virtual void CmdRemoveItem(PlacableFactoryItem aPFI)
-        {
-            aPFI.RemoveItem();
-        }
+        
 
 
         
