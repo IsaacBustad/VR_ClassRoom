@@ -11,10 +11,10 @@
 ## Step 2: Spawn Objects on the Network
 
 - [x] Host should be able to place networked objects using PlacableItemPlacer 
-- [ ] Allow host to permit user to place items in the room
-- [ ] Client should be able to place items using PlacableItemPlacer 
-  - [ ] User the NetworkPermissionsMannager to enable user to place items
-  - [ ] Spawan the item using the command on the spawn bridge
+- [x] Allow host to permit user to place items in the room
+- [x] Client should be able to place items using PlacableItemPlacer 
+  - [x] User the NetworkPermissionsMannager to enable user to place items
+  - [x] Spawan the item using the command on the spawn bridge
 - [x] Creat new NetPlacableItems
 - [x] Disable placer on Guest Can Edit Turned off
 - [x] Enable placer on Guest Can Edit Turned on
@@ -24,12 +24,12 @@
 - [x] Create a NetPlacableItemRemover
   - [x] Inherit  PlacableItemRemover to NetPlacableItemRemover
 - [x] Allow host to remove network items
-- [ ] Allow host to toggel guest permission to remove items
-- [ ] Allow guest to remove items
-  - [ ] Guest can only remove items when permitted
-  - [ ] Guest can remove networked Items from the scene
-- [ ] Disable Remover on Guest Can Edit Turned off
-- [ ] Enable Remover on Guest Can Edit Turned on
+- [x] Allow host to toggel guest permission to remove items
+- [x] Allow guest to remove items
+  - [x] Guest can only remove items when permitted
+  - [x] Guest can remove networked Items from the scene
+- [x] Disable Remover on Guest Can Edit Turned off
+- [x] Enable Remover on Guest Can Edit Turned on
 
 ## Step 4: Canvas For Selection
 
@@ -41,7 +41,7 @@
 ## Step 5: Grab and Interact with Items in XR
 
 - [x] Allow the host and guest to interact with the placed items
-- [ ] Make sure that transforms and states are updated
+- [x] Make sure that transforms and states are updated
 
 ## CatalogController Adaptation
 
