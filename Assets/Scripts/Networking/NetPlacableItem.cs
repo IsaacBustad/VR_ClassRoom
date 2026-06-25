@@ -39,6 +39,8 @@ namespace BugFreeProductions.Tools
         protected override void CollectVars()
         {
             ni = GetComponent<NetworkIdentity>();
+            netSpawnable = GetComponent<NetPlacableItemSpawnable>();
+
             base.CollectVars();
             // // get and default Rigidbody
             // rb = GetComponent<Rigidbody>();
