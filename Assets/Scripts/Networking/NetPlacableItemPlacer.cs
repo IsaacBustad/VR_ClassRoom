@@ -135,6 +135,7 @@ namespace BugFreeProductions.Tools
                     Debug.Log("requesting spawn");
                     netItemSpawner.RequestNetworkItemSpawn(placableFactoryItem.ObjectPlacement().ToNetPlacementData());
                 }
+                Destroy(placableFactoryItem.gameObject);
                 return;
             }
 
