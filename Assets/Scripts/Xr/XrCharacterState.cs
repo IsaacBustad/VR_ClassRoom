@@ -4,6 +4,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -14,37 +15,67 @@ namespace BugFreeProductions.Tools
     public class XrCharacterState
     {
         #region Vars
+        protected XrCharacterState exitXrCS = null;
         protected XrCharacterContext xrcc = null;
         #endregion Vars
 
 
         #region Methods
-        // Construct
-        public virtual void BuildMode()
+        #region Change States Methods
+        // Build
+        public virtual void BuildMode(XrCharacterState axrcs)
         {
-            xrcc.CurCharacterState = xrcc.BuildCharacterState;
-            xrcc.XRInteractionManager.enabled = false;
-            xrcc.ItemPlacer.SetActive(false);
+            // // set the past or exit state
+            // exitXrCS = axrcs;
+
+            // xrcc.CurCharacterState = xrcc.BuildCharacterState;
+            // xrcc.XRInteractionManager.enabled = false;
+            // xrcc.ItemPlacer.SetActive(false);
         }
 
 
         // Edit
-        public virtual void EditMode()
+        public virtual void EditMode(XrCharacterState axrcs)
         {
-            xrcc.CurCharacterState = xrcc.EditCharacterState;
-            xrcc.ItemPlacer.SetActive(true);
-            xrcc.XRInteractionManager.enabled = false;
+            // xrcc.CurCharacterState = xrcc.EditCharacterState;
+            // xrcc.ItemPlacer.SetActive(true);
+            // xrcc.XRInteractionManager.enabled = false;
         }
 
 
         // Interact
-        public virtual void InteractMode()
+        public virtual void InteractMode(XrCharacterState axrcs)
         {
-            xrcc.CurCharacterState = xrcc.InteractCharacterState;
-            xrcc.XRInteractionManager.enabled = true;
-            xrcc.ItemPlacer.SetActive(false);
+            // xrcc.CurCharacterState = xrcc.InteractCharacterState;
+            // xrcc.XRInteractionManager.enabled = true;
+            // xrcc.ItemPlacer.SetActive(false);
+        }
+
+        // Interact
+        public virtual void MenuMode(XrCharacterState axrcs)
+        {
+            // xrcc.CurCharacterState = xrcc.InteractCharacterState;
+            // xrcc.XRInteractionManager.enabled = true;
+            // xrcc.ItemPlacer.SetActive(false);
         }
         
+        #endregion Change States Methods
+
+        public virtual void OnStateBegin(XrCharacterState axrcs)
+        {
+            exitXrCS = axrcs;
+        }
+
+        public virtual void OnStateEnd()
+        {
+            if (exitXrCS != null)
+            {
+                xrcc.CurCharacterState = exitXrCS;
+            }
+            xrcc.CurCharacterState = exitXrCS;
+        }
+
+
         #endregion Methods
 
 

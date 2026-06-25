@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -23,39 +24,52 @@ namespace BugFreeProductions.Tools
         protected XrCharacterState buildCharacterState;
         protected XrCharacterState editCharacterState;
         protected XrCharacterState interactCharacterState;
+        protected XrCharacterState menuCharacterState;
 
-        private bool _isBuildMode = false;
 
         #endregion Vars
 
         #region Methods
-        /// <summary>
-        /// Call this when entering or exiting your Placement/Removal mode.
-        /// </summary>
-        public void SetBuildMode(bool active)
+
+        #region Unity Methods
+        protected virtual void OnEnable()
         {
-            _isBuildMode = active;
+            // create states with access to this object
+            buildCharacterState = new BuildXrCharacterState(this);
+            editCharacterState = new EditXrCharacterState(this);
+            interactCharacterState = new InteractXrCharacterState(this);
+            menuCharacterState = new MenuXrCharacterState(this);
 
-            if (_isBuildMode)
-            {
-                // Disable grabbing entirely while placing/removing
-                leftHandGrabInteractor.enabled = false;
-                rightHandGrabInteractor.enabled = false;
-                
-                // (Optional) Enable your placement/removal lasers/tools here
-            }
-            else
-            {
-                // Re-enable standard XRI grabbing when back in play mode
-                leftHandGrabInteractor.enabled = true;
-                rightHandGrabInteractor.enabled = true;
-            }
-        }
+            // select entry state
+            curCharacterState = interactCharacterState;
+            curCharacterState.InteractMode(curCharacterState);
+        }        
+        #endregion Unity Methods
 
+        #region Change State Methods
         public virtual void BuildMode()
         {
-            
+            curCharacterState.BuildMode(curCharacterState);
         }
+
+        public virtual void EditMode()
+        {
+            curCharacterState.EditMode(curCharacterState);
+        }
+
+        public virtual void InteractMode()
+        {
+            curCharacterState.InteractMode(curCharacterState);
+        }
+
+        public virtual void MenuMode()
+        {
+            curCharacterState.MenuMode(curCharacterState);
+        }
+
+        #endregion Change State Methods
+
+        
         #endregion Methods
 
 
