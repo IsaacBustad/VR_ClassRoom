@@ -132,6 +132,7 @@ namespace BugFreeProductions.Tools
             {
                 if (netItemSpawner != null)
                 {
+                    Debug.Log("requesting spawn");
                     netItemSpawner.RequestNetworkItemSpawn(placableFactoryItem.ObjectPlacement().ToNetPlacementData());
                 }
                 return;

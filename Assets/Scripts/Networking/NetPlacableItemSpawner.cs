@@ -18,6 +18,7 @@ namespace BugFreeProductions.Tools
         public virtual void RequestNetworkItemSpawn(NetPlacementData netPlacementData)
         {
             // call the network spawn command
+            Debug.Log("request placed");
             CmdSpawnNetworkItem(netPlacementData);
         }
         public virtual void RequestNetworkItemDeSpawn(uint aNI)
@@ -30,6 +31,7 @@ namespace BugFreeProductions.Tools
         {
             if (itemFactory != null)
             {
+                Debug.Log("requested Commang run");
                 // create reference
                 FactoryItem factoryItem = null;
 
