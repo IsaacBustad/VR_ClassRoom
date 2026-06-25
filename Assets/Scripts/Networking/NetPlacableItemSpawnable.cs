@@ -24,6 +24,12 @@ namespace BugFreeProductions.Tools
             }
         }
 
+        public virtual void RemoveItem()
+        {
+            CmdRemoveItem();
+        }
+
+        
         [Command]
         public virtual void CmdRemoveItem()
         {

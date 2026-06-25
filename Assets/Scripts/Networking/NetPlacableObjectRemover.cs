@@ -112,22 +112,31 @@ namespace BugFreeProductions.Tools
 
         protected override void RemoveObject()
         {
-            if (ni.isServer || NetGuestPermissionManager.GuestCanEdit)
+            if (ni.isServer )
             {
-                placableItemHighlighter.GetComponent<NetPlacableItem>().RemoveItem();
-
+                placableItemHighlighter.GetComponent<PlacableFactoryItem>().RemoveItem();
+                return;
             }
 
-            else
+            if (npis.isClient && NetGuestPermissionManager.GuestCanEdit)
             {
-                //npis.RequestNetworkItemDeSpawn(ni.netId);
+                CmdRemoveItem(placableItemHighlighter.GetComponent<PlacableFactoryItem>());
+                return;
             }
+            
             // if (placableItemHighlighter != null)
             // {
             //     placableItemHighlighter.GetComponent<PlacableFactoryItem>().RemoveItem();
             // }
 
         }
+
+        [Command]
+        protected virtual void CmdRemoveItem(PlacableFactoryItem aPFI)
+        {
+            aPFI.RemoveItem();
+        }
+
 
         
 

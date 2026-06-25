@@ -22,17 +22,18 @@ namespace BugFreeProductions.Tools
         #region Methods
         public override void RemoveItem()
         {
-            if (ni.isServer)
-            {
-                NetworkServer.Destroy(gameObject);
-                return;
-            }
+            // if (ni.isServer)
+            // {
+            //     NetworkServer.Destroy(gameObject);
+            //     return;
+            // }
 
-            if (ni.isClient && NetGuestPermissionManager.GuestCanEdit)
-            {
-                netSpawnable.CmdRemoveItem();
-                return;
-            }
+            // if (ni.isClient && NetGuestPermissionManager.GuestCanEdit)
+            // {
+            //     netSpawnable.RemoveItem();
+            //     return;
+            // }
+            NetworkServer.Destroy(gameObject);
             
         }
 
