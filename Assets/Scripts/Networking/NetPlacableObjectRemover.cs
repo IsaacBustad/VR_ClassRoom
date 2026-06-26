@@ -112,13 +112,15 @@ namespace BugFreeProductions.Tools
 
         protected override void RemoveObject()
         {
-            if (ni.isServer )
+            if (ni.isServer && placableItemHighlighter != null)
             {
+                
                 placableItemHighlighter.GetComponent<PlacableFactoryItem>().RemoveItem();
+
                 return;
             }
 
-            if (npis.isClient && NetGuestPermissionManager.GuestCanEdit)
+            if (npis.isClient && NetGuestPermissionManager.GuestCanEdit && placableItemHighlighter != null)
             {
                 npis.RequestNetworkItemDeSpawn(placableItemHighlighter.GetComponent<NetPlacableItemSpawnable>().netId);
                 return;

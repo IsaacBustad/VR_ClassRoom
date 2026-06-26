@@ -17,31 +17,31 @@ namespace BugFreeProductions.Tools
     {
         #region  Vars
         // Singelten instance
-        private static JSONPlacementMannager instance = null;
+        protected static JSONPlacementMannager instance = null;
 
         // factory References
-        [SerializeField] private AbstractFactory_SCO abf_SCO = null;
+        [SerializeField] protected AbstractFactory_SCO abf_SCO = null;
 
         // list of all Factory Item objects in the scene kept for optimization and memento access
-        private List<FactoryItem> factoryItems  = new List<FactoryItem>();
+        protected List<FactoryItem> factoryItems  = new List<FactoryItem>();
 
         // pathing variables
-        [SerializeField] private string roomConfigPath = "N/A";
-        private string objectPlacementPath = "ObjectPlacements.json";
-        private string roomPlacementPath = "RoomPointPlacements.json";
-        private string roomNamePath = "RoomNames.json";
+        [SerializeField] protected string roomConfigPath = "N/A";
+        protected string objectPlacementPath = "ObjectPlacements.json";
+        protected string roomPlacementPath = "RoomPointPlacements.json";
+        protected string roomNamePath = "RoomNames.json";
 
         // not a room reference
-        private string notRoom = "N/A";
+        protected string notRoom = "N/A";
 
 
         // Mannaged readers and writers
-        private MannagedJSONReader jsonReader = new MannagedJSONReader();
-        private MannagedJSONWriter jsonWriter = new MannagedJSONWriter();
+        protected MannagedJSONReader jsonReader = new MannagedJSONReader();
+        protected MannagedJSONWriter jsonWriter = new MannagedJSONWriter();
 
         // Room object ID and Pool
-        private string roomID = "Room";
-        [SerializeField] private GenericPool pool = new GenericPool();
+        protected string roomID = "Room";
+        [SerializeField] protected GenericPool pool = new GenericPool();
         
         #region New Observer System
         [SerializeField] protected List<Subscriber> subscribers = new List<Subscriber>();
@@ -51,7 +51,12 @@ namespace BugFreeProductions.Tools
         
         #endregion Vars
         // Methods
-        private void OnEnable()
+        protected virtual void OnEnable()
+        {
+            Setup();
+        }
+
+        protected virtual void Setup()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
             if (instance != null)
@@ -70,18 +75,18 @@ namespace BugFreeProductions.Tools
         }
 
         // onScene change
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             ReadRoomConfig();
         }
 
         // remove from delegate on destroy
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
         #region Room Saving
-        public void ReadRoomConfig()
+        public virtual void ReadRoomConfig()
         {
             if (roomConfigPath != notRoom)
             {
@@ -95,7 +100,7 @@ namespace BugFreeProductions.Tools
             
         }
 
-        public void WriteRoomConfig()
+        public virtual void WriteRoomConfig()
         {
             jsonWriter.WriteObjPlacementData("/" + roomConfigPath + roomPlacementPath, "/" + roomConfigPath + objectPlacementPath);
         }
@@ -103,7 +108,7 @@ namespace BugFreeProductions.Tools
 
         #region Subscription Methods
         // add a subscriber to the Subsctition
-        public void AddSubscriber(Subscriber aSub)
+        public virtual void AddSubscriber(Subscriber aSub)
         {
             subscribers.Add(aSub); 
 
@@ -111,13 +116,13 @@ namespace BugFreeProductions.Tools
         }
 
         // remove a subscriber from the Subscription
-        public void RemoveSubscriber(Subscriber aSub)
+        public virtual void RemoveSubscriber(Subscriber aSub)
         {
             subscribers.Remove(aSub); 
         }
 
         // notify all subscribers
-        public void NotifySubscribers()
+        public virtual void NotifySubscribers()
         {
             
         }

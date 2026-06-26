@@ -57,6 +57,8 @@ namespace BugFreeProductions.Tools
             OnPermissionsChanged?.Invoke(netGuestPermission);
         }
 
+        #region Toggles
+
         // Only the owner should be able to request 
         // the guest placing permission changing
         public virtual void ToggleGuestCanEdit()
@@ -93,6 +95,23 @@ namespace BugFreeProductions.Tools
 
         }
 
+        public virtual void ToggleGuestCanSave()
+        {
+            // check if is owned by the local object 
+            if (isServer)
+            {
+                // hold current permission value
+                NetGuestPermission nNetGuestPermission = netGuestPermission;
+
+                // edit current permissions
+                nNetGuestPermission.guestCanSave = !nNetGuestPermission.guestCanSave;
+
+                // reassign permissions to take effect
+                netGuestPermission = nNetGuestPermission;
+                
+            }
+        }
+
         // command to request server toggle permission 
         // [Command] protected virtual void CmdToggleGuestCanEdit()
         // {
@@ -101,6 +120,34 @@ namespace BugFreeProductions.Tools
         //         guestCanEdit = !guestCanEdit;
         //     }
         // }
+        #endregion Toggles
+
+        #region Functional Methods
+        // static for easy call
+        public static void SaveRoom()
+        {
+            instance.OnSaveRoom();
+        }
+
+        // overridable for easy change in childeren
+        protected virtual void OnSaveRoom()
+        {
+            if (isServer)
+            {
+                JSONPlacementMannager.Instance.WriteRoomConfig();
+                return;
+            }
+
+            if (netGuestPermission.guestCanSave)
+            {
+                JSONPlacementMannager.Instance.WriteRoomConfig();
+                return;
+            }
+            
+        }
+
+        #endregion Functional Methods
+
         #endregion Methods
 
         #region Accessors
@@ -128,6 +175,14 @@ namespace BugFreeProductions.Tools
             get
             {
                 return instance.netGuestPermission.guestCanRecord;
+            }
+        }
+
+        public static bool GuestCanSave
+        {
+            get
+            {
+                return instance.netGuestPermission.guestCanSave;
             }
         }
         #endregion Accessors

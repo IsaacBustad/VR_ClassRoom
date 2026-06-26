@@ -231,6 +231,24 @@ namespace BugFreeProductions.Tools
             // lineRenderer.SetPositions(posArray);
         }
 
+        public override void SaveRoomConfig()
+        {
+            if (netItemSpawner.isServer)
+            {
+                JSONPlacementMannager.Instance.WriteRoomConfig();
+                return;
+            }
+
+            if (netItemSpawner.isClient && NetGuestPermissionManager.GuestCanSave)
+            {
+                JSONPlacementMannager.Instance.WriteRoomConfig();
+                return;
+            }
+
+            // these are base functions
+            //JSONPlacementMannager.Instance.WriteRoomConfig();
+        }
+
         
     }
 }

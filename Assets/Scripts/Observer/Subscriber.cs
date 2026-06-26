@@ -19,5 +19,7 @@ public interface Subscriber
     // method to unsubscribe from SubscriptionService
     public void Unsubscribe();
 
+    
+
 }
 }

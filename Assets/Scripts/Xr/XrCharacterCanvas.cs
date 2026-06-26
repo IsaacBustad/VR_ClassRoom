@@ -23,6 +23,7 @@ namespace BugFreeProductions.Tools
         // dedicated host UI slots
         [SerializeField] protected GameObject guestCanEditBtn = null;
         [SerializeField] protected GameObject guestCanRecordBtn = null;
+        [SerializeField] protected GameObject guestCanSaveBtn = null;
 
 
         // positive and negative colors
@@ -31,14 +32,22 @@ namespace BugFreeProductions.Tools
         [SerializeField] protected Color textColor = Color.white;
 
 
+        // action button refferences
+        [SerializeField] protected GameObject saveButton = null;
+
+        // needs to be phased out
+        [SerializeField] protected NetPlacableObjectPlacer npop = null;
+
+
         #endregion Vars
 
         #region Methods
         protected virtual void OnEnable()
         {
             //CollectVars();
-            //Setup();
+            Setup();
             NetGuestPermissionManager.Instance.OnPermissionsChanged += OnPermissionDataChanged;
+            
         }
 
         protected virtual void CollectVars()
@@ -47,6 +56,7 @@ namespace BugFreeProductions.Tools
             //netUserPermission = NetGuestPermissionManager.Instance;
 
         }
+        #region Toggles
 
         public virtual void ToggleGuestCanRecord()
         {
@@ -60,12 +70,21 @@ namespace BugFreeProductions.Tools
             Debug.Log("Edit Called");
         }
 
+        public virtual void ToggleGuestCanSave()
+        {
+            NetGuestPermissionManager.Instance.ToggleGuestCanSave();
+            Debug.Log("Can Save Toggled");
+        }
+
+        #endregion Toggles
+        
+
         protected virtual void OnPermissionDataChanged(NetGuestPermission netGuestPermission)
         {
             Setup();
             SetupColor(guestCanEditBtn,netGuestPermission.guestCanEdit);
             SetupColor(guestCanRecordBtn,netGuestPermission.guestCanRecord);
-
+            SetupColor(guestCanSaveBtn,netGuestPermission.guestCanSave);
         }
 
         protected virtual void Setup()
@@ -73,6 +92,27 @@ namespace BugFreeProductions.Tools
             // find if the class exist on a server
             bool isServer = NetGuestPermissionManager.Instance.isServer;
 
+
+            guestCanEditBtn.GetComponent<Button>().enabled = isServer;
+            guestCanRecordBtn.GetComponent<Button>().enabled = isServer;
+            guestCanSaveBtn.GetComponent<Button>().enabled = isServer;
+
+            // lea
+            if (isServer)
+            {
+                saveButton.SetActive(true);
+            
+                saveButton.GetComponent<Button>().enabled = true;
+            }
+
+            else
+            {
+                saveButton.SetActive(NetGuestPermissionManager.GuestCanEdit);
+            
+                saveButton.GetComponent<Button>().enabled = NetGuestPermissionManager.GuestCanSave;
+            }
+
+            
             // if true turn on the ui items for host
             // if false turn off ui items for the host
             foreach (GameObject uiItem in itemsInUI)
@@ -80,22 +120,10 @@ namespace BugFreeProductions.Tools
                 // make objects visible
                 uiItem.SetActive(true);
 
-                uiItem.GetComponent<Button>().enabled = isServer;
-                //uiItem.SetActive(!isServer);
-                //SetupColor(uiItem);
+                
             }
 
-            // if true turn off the ui items for guest
-            // if false turn on ui items for the guest
-            // foreach (GameObject uiItem in guestUI)
-            // {
-            //     //uiItem.SetActive(isServer);
-            //     SetupColor(uiItem);
-            // }
-
-
-
-
+            
 
         }
 
@@ -131,6 +159,16 @@ namespace BugFreeProductions.Tools
 
 
         }
+
+        #region Functional Methods
+        public virtual void SaveRoom()
+        {
+            NetGuestPermissionManager.SaveRoom();
+            
+        }
+
+
+        #endregion Functional Methods
 
 
         #endregion Methods

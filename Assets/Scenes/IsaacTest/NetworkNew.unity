@@ -763,6 +763,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mannager
       objectReference: {fileID: 0}
+    - target: {fileID: 4158969046781334587, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
+      propertyPath: abf_SCO
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c8e106cde277874e8878010bd60b4ff, type: 2}
     - target: {fileID: 6349043744678061735, guid: 9932f291b1e35b046882c826cd3b3a49, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5335517

@@ -13,15 +13,19 @@ namespace BugFreeProductions.Tools
         public bool guestCanEdit;
         public bool guestCanRecord;
         public bool guestCanPermit;
+        public bool guestCanSave;
 
 
 
-        public NetGuestPermission(bool aGuestCanEdit, bool aGuestCanRecord, bool aGuestCanPermit)
+        public NetGuestPermission(bool aGuestCanEdit, bool aGuestCanRecord, bool aGuestCanPermit, bool aGuestCanSave)
         {
             guestCanEdit = aGuestCanEdit;
             guestCanRecord = aGuestCanRecord;
             guestCanPermit = aGuestCanPermit;
+            guestCanSave = aGuestCanSave;
 
         }
+
+        
     }
 }
