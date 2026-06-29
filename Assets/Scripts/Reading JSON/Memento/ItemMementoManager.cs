@@ -73,9 +73,9 @@ namespace BugFreeProductions.Tools
         {
             if (Input.GetKeyDown(startRecordingKey))
             {
-                Debug.Log("Copilot ItemMementoManager: Started Recording Session.");
+                Debug.Log("ItemMementoManager: Started Recording Session.");
                 sessionRecorder.StartRecordingSession();
-                Debug.Log("Copilot ItemMementoManager: Started Recording Session.");
+                Debug.Log("ItemMementoManager: Started Recording Session.");
             }
 
             // for testing the ending of a recording session and writes to

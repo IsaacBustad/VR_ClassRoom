@@ -20,7 +20,7 @@ namespace BugFreeProductions.Tools
 
         #region Synced and Network Vars
         // network and synced variables
-        [SyncVar(hook = nameof(OnPermissionDataChanged))] NetGuestPermission netGuestPermission = new NetGuestPermission();
+        [SyncVar(hook = nameof(OnPermissionDataChanged))] protected NetGuestPermission netGuestPermission = new NetGuestPermission();
 
 
         #endregion Synced and Network Vars
@@ -112,6 +112,23 @@ namespace BugFreeProductions.Tools
             }
         }
 
+        public virtual void ToggleGuestCanReplay()
+        {
+            // check if is owned by the local object 
+            if (isServer)
+            {
+                // hold current permission value
+                NetGuestPermission nNetGuestPermission = netGuestPermission;
+
+                // edit current permissions
+                nNetGuestPermission.guestCanReplay = !nNetGuestPermission.guestCanReplay;
+
+                // reassign permissions to take effect
+                netGuestPermission = nNetGuestPermission;
+                
+            }
+        }
+
         // command to request server toggle permission 
         // [Command] protected virtual void CmdToggleGuestCanEdit()
         // {
@@ -161,6 +178,14 @@ namespace BugFreeProductions.Tools
             }
         }
 
+        public static NetGuestPermission NetGuestPermission
+        {
+            get
+            {
+                return instance.netGuestPermission;
+            }
+        }
+
         public static bool GuestCanEdit
         {
             get
@@ -183,6 +208,14 @@ namespace BugFreeProductions.Tools
             get
             {
                 return instance.netGuestPermission.guestCanSave;
+            }
+        }
+
+        public static bool GuestCanReplay
+        {
+            get
+            {
+                return instance.netGuestPermission.guestCanReplay;
             }
         }
         #endregion Accessors

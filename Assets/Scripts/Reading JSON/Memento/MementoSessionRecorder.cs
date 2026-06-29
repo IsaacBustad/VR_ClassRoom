@@ -99,43 +99,7 @@ namespace BugFreeProductions.Tools
             
         }
 
-        // ToDo: Use Linq reuse existing memento players
-        // ToDo: Remove Dictionary usage
-        // public virtual int GetMementoID(ItemMementoRecorder aIMR)
-        // {
-        //     // hold the ID
-        //     int retID = nextMementoID;
-
-        //     // Loop untill you find an available instanceID
-
-
-        //     // check if id is default
-        //     if (aIMR.InstanceID == -1)
-        //     {
-        //         // add if not found in dictionary
-        //         mementoItemsByMementoID.Add(nextMementoID, aIMR);
-        //         nextMementoID ++;
-        //         retID = nextMementoID;
-        //     }
-
-        //     else if(mementoItemsByMementoID.ContainsKey(aIMR.InstanceID) == true)
-        //     {
-        //         // setting the returned id to Instance ID if ID exist in Dictionary
-        //         retID = aIMR.InstanceID;
-        //     }
-
-        //     else
-        //     {
-                
-        //         nextMementoID++;
-        //         retID = nextMementoID;
-
-        //         // add if not found in dictionary
-        //         mementoItemsByMementoID.Add(retID, aIMR);
-        //     }
-            
-        //     return retID;
-        // }
+        
         
         #endregion // Recording Methods
 

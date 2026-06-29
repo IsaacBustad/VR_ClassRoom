@@ -11,18 +11,20 @@ namespace BugFreeProductions.Tools
     public struct NetGuestPermission
     {
         public bool guestCanEdit;
-        public bool guestCanRecord;
         public bool guestCanPermit;
         public bool guestCanSave;
+        public bool guestCanRecord;
+        public bool guestCanReplay;
 
 
 
-        public NetGuestPermission(bool aGuestCanEdit, bool aGuestCanRecord, bool aGuestCanPermit, bool aGuestCanSave)
+        public NetGuestPermission(bool aGuestCanEdit, bool aGuestCanRecord, bool aGuestCanPermit, bool aGuestCanSave, bool aGuestCanReplay)
         {
             guestCanEdit = aGuestCanEdit;
             guestCanRecord = aGuestCanRecord;
             guestCanPermit = aGuestCanPermit;
             guestCanSave = aGuestCanSave;
+            guestCanReplay = aGuestCanReplay;
 
         }
 

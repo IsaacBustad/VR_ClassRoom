@@ -8,18 +8,16 @@ using UnityEngine;
 namespace BugFreeProductions.Tools
 {
     // interface for subscribers to the memento system
-public interface Subscriber
-{
-    // method to recieve update from subscrition
-    public void OnNotify();
+    public interface Subscriber
+    {
+        // method to recieve update from subscrition
+        public void OnNotify();
 
-    // method to subscribe to SubscriptionService
-    public void Subscribe();
+        // method to subscribe to SubscriptionService
+        public void Subscribe();
 
-    // method to unsubscribe from SubscriptionService
-    public void Unsubscribe();
+        // method to unsubscribe from SubscriptionService
+        public void Unsubscribe();
 
-    
-
-}
+    }
 }

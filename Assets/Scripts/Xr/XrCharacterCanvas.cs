@@ -3,6 +3,8 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Meta.XR.ImmersiveDebugger.UserInterface;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +26,7 @@ namespace BugFreeProductions.Tools
         [SerializeField] protected GameObject guestCanEditBtn = null;
         [SerializeField] protected GameObject guestCanRecordBtn = null;
         [SerializeField] protected GameObject guestCanSaveBtn = null;
+        [SerializeField] protected GameObject guestCanReplayBtn = null;
 
 
         // positive and negative colors
@@ -45,7 +48,7 @@ namespace BugFreeProductions.Tools
         protected virtual void OnEnable()
         {
             //CollectVars();
-            Setup();
+            Setup(NetGuestPermissionManager.NetGuestPermission);
             NetGuestPermissionManager.Instance.OnPermissionsChanged += OnPermissionDataChanged;
             
         }
@@ -76,27 +79,77 @@ namespace BugFreeProductions.Tools
             Debug.Log("Can Save Toggled");
         }
 
+        public virtual void ToggleGuestCanReplay()
+        {
+            NetGuestPermissionManager.Instance.ToggleGuestCanReplay();
+            Debug.Log("Can Replay Toggled");
+        }
+
         #endregion Toggles
         
 
         protected virtual void OnPermissionDataChanged(NetGuestPermission netGuestPermission)
         {
-            Setup();
-            SetupColor(guestCanEditBtn,netGuestPermission.guestCanEdit);
-            SetupColor(guestCanRecordBtn,netGuestPermission.guestCanRecord);
-            SetupColor(guestCanSaveBtn,netGuestPermission.guestCanSave);
+            Setup(netGuestPermission);
+            
         }
 
-        protected virtual void Setup()
+        // protected virtual void Setup()
+        // {
+        //     // find if the class exist on a server
+        //     bool isServer = NetGuestPermissionManager.Instance.isServer;
+
+        //     // If I am server we will disable the button component
+        //     guestCanEditBtn.GetComponent<Button>().enabled = isServer;
+        //     guestCanRecordBtn.GetComponent<Button>().enabled = isServer;
+        //     guestCanSaveBtn.GetComponent<Button>().enabled = isServer;
+        //     guestCanRecordBtn.GetComponent<Button>().enabled = isServer;
+
+
+        //     // lea
+        //     if (isServer)
+        //     {
+        //         saveButton.SetActive(true);
+            
+        //         saveButton.GetComponent<Button>().enabled = true;
+        //     }
+
+        //     else
+        //     {
+        //         saveButton.SetActive(NetGuestPermissionManager.GuestCanEdit);
+            
+        //         saveButton.GetComponent<Button>().enabled = NetGuestPermissionManager.GuestCanSave;
+        //     }
+
+            
+        //     // if true turn on the ui items for host
+        //     // if false turn off ui items for the host
+        //     foreach (GameObject uiItem in itemsInUI)
+        //     {
+        //         // make objects visible
+        //         uiItem.SetActive(true);
+
+                
+        //     }
+
+            
+
+        // }
+
+        protected virtual void Setup(NetGuestPermission netGuestPermission)
         {
+            // If I am server we will disable the button component
             // find if the class exist on a server
             bool isServer = NetGuestPermissionManager.Instance.isServer;
-
-
+                
             guestCanEditBtn.GetComponent<Button>().enabled = isServer;
+            
             guestCanRecordBtn.GetComponent<Button>().enabled = isServer;
             guestCanSaveBtn.GetComponent<Button>().enabled = isServer;
+            
+            guestCanRecordBtn.GetComponent<Button>().enabled = isServer;
 
+            
             // lea
             if (isServer)
             {
@@ -123,6 +176,11 @@ namespace BugFreeProductions.Tools
                 
             }
 
+            // Set up the color to represent the changed values
+            SetupColor(guestCanEditBtn,netGuestPermission.guestCanEdit);
+            SetupColor(guestCanRecordBtn,netGuestPermission.guestCanRecord);
+            SetupColor(guestCanSaveBtn,netGuestPermission.guestCanSave);
+            SetupColor(guestCanReplayBtn,netGuestPermission.guestCanReplay);
             
 
         }
